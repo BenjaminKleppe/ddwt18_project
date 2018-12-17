@@ -10,11 +10,6 @@ include 'model.php';
 
 /* Connect to DB */
 $db = connect_db('localhost', 'ddwt_project', 'ddwt18','ddwt18');
-/* Get Number of Series and users */
-$nbr_series = count_series($db);
-$nbr_users = count_users($db);
-/* always use template 'cards' */
-$right_column = use_template('cards');
 
 $template = Array(
     1 => Array(
