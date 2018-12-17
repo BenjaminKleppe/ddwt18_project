@@ -147,7 +147,7 @@ function get_serie_table($series, $pdo){
         <tr>
             <th scope="row">'.$value['name'].'</th>
             <th scope="row">'.get_name($pdo, $value['user'])['firstname'].' '.get_name($pdo, $value['user'])['lastname'].'</th>
-            <td><a href="/DDWT18/week2/serie/?serie_id='.$value['id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/serie/?serie_id='.$value['id'].'" role="button" class="btn btn-primary">More info</a></td>
         </tr>
         ';
     }
@@ -506,7 +506,7 @@ function register_user($pdo, $form_data)
         'message' => sprintf('%s, your account was successfully
 created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
     ];
-    redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
     return null;
 }
@@ -558,7 +558,7 @@ function login_user($pdo, $form_data)
             'message' => sprintf('%s, you were logged in successfully!',
                 get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
         ];
-        redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
+        redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
             json_encode($feedback)));
     }
 }
