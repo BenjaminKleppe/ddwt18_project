@@ -37,11 +37,10 @@ $template = Array(
         'name' => 'Register',
         'url' => '/ddwt18_project/register/'
     ));
-
-
+/*
 else {
     http_response_code(404);
 }
-
+*/
 
 
