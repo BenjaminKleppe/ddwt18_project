@@ -169,7 +169,7 @@ function get_room_table($rooms, $pdo){
             <th scope="row"></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
-            <th scope="row">€ '.$value['price'].'</th>           
+            <th scope="row">€'.$value['price'].'</th>           
             <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
         </tr>
         ';

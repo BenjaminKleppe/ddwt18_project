@@ -31,8 +31,9 @@
                     <?php if (isset($error_msg)){echo $error_msg;} ?>
 
                     <h1><?= $page_title ?></h1>
-                    <h5><?= $page_subtitle ?></h5>
-                    <p><?= $adress ?></p>
+                    <h3>€<?= $price ?></h3>
+                    <p><?= $address ?></p>
+                    <h4>Information about the room:</h4>
                     <table class="table">
                         <tbody>
                         <tr>

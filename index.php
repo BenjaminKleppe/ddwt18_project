@@ -86,26 +86,30 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get series from db */
     $room_id = $_GET['room_id'];
     $user_id = $_GET['username'];
+    $user_name = get_name($db, $user_id);
     $room_info = get_room_info($db, $room_id);
-    $display_buttons = get_user_id() == $room_info['username'];
+    $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Page info */
-    $page_title = $room_info['street'];
+    $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
         'Week 2' => na('/DDWT18/ddwt18_project/', False),
         'Overview' => na('/DDWT18/ddwt18_project/overview/', False),
-        $room_info['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
+        $user_id['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
     ]);
     $navigation = get_navigation($template, '2');
 
     /* Page content */
-    $user_name = get_name($db, $user_id['username']);
+
     $added_by = $user_name['firstname']." ".$user_name['lastname'];
-    $page_subtitle = sprintf("Information about %s", $room_info['street']);
-    $page_content = $room_info['description'];
-    $nbr_seasons = $room_info['seasons'];
-    $creators = $room_info['creator'];
+    $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
+    $description = $room_info['description'];
+    $type = $room_info['type'];
+    $size = $room_info['size'];
+    $price = $room_info['price'];
+    $tenant = $room_info['tenant'];
+    $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
