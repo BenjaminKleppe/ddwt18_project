@@ -54,6 +54,38 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     include use_template('main');
 }
 
+/* Single Serie */
+elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
+    /* Get series from db */
+    $room_id = $_GET['room_id'];
+    $user_id = $_GET['username'];
+    $room_info = get_room_info($db, $room_id);
+    $display_buttons = get_user_id() == $room_info['username'];
+
+    /* Page info */
+    $page_title = $room_info['street'];
+    $breadcrumbs = get_breadcrumbs([
+        'DDWT18' => na('/DDWT18/', False),
+        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'Overview' => na('/DDWT18/ddwt18_project/overview/', False),
+        $room_info['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
+    ]);
+    $navigation = get_navigation($template, '2');
+
+    /* Page content */
+    $user_name = get_name($db, $user_id['username']);
+    $added_by = $user_name['firstname']." ".$user_name['lastname'];
+    $page_subtitle = sprintf("Information about %s", $room_info['street']);
+    $page_content = $room_info['description'];
+    $nbr_seasons = $room_info['seasons'];
+    $creators = $room_info['creator'];
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+
+    /* Choose Template */
+    include use_template('room');
+}
 
 /*
 else {

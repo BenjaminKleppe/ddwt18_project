@@ -198,7 +198,7 @@ function get_rooms($pdo){
 
 // Get's the information of a single room
 function get_room_info($pdo, $room_id){
-    $stmt = $pdo->prepare('SELECT * FROM room WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_id]);
     $room_info = $stmt->fetch();
     $room_info_exp = Array();
@@ -238,8 +238,8 @@ function redirect($location){
  */
 function get_user_id(){
     session_start();
-    if (isset($_SESSION['user_id'])){
-        return $_SESSION['user_id'];
+    if (isset($_SESSION['username'])){
+        return $_SESSION['username'];
     } else {
         return False;
     }
@@ -248,7 +248,7 @@ function get_user_id(){
 /* returns first- and lastname from user */
 function get_name($pdo, $user) {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname FROM users WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT firstname, lastname FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;

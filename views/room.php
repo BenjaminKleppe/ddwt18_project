@@ -32,21 +32,34 @@
 
                     <h1><?= $page_title ?></h1>
                     <h5><?= $page_subtitle ?></h5>
-                    <p><?= $page_content ?></p>
+                    <p><?= $adress ?></p>
                     <table class="table">
                         <tbody>
                         <tr>
-                            <th scope="row">Creators</th>
-                            <td><?= $creators ?></td>
+                            <th scope="row">Description</th>
+                            <td><?= $description ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Number of seasons</th>
-                            <td><?= $nbr_seasons ?></td>
+                            <th scope="row">Type</th>
+                            <td><?= $type ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Added by user</th>
-                            <td><?= $added_by ?></td>
+                            <th scope="row">Size</th>
+                            <td><?= $size ?></td>
                         </tr>
+                        <tr>
+                            <th scope="row">Facilities</th>
+                            <td><?= $facilities ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Desired tenant</th>
+                            <td><?= $tenant ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Location</th>
+                            <td><?= $type ?></td>
+                        </tr>
+
                         </tbody>
                     </table>
                     <?php if ($display_buttons) { ?>
@@ -62,16 +75,6 @@
                         </div>
                     </div>
                     <?php } ?>
-
-
-                </div>
-
-                <!-- Right column -->
-                <div class="col-md-4">
-
-                    <?php include $right_column ?>
-
-                </div>
 
             </div>
         </div>
