@@ -1,7 +1,7 @@
 <?php
 /**
  * Controller
- * User: reinardvandalen
+ * User: b.kleppe, l.janssen, t.tan, g.danoe
  * Date: 05-11-18
  * Time: 15:25
  */
