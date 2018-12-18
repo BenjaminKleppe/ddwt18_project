@@ -58,6 +58,15 @@
                                 <textarea class="form-control" id="inputAbstract" rows="3" name="Abstract" required><?php if (isset($serie_info)){echo $serie_info['abstract'];} ?></textarea>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="dropdown" class="col-sm-2 col-form-label"> Select Role: </label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="dropdown">
+                                    <option value="Owner">Owner</option>
+                                    <option value="Tenant">Tenant</option>
+                                </select>
+                            </div>
+                        </div>
                         <?php if(isset($serie_id)){ ?><input type="hidden" name="serie_id" value="<?php echo $serie_id ?>"><?php } ?>
                         <div class="form-group row">
                             <div class="col-sm-10">

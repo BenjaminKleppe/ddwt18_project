@@ -150,6 +150,50 @@ function get_error($feedback){
     return $error_exp;
 }
 
+function get_room_table($rooms, $pdo){
+    $table_exp = '
+    <table class="table table-hover">
+    <thead
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Address</th>
+        <th scope="col">Squere Metre</th>
+        <th scope="col"><strong>Price</strong></th>
+    </tr>
+    </thead>
+    <tbody>';
+    foreach($rooms as $key => $value){
+        $table_exp .= '
+        <tr>
+            <th scope="row">'.$value['photo'].'</th>
+            <th scope="row">'.get_name($pdo, $value['room'])['street'].' '.get_name($pdo, $value['room'])['house_number'].'</th>
+            <th scope="row">'.get_name($pdo, $value['room'])['size'].'</th>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['id'].'" role="button" class="btn btn-primary">More info</a></td>
+        </tr>
+        ';
+    }
+    $table_exp .= '
+    </tbody>
+    </table>
+    ';
+    return $table_exp;
+}
+
+function get_rooms($pdo){
+    $stmt = $pdo->prepare('SELECT * FROM room');
+    $stmt->execute();
+    $series = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($series as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
+}
+
 /**
  * Count the number of users listed on Series Overview
  * @param object $pdo database object
