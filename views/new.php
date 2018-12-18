@@ -35,39 +35,58 @@
                     <p><?= $page_content ?></p>
                     <form action="<?= $form_action ?>" method="POST">
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName" name="Name" value="<?php if (isset($serie_info)){echo $serie_info['name'];} ?>" required>
+                            <label for="street" class="col-sm-3 col-form-label">Street</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="street" name="street" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputCreator" class="col-sm-2 col-form-label">Creator</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputCreator" name="Creator" value="<?php if (isset($serie_info)){echo $serie_info['creator'];} ?>" required>
+                            <label for="houseNumber" class="col-sm-3 col-form-label">House number<br/>(e.g. 34A)</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="houseNumber" name="house_number" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputSeasons" class="col-sm-2 col-form-label">Seasons</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="inputCreator" name="Seasons" value="<?php if (isset($serie_info)){echo $serie_info['seasons'];} ?>" required>
+                            <label for="postalCode" class="col-sm-3 col-form-label">Postal code<br/>(e.g. 9711AN)</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="postalCode" name="postalcode" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputAbstract" class="col-sm-2 col-form-label">Abstract</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="inputAbstract" rows="3" name="Abstract" required><?php if (isset($serie_info)){echo $serie_info['abstract'];} ?></textarea>
+                            <label for="city" class="col-sm-3 col-form-label">City</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="city" name="city" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="dropdown" class="col-sm-2 col-form-label"> Select Role: </label>
+                            <label for="type" class="col-sm-3 col-form-label"> Select type: </label>
                             <div class="col-sm-3">
-                                <select class="form-control" id="dropdown">
-                                    <option value="Owner">Owner</option>
-                                    <option value="Tenant">Tenant</option>
+                                <select class="form-control" id="type">
+                                    <option value="room">Room</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="studio">Studio</option>
                                 </select>
                             </div>
                         </div>
-                        <?php if(isset($serie_id)){ ?><input type="hidden" name="serie_id" value="<?php echo $serie_id ?>"><?php } ?>
+                        <div class="form-group row">
+                            <label for="price" class="col-sm-3 col-form-label">Price in €</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="price" name="price" value="<?php if (isset($room_info)){echo $room_info['price'];} ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="size" class="col-sm-3 col-form-label">Size in m2</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="size" name="size" value="<?php if (isset($room_info)){echo $room_info['size'];} ?>" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="inputDescription" rows="3" name="description" required><?php if (isset($room_info)){echo $room_info['description'];} ?></textarea>
+                            </div>
+                        </div>
+                        <?php if(isset($room_id)){ ?><input type="hidden" name="room_id" value="<?php echo $room_id ?>"><?php } ?>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
@@ -77,11 +96,13 @@
                 </div>
 
                 <!-- Right column -->
+                <!--
                 <div class="col-md-4">
 
                     <?php include $right_column ?>
 
                 </div>
+                -->
 
             </div>
         </div>
