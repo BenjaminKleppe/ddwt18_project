@@ -37,25 +37,25 @@
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="street" name="street" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" required>
+                        <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="houseNumber" class="col-sm-3 col-form-label">House number<br/>(e.g. 34A)</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="houseNumber" name="house_number" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" required>
+                        <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="postalCode" class="col-sm-3 col-form-label">Postal code<br/>(e.g. 9711AN)</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="postalCode" name="postalcode" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
+                        <input type="text" class="form-control" id="postalCode" name="postalcode" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="city" class="col-sm-3 col-form-label">City</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="city" name="city" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -71,13 +71,13 @@
                 <div class="form-group row">
                     <label for="price" class="col-sm-3 col-form-label">Price in €</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="price" name="price" value="<?php if (isset($room_info)){echo $room_info['price'];} ?>" required>
+                        <input type="text" class="form-control" id="price" name="price" placeholder="375" value="<?php if (isset($room_info)){echo $room_info['price'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="size" class="col-sm-3 col-form-label">Size in m2</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="size" name="size" value="<?php if (isset($room_info)){echo $room_info['size'];} ?>" required>
+                        <input type="text" class="form-control" id="size" name="size" placeholder="20" value="<?php if (isset($room_info)){echo $room_info['size'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -93,7 +93,7 @@
                 <div class="form-group row">
                     <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" id="inputDescription" rows="3" name="description" required><?php if (isset($room_info)){echo $room_info['description'];} ?></textarea>
+                        <textarea class="form-control" id="inputDescription" rows="3" placeholder="Write here your description of the room..." name="description" required><?php if (isset($room_info)){echo $room_info['description'];} ?></textarea>
                     </div>
                 </div>
                 <?php if(isset($room_id)){ ?><input type="hidden" name="room_id" value="<?php echo $room_id ?>"><?php } ?>
