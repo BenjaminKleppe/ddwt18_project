@@ -14,19 +14,19 @@ $db = connect_db('localhost', 'ddwt_project', 'ddwt18','ddwt18');
 $template = Array(
     1 => Array(
         'name' => 'Home',
-        'url' => '/ddwt18_project/'),
+        'url' => '/DDWT18/ddwt18_project/'),
     2 => Array(
         'name' => 'Overview',
-        'url' => '/ddwt18_project/overview/'),
+        'url' => '/DDWT18/ddwt18_project/overview/'),
     3 => Array(
         'name' => 'Add series',
-        'url' => '/ddwt18_project/add/'),
+        'url' => '/DDWT18/ddwt18_project/add/'),
     4 => Array(
         'name' => 'My Account',
-        'url' => '/ddwt18_project/myaccount/'),
+        'url' => '/DDWT18/ddwt18_project/myaccount/'),
     5 => Array(
         'name' => 'Register',
-        'url' => '/ddwt18_project/register/')
+        'url' => '/DDWT18/ddwt18_project/register/')
 );
 
 /* Overview page */
