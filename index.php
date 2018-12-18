@@ -81,6 +81,17 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     include use_template('new');
 }
 
+/* Add serie POST */
+elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
+    /* Check if logged in */
+
+    /* Add room to database */
+    $feedback = add_room($db, $_POST);
+    /* Redirect to room GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/add/?error_msg=%s',
+        json_encode($feedback)));
+}
+
 /* Single Serie */
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get series from db */

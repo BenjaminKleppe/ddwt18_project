@@ -210,6 +210,69 @@ function get_room_info($pdo, $room_id){
     return $room_info_exp;
 }
 
+// add serie
+function add_room($pdo, $room_info){
+    /*check if all fields are set */
+    if(
+        empty($room_info['street']) or
+        empty($room_info['house_number']) or
+        empty($room_info['postalcode']) or
+        empty($room_info['city']) or
+        empty($room_info['type']) or
+        empty($room_info['price']) or
+        empty($room_info['size']) or
+        empty($room_info['description'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. Not all fields were filled in!'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['price'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field price.'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['size'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field size.'
+        ];
+    }
+
+    /* Add Serie */
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $room_info['street'],
+        $room_info['house_number'],
+        $room_info['postalcode'],
+        $room_info['city'],
+        $room_info['type'],
+        $room_info['price'],
+        $room_info['size'],
+        $room_info['description']
+    ]);
+    $inserted = $stmt->rowCount();
+    if ($inserted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Room %s %s added to Series Overview.", $room_info['street'], $room_info['house_number'])
+        ];
+    }
+    else {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. The room was not added. Try it again.'
+        ];
+    }
+
+}
+
 /**
  * Count the number of users listed on Series Overview
  * @param object $pdo database object
