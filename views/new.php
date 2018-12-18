@@ -81,6 +81,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities:<br/>(multiple) </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="facilities" name="facilities" multiple>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="wifi">WiFi</option>
+                            <option value="dishwasher">Dishwasher</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
                     <div class="col-sm-9">
                         <textarea class="form-control" id="inputDescription" rows="3" name="description" required><?php if (isset($room_info)){echo $room_info['description'];} ?></textarea>
