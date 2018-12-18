@@ -196,6 +196,20 @@ function get_rooms($pdo){
     return $room_exp;
 }
 
+// Get's the information of a single room
+function get_room_info($pdo, $room_id){
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE id = ?');
+    $stmt->execute([$room_id]);
+    $room_info = $stmt->fetch();
+    $room_info_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($room_info as $key => $value){
+        $room_info_exp[$key] = htmlspecialchars($value);
+    }
+    return $room_info_exp;
+}
+
 /**
  * Count the number of users listed on Series Overview
  * @param object $pdo database object
