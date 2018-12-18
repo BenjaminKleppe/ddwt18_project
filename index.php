@@ -54,6 +54,33 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     include use_template('main');
 }
 
+/* Add serie get */
+elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
+    /* Check if logged in */
+
+    /* Page info */
+    $page_title = 'Add Room';
+    $breadcrumbs = get_breadcrumbs([
+        'DDWT18' => na('/DDWT18/', False),
+        'Week 2' => na('/DDWT18/week2/', False),
+        'Add Series' => na('/DDWT18/week2/new/', True)
+    ]);
+    $navigation = get_navigation($template, '3');
+
+    /* Page content */
+    $page_subtitle = 'Search a new roommate';
+    $page_content = 'Fill in the details of your room.';
+    $submit_btn = "Add room";
+    $form_action = '/DDWT18/ddwt18_project/add/';
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']);
+    }
+
+    include use_template('new');
+}
+
 /* Single Serie */
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get series from db */
