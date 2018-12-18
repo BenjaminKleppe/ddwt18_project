@@ -210,7 +210,19 @@ function get_room_info($pdo, $room_id){
     return $room_info_exp;
 }
 
-// add serie
+/* checks postal code */
+function PostalCheck($postcode)
+{
+    $upper = strtoupper($postcode);
+
+    if( preg_match("/^\W*[1-9]{1}[0-9]{3}\W*[a-zA-Z]{2}\W*$/",  $upper)) {
+        return $upper;
+    } else {
+        return false;
+    }
+}
+
+/* add a room to the database */
 function add_room($pdo, $room_info){
     /*check if all fields are set */
     if(
@@ -245,7 +257,22 @@ function add_room($pdo, $room_info){
         ];
     }
 
-    /* Add Serie */
+    /* Check if postal code is entered correctly */
+    if (strlen($room_info['postalcode']) !== 6) {
+        return [
+            'type' => 'danger',
+            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
+        ];}
+    else {
+        if (PostalCheck($room_info['postalcode']) == false ){
+            return [
+                'type' => 'danger',
+                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
+            ];
+}
+    }
+
+    /* Add room */
     $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $room_info['street'],
