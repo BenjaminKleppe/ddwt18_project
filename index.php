@@ -44,7 +44,11 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_subtitle = 'The overview of all rooms available';
     $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
-    print_r('hi');
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']);
+    }
 
     /* Choose Template */
     include use_template('main');
