@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- Own CSS -->
-    <link rel="stylesheet" href="/DDWT18/week2/css/main.css">
+    <link rel="stylesheet" href="/ddwt18_project/css/main.css">
 
     <title><?= $page_title ?></title>
 </head>
@@ -41,13 +41,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="houseNumber" class="col-sm-3 col-form-label">House number<br/>(e.g. 34A)</label>
+                    <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="postalCode" class="col-sm-3 col-form-label">Postal code<br/>(e.g. 9711AN)</label>
+                    <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="postalCode" name="postalcode" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
                     </div>
