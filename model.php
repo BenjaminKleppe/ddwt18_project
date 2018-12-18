@@ -158,17 +158,19 @@ function get_room_table($rooms, $pdo){
         <th scope="col">Photo</th>
         <th scope="col">Address</th>
         <th scope="col">Squere Metre</th>
-        <th scope="col"><strong>Price</strong></th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>';
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row">'.$value['photo'].'</th>
-            <th scope="row">'.get_name($pdo, $value['room'])['street'].' '.get_name($pdo, $value['room'])['house_number'].'</th>
-            <th scope="row">'.get_name($pdo, $value['room'])['size'].'</th>
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <th scope="row"></th>
+            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
+            <th scope="row">'.$value['size'].'m2</th>
+            <th scope="row">€ '.$value['price'].'</th>           
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
         </tr>
         ';
     }
