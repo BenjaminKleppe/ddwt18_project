@@ -1,4 +1,4 @@
-<!-- Series count -->
+<?php /* <!-- Series count -->
 <div class="card">
     <div class="card-header">
         Series
@@ -21,3 +21,4 @@
         <a href="/DDWT18/week2/register/" class="btn btn-primary">Join now</a>
     </div>
 </div>
+ */ ?>
