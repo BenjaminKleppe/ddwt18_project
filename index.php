@@ -32,6 +32,30 @@ $template = Array(
         'name' => 'Register',
         'url' => '/ddwt18_project/register/'
     ));
+
+/* Overview page */
+elseif (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
+    /* Page info */
+$page_title = 'Overview';
+$breadcrumbs = get_breadcrumbs([
+    'DDWT18' => na('/DDWT18/', False),
+    'Week 2' => na('/DDWT18/ddwt18_project/', False),
+    'Overview' => na('/DDWT18/ddwt18_project/overview', True)
+]);
+$navigation = get_navigation($template, '2');
+
+/* Page content */
+$page_subtitle = 'The overview of all rooms available';
+$page_content = 'On this page you will find all available rooms for internationals.';
+$left_content = get_room_table(get_rooms($db), $db);
+
+/* Get error msg from POST route */
+if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+
+/* Choose Template */
+include use_template('main');
+}
+
 /*
 else {
     http_response_code(404);
