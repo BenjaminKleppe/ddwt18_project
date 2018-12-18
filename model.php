@@ -150,6 +150,156 @@ function get_error($feedback){
     return $error_exp;
 }
 
+function get_room_table($rooms, $pdo){
+    $table_exp = '
+    <table class="table table-hover">
+    <thead
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Address</th>
+        <th scope="col">Squere Metre</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>';
+    foreach($rooms as $key => $value){
+        $table_exp .= '
+        <tr>
+            <th scope="row"></th>
+            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
+            <th scope="row">'.$value['size'].'m2</th>
+            <th scope="row">€'.$value['price'].',-</th>           
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+        </tr>
+        ';
+    }
+    $table_exp .= '
+    </tbody>
+    </table>
+    ';
+    return $table_exp;
+}
+
+function get_rooms($pdo){
+    $stmt = $pdo->prepare('SELECT * FROM room');
+    $stmt->execute();
+    $series = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($series as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
+}
+
+// Get's the information of a single room
+function get_room_info($pdo, $room_id){
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $room_info = $stmt->fetch();
+    $room_info_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($room_info as $key => $value){
+        $room_info_exp[$key] = htmlspecialchars($value);
+    }
+    return $room_info_exp;
+}
+
+/* checks postal code */
+function PostalCheck($postcode)
+{
+    $upper = strtoupper($postcode);
+
+    if( preg_match("/^\W*[1-9]{1}[0-9]{3}\W*[a-zA-Z]{2}\W*$/",  $upper)) {
+        return $upper;
+    } else {
+        return false;
+    }
+}
+
+/* add a room to the database */
+function add_room($pdo, $room_info){
+    /*check if all fields are set */
+    if(
+        empty($room_info['street']) or
+        empty($room_info['house_number']) or
+        empty($room_info['postalcode']) or
+        empty($room_info['city']) or
+        empty($room_info['type']) or
+        empty($room_info['price']) or
+        empty($room_info['size']) or
+        empty($room_info['description'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. Not all fields were filled in!'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['price'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field price.'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['size'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field size.'
+        ];
+    }
+
+    /* Check if postal code is entered correctly */
+    if (strlen($room_info['postalcode']) !== 6) {
+        return [
+            'type' => 'danger',
+            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
+        ];}
+    else {
+        if (PostalCheck($room_info['postalcode']) == false ){
+            return [
+                'type' => 'danger',
+                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
+            ];
+}
+    }
+
+    /* Add room */
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $room_info['street'],
+        $room_info['house_number'],
+        $room_info['postalcode'],
+        $room_info['city'],
+        $room_info['type'],
+        $room_info['price'],
+        $room_info['size'],
+        $room_info['description']
+    ]);
+    $inserted = $stmt->rowCount();
+    if ($inserted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Room %s %s added to Series Overview.", $room_info['street'], $room_info['house_number'])
+        ];
+    }
+    else {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. The room was not added. Try it again.'
+        ];
+    }
+
+}
+
 /**
  * Count the number of users listed on Series Overview
  * @param object $pdo database object
@@ -178,8 +328,8 @@ function redirect($location){
  */
 function get_user_id(){
     session_start();
-    if (isset($_SESSION['user_id'])){
-        return $_SESSION['user_id'];
+    if (isset($_SESSION['username'])){
+        return $_SESSION['username'];
     } else {
         return False;
     }
@@ -188,7 +338,7 @@ function get_user_id(){
 /* returns first- and lastname from user */
 function get_name($pdo, $user) {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname FROM users WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT firstname, lastname FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
