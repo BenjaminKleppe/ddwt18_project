@@ -35,22 +35,53 @@
 
                     <div class="pd-15">&nbsp;</div>
 
-                    <form action="/DDWT18/week2/register/" method="POST">
+                    <form action="/DDWT18/ddwt18_project/register/" method="POST">
                         <div class="form-group">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" placeholder="j.jansen" name="username" required>
+                            <label for="inputusername">Username</label>
+                            <input type="text" class="form-control" id="inputusername" placeholder="j.jansen" name="username" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="******" name="password" required>
+                            <label for="inputpassword">Password</label>
+                            <input type="password" class="form-control" id="inputpassword" placeholder="******" name="password" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputUsername">First name</label>
-                            <input type="text" class="form-control" id="inputUsername" placeholder="Jan" name="firstname" required>
+                            <label for="inputfirstname">First name</label>
+                            <input type="text" class="form-control" id="inputfirstname" placeholder="Jan" name="firstname" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputUsername">Last name</label>
-                            <input type="text" class="form-control" id="inputUsername" placeholder="Jansen" name="lastname" required>
+                            <label for="inputlastname">Last name</label>
+                            <input type="text" class="form-control" id="inputlastname" placeholder="Jansen" name="lastname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputrole">Role</label>
+                            <select class="form-control" id="inputrole" name="role" required>
+                                <option value="owner">Owner</option>
+                                <option value="tenant">Tenant</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputdateofbirth">Date of birth</label>
+                            <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputstudy">Study</label>
+                            <input type="text" class="form-control" id="inputstudy" name="study" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputlanguage">Language</label>
+                            <input type="text" class="form-control" id="inputlanguage" name="language" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputemail">E-mail</label>
+                            <input type="text" class="form-control" id="inputemail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputphonenumber">Phone number</label>
+                            <input type="text" class="form-control" id="inputphonenumber" name="phonenumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputbiography">Biography</label>
+                            <textarea class="form-control" id="inputbiography" rows="3" name="biography" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Register now</button>
                     </form>

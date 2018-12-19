@@ -129,6 +129,35 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     include use_template('room');
 }
 
+/* Register GET */
+elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
+    /* Page info */
+    $page_title = 'Register';
+    $breadcrumbs = get_breadcrumbs([
+        'DDWT18' => na('/DDWT18/', False),
+        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'Register' => na('/DDWT18/ddwt18_project/register/', True)
+    ]);
+    $navigation = get_navigation($template, 4);
+    /* Page content */
+    $page_subtitle = 'Register';
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    /* Choose Template */
+    include use_template('register');
+}
+
+/* Register POST */
+elseif (new_route('/DDWT18/ddwt18_project/register/', 'post')){
+    /* Register user */
+    $feedback = register_user($db, $_POST)
+        /* Redirect to homepage */;
+    redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
+        json_encode($feedback)));
+}
+
+
+
 /*
 else {
     http_response_code(404);

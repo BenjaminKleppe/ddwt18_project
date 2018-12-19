@@ -419,3 +419,77 @@ function logout_user(){
         ];
     }
 }
+
+function register_user($pdo, $form_data)
+{
+    /* Check if all fields are set */
+    if (
+        empty($form_data['username']) or
+        empty($form_data['password']) or
+        empty($form_data['firstname']) or
+        empty($form_data['lastname']) or
+        empty($form_data['role']) or
+        empty($form_data['dateofbirth']) or
+        empty($form_data['study']) or
+        empty($form_data['language']) or
+        empty($form_data['email']) or
+        empty($form_data['phonenumber']) or
+        empty($form_data['biography'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'You should fill in everything.'
+        ];
+    }
+    /* Check if user already exists */
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+        $stmt->execute([$form_data['username']]);
+        $user_exists = $stmt->rowCount();
+    } catch (\PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    /* Return error message for existing username */
+    if (!empty($user_exists)) {
+        return [
+            'type' => 'danger',
+            'message' => 'The username you entered does already exist!'
+        ];
+    }
+    /* Hash password */
+    $password = password_hash($form_data['password'], PASSWORD_DEFAULT);
+    /* Save user to the database */
+    try {
+        $stmt = $pdo->prepare('INSERT INTO user (username, password, firstname,
+lastname, role, `date-of-birth`, studie, `language`, email, phone_number, biography) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$form_data['username'], $password, $form_data['firstname'],
+            $form_data['lastname'], $form_data['role'], $form_data['dateofbirth'], $form_data['study'],$form_data['language'],$form_data['email'],$form_data['phonenumber'],$form_data['biography']]);
+        $user_id = $pdo->lastInsertId();
+    } catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    /* Login user and redirect */
+    session_start();
+    $_SESSION['user_id'] = $user_id;
+    $feedback = [
+        'type' => 'success',
+        'message' => sprintf('%s, your account was successfully
+created!', get_user($pdo, $_SESSION['username'])['firstname'])
+    ];
+    redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
+        json_encode($feedback)));
+}
+
+function get_user($pdo, $id)
+{
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+    $stmt->execute([$id]);
+    $user_info = $stmt->fetch();
+    return $user_info;
+}
