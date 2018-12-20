@@ -19,7 +19,7 @@ $template = Array(
         'name' => 'Overview',
         'url' => '/DDWT18/ddwt18_project/overview/'),
     3 => Array(
-        'name' => 'Add series',
+        'name' => 'Add room',
         'url' => '/DDWT18/ddwt18_project/add/'),
     4 => Array(
         'name' => 'My Account',
@@ -114,6 +114,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $language = $user_name['language'];
     $phonenumber = $user_name['phone_number'];
     $email = $user_name['email'];
+    $address_variable = sprintf("%s %s", $room_info['street'], $room_info['house_number']);;
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');

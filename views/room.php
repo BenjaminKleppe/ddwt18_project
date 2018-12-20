@@ -13,7 +13,7 @@
 
         <title><?= $page_title ?></title>
     </head>
-    <body>
+    <body style="padding-bottom: 5%">
         <!-- Menu -->
         <?= $navigation ?>
 
@@ -80,7 +80,12 @@
 
                 </div>
         </div>
-            <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5429.48857283729!2d6.569872303474646!3d53.22866220500693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c9cd5e6c2764a5%3A0x947c1737c3dae6a0!2sHeymanslaan+18B%2C+9714+GL+Groningen!5e0!3m2!1snl!2snl!4v1545321428470" width="1200" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+            <?php
+            $address = str_replace(" ", "+",$address_variable);
+            ?>
+            <iframe style="width:100%;height:100%;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
 
 
         <!-- Optional JavaScript -->
