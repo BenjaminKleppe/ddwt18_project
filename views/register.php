@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="en">
+<style>
+    select:invalid { color: gray; }
+</style>
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -55,6 +58,7 @@
                         <div class="form-group">
                             <label for="inputrole">Role</label>
                             <select class="form-control col-sm-3" id="inputrole" name="role" required>
+                                <option value="" disabled selected hidden>Choose a Role...</option>
                                 <option value="owner">Owner</option>
                                 <option value="tenant">Tenant</option>
                             </select>
@@ -65,12 +69,12 @@
                         </div>
                         <div class="form-group">
                             <label for="inputstudy">Study</label>
-                            <input type="text" class="form-control" id="inputstudy" name="study" required>
+                            <input type="text" class="form-control" id="inputstudy" name="study" placeholder="Information Science" required>
                         </div>
                         <div class="form-group">
                             <label for="inputlanguage">Language</label>
-                            <select class="form-control col-sm-3" data-placeholder="Choose a Language...">
-                                <option value="" disabled selected>Choose a Language...</option>
+                            <select class="form-control col-sm-3" data-placeholder="Choose a Language..." required>
+                                <option value="" disabled selected hidden>Choose a Language...</option>
                                 <option value="Afrikanns">Afrikanns</option>
                                 <option value="Afrikanns">Afrikanns</option>
                                 <option value="Albanian">Albanian</option>
@@ -147,12 +151,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputemail">E-mail</label>
-                            <input type="text" class="form-control" id="inputemail" name="email" required>
+                            <label for="inputemail">Email</label>
+                            <input type="text" class="form-control" id="inputemail" name="email" placeholder="someone@example.com" required>
                         </div>
                         <div class="form-group">
                             <label for="inputphonenumber">Phone number</label>
-                            <input type="text" class="form-control" id="inputphonenumber" name="phonenumber" required>
+                            <input type="tel" class="form-control" id="inputphonenumber" name="phonenumber" placeholder="+31612345678" required>
                         </div>
                         <div class="form-group">
                             <label for="inputbiography">Biography</label>
