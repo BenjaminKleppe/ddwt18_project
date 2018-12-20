@@ -157,7 +157,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputbiography">Biography</label>
-                            <textarea class="form-control" id="inputbiography" rows="3" name="biography" required></textarea>
+                            <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Register now</button>
                     </form>

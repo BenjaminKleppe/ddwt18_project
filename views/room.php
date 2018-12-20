@@ -63,6 +63,7 @@
 
                         </tbody>
                     </table>
+
                     <?php if ($display_buttons) { ?>
                     <div class="row">
                         <div class="col-sm-2">
@@ -77,7 +78,14 @@
                     </div>
                     <?php } ?>
 
+
             </div>
+                <!-- Right column -->
+                <div class="col-md-4">
+
+                    <?php include $right_column ?>
+
+                </div>
         </div>
 
 

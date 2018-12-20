@@ -79,9 +79,6 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     $submit_btn = "Add room";
     $form_action = '/DDWT18/ddwt18_project/add/';
 
-    /* always use template 'cards' */
-    $right_column = use_template('owner_card');
-
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
         $error_msg = get_error($_GET['error_msg']);
@@ -130,6 +127,9 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $price = $room_info['price'];
     $tenant = $room_info['tenant'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
+
+    /* always use template 'cards' */
+    $right_column = use_template('owner_card');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
