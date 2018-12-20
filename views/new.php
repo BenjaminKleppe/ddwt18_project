@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="en">
+<style>
+    select: { color: gray; }
+</style>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -62,6 +65,7 @@
                     <label for="type" class="col-sm-3 col-form-label"> Select type: </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="type" name="type">
+                            <option value="" disabled selected hidden>Choose a type...</option>
                             <option value="room">Room</option>
                             <option value="apartment">Apartment</option>
                             <option value="studio">Studio</option>
@@ -81,9 +85,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities:<br/>(multiple) </label>
+                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities:<br/>(multiple use Ctrl) </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="facilities" name="facilities" multiple>
+                            <option value="" disabled selected hidden>Choose (multiple) facilities</option>
                             <option value="kitchen">Kitchen</option>
                             <option value="wifi">WiFi</option>
                             <option value="dishwasher">Dishwasher</option>
