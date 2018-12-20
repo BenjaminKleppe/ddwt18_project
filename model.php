@@ -348,10 +348,10 @@ function get_user_id(){
     }
 }
 
-/* returns first- and lastname from user */
+/* returns first- and lastname, and birth date from user */
 function get_name($pdo, $user) {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname FROM user WHERE username = ?');
+    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, language, email, phone_number FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
