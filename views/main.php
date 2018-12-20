@@ -35,8 +35,15 @@
                     <p><?= $page_content ?></p>
                     <?php if(isset($left_content)){echo $left_content;} ?>
                 </div>
+                <!-- Right column -->
+                <div class="col-md-4">
+
+                    <?php include $right_column ?>
+
+                </div>
             </div>
         </div>
+
 
 
         <!-- Optional JavaScript -->

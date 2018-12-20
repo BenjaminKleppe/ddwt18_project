@@ -9,3 +9,5 @@
 .card-body .count {
     margin: 0;
 }
+
+select:invalid { color: gray; }

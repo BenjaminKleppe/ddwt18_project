@@ -35,7 +35,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_title = 'Overview';
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Overview' => na('/DDWT18/ddwt18_project/overview', True)
     ]);
     $navigation = get_navigation($template, '2');
@@ -44,6 +44,12 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_subtitle = 'The overview of all rooms available';
     $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
+
+    /* Get Number of rooms and users */
+    $nbr_rooms = count_rooms($db);
+    $nbr_users = count_users($db);
+    /* always use template 'cards' */
+    $right_column = use_template('cards');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -62,7 +68,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     $page_title = 'Add Room';
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/week2/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Add Series' => na('/DDWT18/week2/new/', True)
     ]);
     $navigation = get_navigation($template, '3');
@@ -105,7 +111,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Overview' => na('/DDWT18/ddwt18_project/overview/', False),
         $user_id['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
     ]);
@@ -122,12 +128,44 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $tenant = $room_info['tenant'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
 
+    /* always use template 'cards' */
+    $right_column = use_template('owner_card');
+
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
 
     /* Choose Template */
     include use_template('room');
 }
+
+/* Register GET */
+elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
+    /* Page info */
+    $page_title = 'Register';
+    $breadcrumbs = get_breadcrumbs([
+        'DDWT18' => na('/DDWT18/', False),
+        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'Register' => na('/DDWT18/ddwt18_project/register/', True)
+    ]);
+    $navigation = get_navigation($template, 5);
+    /* Page content */
+    $page_subtitle = 'Register';
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    /* Choose Template */
+    include use_template('register');
+}
+
+/* Register POST */
+elseif (new_route('/DDWT18/ddwt18_project/register/', 'post')){
+    /* Register user */
+    $feedback = register_user($db, $_POST)
+        /* Redirect to homepage */;
+    redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
+        json_encode($feedback)));
+}
+
+
 
 /*
 else {

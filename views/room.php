@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
         <!-- Own CSS -->
-        <link rel="stylesheet" href="/DDWT18/week2/css/main.css">
+        <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
 
         <title><?= $page_title ?></title>
     </head>
@@ -31,7 +31,7 @@
                     <?php if (isset($error_msg)){echo $error_msg;} ?>
 
                     <h1><?= $page_title ?></h1>
-                    <h3>€<?= $price ?></h3>
+                    <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
                     <h4>Information about the room:</h4>
                     <table class="table">
@@ -63,6 +63,7 @@
 
                         </tbody>
                     </table>
+
                     <?php if ($display_buttons) { ?>
                     <div class="row">
                         <div class="col-sm-2">
@@ -77,7 +78,14 @@
                     </div>
                     <?php } ?>
 
+
             </div>
+                <!-- Right column -->
+                <div class="col-md-4">
+
+                    <?php include $right_column ?>
+
+                </div>
         </div>
 
 
