@@ -138,7 +138,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
         'Week 2' => na('/DDWT18/ddwt18_project/', False),
         'Register' => na('/DDWT18/ddwt18_project/register/', True)
     ]);
-    $navigation = get_navigation($template, 4);
+    $navigation = get_navigation($template, 5);
     /* Page content */
     $page_subtitle = 'Register';
     /* Get error msg from POST route */
