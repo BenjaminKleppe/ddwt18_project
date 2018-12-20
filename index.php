@@ -45,6 +45,12 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
 
+    /* Get Number of rooms and users */
+    $nbr_rooms = count_rooms($db);
+    $nbr_users = count_users($db);
+    /* always use template 'cards' */
+    $right_column = use_template('cards');
+
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
         $error_msg = get_error($_GET['error_msg']);
@@ -72,6 +78,9 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     $page_content = 'Fill in the details of your room.';
     $submit_btn = "Add room";
     $form_action = '/DDWT18/ddwt18_project/add/';
+
+    /* always use template 'cards' */
+    $right_column = use_template('owner_card');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {

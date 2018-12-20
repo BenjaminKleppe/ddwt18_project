@@ -314,6 +314,19 @@ function count_users($pdo){
 }
 
 /**
+ * Count the number of rooms listed on room Overview
+ * @param object $pdo database object
+ * @return mixed
+ */
+function count_rooms($pdo){
+    /* Get series */
+    $stmt = $pdo->prepare('SELECT * FROM room');
+    $stmt->execute();
+    $rooms = $stmt->rowCount();
+    return $rooms;
+}
+
+/**
  * Changes the HTTP Header to a given location
  * @param string $location location to be redirected to
  */
