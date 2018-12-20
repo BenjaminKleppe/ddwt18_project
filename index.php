@@ -35,7 +35,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_title = 'Overview';
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Overview' => na('/DDWT18/ddwt18_project/overview', True)
     ]);
     $navigation = get_navigation($template, '2');
@@ -62,7 +62,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     $page_title = 'Add Room';
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/week2/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Add Series' => na('/DDWT18/week2/new/', True)
     ]);
     $navigation = get_navigation($template, '3');
@@ -105,7 +105,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
     $breadcrumbs = get_breadcrumbs([
         'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/ddwt18_project/', False),
+        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
         'Overview' => na('/DDWT18/ddwt18_project/overview/', False),
         $user_id['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
     ]);

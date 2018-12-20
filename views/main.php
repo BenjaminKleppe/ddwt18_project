@@ -37,6 +37,12 @@
                 </div>
             </div>
         </div>
+        <!-- Right column -->
+        <div class="col-md-4">
+
+            <?php include $right_column ?>
+
+        </div>
 
 
         <!-- Optional JavaScript -->
