@@ -83,17 +83,17 @@
                 <div class="form-group row">
                     <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities: </label>
                     <div class="col-sm-3 col-form-label">
-                        <input type="checkbox" name="facilities" value="Kitchen"> Kitchen<br>
-                        <input type="checkbox" name="facilities" value="Wi-Fi"> Wi-Fi<br>
-                        <input type="checkbox" name="facilities" value="Dishwasher"> Dishwasher<br>
-                        <input type="checkbox" name="facilities" value="Private"> Private bathroom<br>
-                        <input type="checkbox" name="facilities" value="Shared"> Shared bathroom<br>
-                        <input type="checkbox" name="facilities" value="Shower"> Shower<br>
-                        <input type="checkbox" name="facilities" value="Dishwasher"> Dishwasher<br>
-                        <input type="checkbox" name="facilities" value="Furniture"> Furniture<br>
-                        <input type="checkbox" name="facilities" value="Stove"> Stove<br>
-                        <input type="checkbox" name="facilities" value="Microwave"> Microwave<br>
-                        <input type="checkbox" name="facilities" value="living"> Shared living room<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Kitchen"> Kitchen<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Wi-Fi"> Wi-Fi<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Private"> Private bathroom<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Shared"> Shared bathroom<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Shower"> Shower<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Furniture"> Furniture<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Stove"> Stove<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Microwave"> Microwave<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="living"> Shared living room<br>
                     </div>
                 </div>
                 <div class="form-group row">
