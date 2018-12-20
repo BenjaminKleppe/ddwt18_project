@@ -33,11 +33,6 @@ $template = Array(
 if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     /* Page info */
     $page_title = 'Overview';
-    $breadcrumbs = get_breadcrumbs([
-        'DDWT18' => na('/DDWT18/', False),
-        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
-        'Overview' => na('/DDWT18/ddwt18_project/overview', True)
-    ]);
     $navigation = get_navigation($template, '2');
 
     /* Page content */
@@ -66,11 +61,6 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
 
     /* Page info */
     $page_title = 'Add Room';
-    $breadcrumbs = get_breadcrumbs([
-        'DDWT18' => na('/DDWT18/', False),
-        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
-        'Add Series' => na('/DDWT18/week2/new/', True)
-    ]);
     $navigation = get_navigation($template, '3');
 
     /* Page content */
@@ -102,19 +92,12 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get series from db */
     $room_id = $_GET['room_id'];
-    $user_id = $_GET['username'];
-    $user_name = get_name($db, $user_id);
+    $user_name = get_name($db, $room_id);
     $room_info = get_room_info($db, $room_id);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
-    $breadcrumbs = get_breadcrumbs([
-        'DDWT18' => na('/DDWT18/', False),
-        'ddwt18_project' => na('/DDWT18/ddwt18_project/', False),
-        'Overview' => na('/DDWT18/ddwt18_project/overview/', False),
-        $user_id['username'] => na('/DDWT18/ddwt18_project/room/?room_id='.$room_id, True)
-    ]);
     $navigation = get_navigation($template, '2');
 
     /* Page content */
@@ -127,6 +110,10 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $price = $room_info['price'];
     $tenant = $room_info['tenant'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
+    $birthdate = $user_name['dateofbirth'];
+    $language = $user_name['language'];
+    $phonenumber = $user_name['phone_number'];
+    $email = $user_name['email'];
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');
@@ -142,14 +129,9 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
 elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     /* Page info */
     $page_title = 'Register';
-    $breadcrumbs = get_breadcrumbs([
-        'DDWT18' => na('/DDWT18/', False),
-        'Week 2' => na('/DDWT18/ddwt18_project/', False),
-        'Register' => na('/DDWT18/ddwt18_project/register/', True)
-    ]);
     $navigation = get_navigation($template, 5);
     /* Page content */
-    $page_subtitle = 'Register';
+    $page_subtitle = 'Register here to add rooms or to opt-in for a room';
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */

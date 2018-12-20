@@ -22,10 +22,6 @@
 
 <!-- Content -->
 <div class="container">
-    <!-- Breadcrumbs -->
-    <div class="pd-15">&nbsp</div>
-    <?= $breadcrumbs ?>
-
     <div class="row">
 
         <!-- Left column -->
@@ -109,16 +105,6 @@
                 </div>
             </form>
         </div>
-
-        <!-- Right column -->
-        <!--
-                <div class="col-md-4">
-
-                    <?php include $right_column ?>
-
-                </div>
-                -->
-
     </div>
 </div>
 
