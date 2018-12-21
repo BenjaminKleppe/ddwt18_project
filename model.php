@@ -457,7 +457,7 @@ function register_user($pdo, $form_data)
     /* Save user to the database */
     try {
         $stmt = $pdo->prepare('INSERT INTO user (username, password, firstname,
-lastname, role, `date-of-birth`, studie, `language`, email, phone_number, biography) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+lastname, role, dateofbirth, study, language, email, phonenumber, biography) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute([$form_data['username'], $password, $form_data['firstname'],
             $form_data['lastname'], $form_data['role'], $form_data['dateofbirth'], $form_data['study'],$form_data['language'],$form_data['email'],$form_data['phonenumber'],$form_data['biography']]);
         $user_id = $pdo->lastInsertId();
