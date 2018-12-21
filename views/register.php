@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputlanguage">Language</label>
-                            <select class="form-control col-sm-3" data-placeholder="Choose a Language..." required>
+                            <select class="form-control col-sm-3" data-placeholder="Choose a Language..." name="language" required>
                                 <option value="" disabled selected hidden>Choose a Language...</option>
                                 <option value="Afrikanns">Afrikanns</option>
                                 <option value="Afrikanns">Afrikanns</option>

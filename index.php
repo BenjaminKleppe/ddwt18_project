@@ -148,6 +148,25 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'post')){
         json_encode($feedback)));
 }
 
+/* myaccount GET */
+elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Page info */
+    $page_title = 'My Account';
+    $navigation = get_navigation($template, 4);
+    /* Page content */
+    $user_name = get_name($db, $_SESSION['user_id']);
+    $user = $user_name['firstname']." ".$user_name['lastname'];
+    $page_subtitle = 'My account on Rooms Overview!';
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    /* Choose Template */
+    include use_template('account');
+}
 
 
 /*
