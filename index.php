@@ -34,7 +34,6 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     /* Page info */
     $page_title = 'InterRooms';
     $navigation = get_navigation($template, '1');
-
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
     $nbr_users = count_users($db);
