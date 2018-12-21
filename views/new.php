@@ -25,13 +25,16 @@
     <div class="row">
 
         <!-- Left column -->
-        <div class="col-md-8">
+        <div class="col-md-9">
             <!-- Error message -->
             <?php if (isset($error_msg)){echo $error_msg;} ?>
 
             <h1><?= $page_title ?></h1>
             <h5><?= $page_subtitle ?></h5>
             <p><?= $page_content ?></p>
+
+            <div class="pd-15">&nbsp;</div>
+
             <form action="<?= $form_action ?>" method="POST">
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>

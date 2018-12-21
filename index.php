@@ -177,7 +177,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $navigation = get_navigation($template, 4);
     /* Page content */
     $user_name = get_name($db, $_SESSION['user_id']);
-    $user = $user_name['firstname']." ".$user_name['lastname'];
+    $user = $user_name['firstname'];
     $page_subtitle = 'My account on Rooms Overview!';
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }

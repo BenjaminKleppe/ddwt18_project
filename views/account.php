@@ -42,7 +42,7 @@
                         </div>
                         <div class="card-body">
                             <p>You're logged in to Series Overview.</p>
-                            <a href="/DDWT18/week2/logout/" class="btn btn-primary">Logout</a>
+                            <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -50,11 +50,11 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            Add series
+                            Add rooms
                         </div>
                         <div class="card-body">
-                            <p>Add your contribution to Series Overview.</p>
-                            <a href="/DDWT18/week2/add/" class="btn btn-primary">Add a series</a>
+                            <p>Add your contribution to Rooms Overview.</p>
+                            <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Add a room</a>
                         </div>
                     </div>
                 </div>
