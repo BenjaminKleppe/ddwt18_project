@@ -89,7 +89,6 @@
                         <input type="checkbox" id="facilities" name="facilities[]" value="Private"> Private bathroom<br>
                         <input type="checkbox" id="facilities" name="facilities[]" value="Shared"> Shared bathroom<br>
                         <input type="checkbox" id="facilities" name="facilities[]" value="Shower"> Shower<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
                         <input type="checkbox" id="facilities" name="facilities[]" value="Furniture"> Furniture<br>
                         <input type="checkbox" id="facilities" name="facilities[]" value="Stove"> Stove<br>
                         <input type="checkbox" id="facilities" name="facilities[]" value="Microwave"> Microwave<br>
