@@ -71,28 +71,6 @@ function use_template($template){
 }
 
 /**
- * Creates breadcrumb HTML code using given array
- * @param array $breadcrumbs Array with as Key the page name and as Value the corresponding url
- * @return string html code that represents the breadcrumbs
- */
-function get_breadcrumbs($breadcrumbs) {
-    $breadcrumbs_exp = '
-    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">';
-    foreach ($breadcrumbs as $name => $info) {
-        if ($info[1]){
-            $breadcrumbs_exp .= '<li class="breadcrumb-item active" aria-current="page">'.$name.'</li>';
-        }else{
-            $breadcrumbs_exp .= '<li class="breadcrumb-item"><a href="'.$info[0].'">'.$name.'</a></li>';
-        }
-    }
-    $breadcrumbs_exp .= '
-    </ol>
-    </nav>';
-    return $breadcrumbs_exp;
-}
-
-/**
  * Creates navigation HTML code using given array
  * @param array $navigation Array with as Key the page name and as Value the corresponding url
  * @return string html code that represents the navigation
@@ -100,7 +78,7 @@ function get_breadcrumbs($breadcrumbs) {
 function get_navigation($template, $active_id){
     $navigation_exp = '
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Rooms Overview</a>
+    <div><img src="../interroom.png" alt="Logo" width="200" height="50"/></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -233,7 +211,8 @@ function add_room($pdo, $room_info){
         empty($room_info['type']) or
         empty($room_info['price']) or
         empty($room_info['size']) or
-        empty($room_info['description'])
+        empty($room_info['description']) or
+        empty($room_info['tenant'])
     ) {
         return [
             'type' => 'danger',
@@ -273,7 +252,7 @@ function add_room($pdo, $room_info){
     }
 
     /* Add room */
-    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -282,7 +261,8 @@ function add_room($pdo, $room_info){
         $room_info['type'],
         $room_info['price'],
         $room_info['size'],
-        $room_info['description']
+        $room_info['description'],
+        $room_info['tenant']
     ]);
     $inserted = $stmt->rowCount();
     if ($inserted ==  1) {

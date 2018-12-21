@@ -81,20 +81,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities:<br/>(multiple use Ctrl) </label>
-                    <div class="col-sm-3">
-                        <select class="form-control" id="facilities" name="facilities" multiple>
-                            <option value="" disabled selected hidden>Choose (multiple) facilities</option>
-                            <option value="kitchen">Kitchen</option>
-                            <option value="wifi">WiFi</option>
-                            <option value="dishwasher">Dishwasher</option>
-                        </select>
+                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities: </label>
+                    <div class="col-sm-3 col-form-label">
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Kitchen"> Kitchen<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Wi-Fi"> Wi-Fi<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Private"> Private bathroom<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Shared"> Shared bathroom<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Shower"> Shower<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Furniture"> Furniture<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Stove"> Stove<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="Microwave"> Microwave<br>
+                        <input type="checkbox" id="facilities" name="facilities[]" value="living"> Shared living room<br>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
                     <div class="col-sm-9">
                         <textarea class="form-control" id="inputDescription" rows="3" placeholder="Write here your description of the room..." name="description" required><?php if (isset($room_info)){echo $room_info['description'];} ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputtenant" class="col-sm-3 col-form-label">Desired tenant:</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="inputtenant" rows="3" placeholder="Write here your description of the desired tenant..." name="tenant" required><?php if (isset($room_info)){echo $room_info['tenant'];} ?></textarea>
                     </div>
                 </div>
                 <?php if(isset($room_id)){ ?><input type="hidden" name="room_id" value="<?php echo $room_id ?>"><?php } ?>

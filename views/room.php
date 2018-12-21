@@ -13,7 +13,7 @@
 
         <title><?= $page_title ?></title>
     </head>
-    <body>
+    <body style="padding-bottom: 5%">
         <!-- Menu -->
         <?= $navigation ?>
 
@@ -53,10 +53,6 @@
                             <th scope="row">Desired tenant</th>
                             <td><?= $tenant ?></td>
                         </tr>
-                        <tr>
-                            <th scope="row">Location</th>
-                            <td><div id="googleMap" style="width:100%;height:400px;"></div></td>
-                        </tr>
 
                         </tbody>
                     </table>
@@ -85,17 +81,15 @@
                 </div>
         </div>
 
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+            <?php
+            $address = str_replace(" ", "+",$address_variable);
+            ?>
+            <iframe style="width:100%;height:100%;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+
 
         <!-- Optional JavaScript -->
-            <script>
-                function myMap() {
-                    var mapProp= {
-                        center:new google.maps.LatLng(51.508742,-0.120850),
-                        zoom:5,
-                    };
-                    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                }
-            </script>
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
