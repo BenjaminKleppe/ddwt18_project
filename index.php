@@ -29,6 +29,24 @@ $template = Array(
         'url' => '/DDWT18/ddwt18_project/register/')
 );
 
+/* Home page */
+if (new_route('/DDWT18/ddwt18_project/', 'get')) {
+    /* Page info */
+    $page_title = 'InterRooms';
+    $navigation = get_navigation($template, '1');
+
+    /* Get Number of rooms and users */
+    $nbr_rooms = count_rooms($db);
+    $nbr_users = count_users($db);
+    /* always use template 'cards' */
+    $right_column = use_template('cards');
+
+    /* Page content */
+    $page_subtitle = 'Rooms, especially for internationals.';
+    $page_content = 'This platform is establishing a connection between international students, so that they can live together.';
+    include use_template('main');
+}
+
 /* Overview page */
 if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     /* Page info */
