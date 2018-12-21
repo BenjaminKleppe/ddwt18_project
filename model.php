@@ -472,12 +472,12 @@ lastname, role, dateofbirth, study, language, email, phonenumber, biography) VAL
     $_SESSION['user_id'] = $user_id;
     $feedback = [
         'type' => 'success',
-        'message' => sprintf('%s, your account was successfully
-created!', get_user($pdo, $_SESSION['username'])['firstname'])
+        'message' => sprintf('%s, your account was successfully created!', $form_data['firstname'])
     ];
     redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
         json_encode($feedback)));
 }
+
 
 function get_user($pdo, $id)
 {
