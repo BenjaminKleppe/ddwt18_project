@@ -321,6 +321,7 @@ function redirect($location){
  * @return bool current user id or False if not logged in
  */
 function get_user_id(){
+    session_start();
     if (isset($_SESSION['user_id'])){
         return $_SESSION['user_id'];
     } else {
