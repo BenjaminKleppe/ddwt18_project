@@ -30,6 +30,9 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
+                    <div>
+                        <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
+                    </div>
                     <h4>Information about the room:</h4>
                     <table class="table">
                         <tbody>
