@@ -59,6 +59,26 @@
                     </div>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Your account details:
+                        </div>
+                        <div class="card-body">
+                            <p>First name: <?= $user_first ?></p>
+                            <p>Last name: <?= $user_last ?></p>
+                            <p>Role: <?= $user_role ?></p>
+                            <p>Date of birth: <?= $user_dob ?></p>
+                            <p>Biography: <?= $user_bio ?></p>
+                            <p>Study: <?= $user_study ?></p>
+                            <p>Language: <?= $user_language ?></p>
+                            <p>E-mail: <?= $user_mail ?></p>
+                            <p>Phone number: <?= $user_phone ?></p>
+                            <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Edit details</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

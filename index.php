@@ -181,6 +181,15 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     /* Page content */
     $user_name = get_name($db, $_SESSION['user_id']);
     $user = $user_name['firstname']." ".$user_name['lastname'];
+    $user_first = $user_name['firstname'];
+    $user_last = $user_name['lastname'];
+    $user_role = $user_name['role'];
+    $user_dob = $user_name['dateofbirth'];
+    $user_bio = $user_name['biography'];
+    $user_study = $user_name['study'];
+    $user_language = $user_name['language'];
+    $user_mail = $user_name['email'];
+    $user_phone = $user_name['phonenumber'];
     $page_subtitle = 'My account on Rooms Overview!';
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
