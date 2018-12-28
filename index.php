@@ -267,6 +267,9 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
     redirect(sprintf('/DDWT18/ddwt18_project/', json_encode($feedback)));
 }
 
+elseif (new_route('/DDWT18/ddwt18_project/hoi/', 'get')) {
+
+}
 
 else {
     http_response_code(404);
