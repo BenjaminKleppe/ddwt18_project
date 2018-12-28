@@ -162,11 +162,11 @@ function get_room_table($rooms, $pdo){
 function get_rooms($pdo){
     $stmt = $pdo->prepare('SELECT * FROM room');
     $stmt->execute();
-    $series = $stmt->fetchAll();
+    $rooms = $stmt->fetchAll();
     $room_exp = Array();
 
     /* Create array with htmlspecialchars */
-    foreach ($series as $key => $value){
+    foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key][$user_key] = htmlspecialchars($user_input);
         }
@@ -286,11 +286,11 @@ function add_room($pdo, $room_info){
  * @return mixed
  */
 function count_users($pdo){
-    /* Get series */
+    /* Get rooms */
     $stmt = $pdo->prepare('SELECT * FROM user');
     $stmt->execute();
-    $series = $stmt->rowCount();
-    return $series;
+    $rooms = $stmt->rowCount();
+    return $rooms;
 }
 
 /**
@@ -299,7 +299,7 @@ function count_users($pdo){
  * @return mixed
  */
 function count_rooms($pdo){
-    /* Get series */
+    /* Get rooms */
     $stmt = $pdo->prepare('SELECT * FROM room');
     $stmt->execute();
     $rooms = $stmt->rowCount();
@@ -330,7 +330,7 @@ function get_user_id(){
 
 /* returns first- and lastname, and birth date from user */
 function get_name($pdo, $user) {
-    /* Get series */
+    /* Get rooms */
     $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
@@ -340,7 +340,7 @@ function get_name($pdo, $user) {
 /* returns first- and lastname, and birth date from user */
 function owner_name($pdo, $user)
 {
-    /* Get series */
+    /* Get rooms */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
@@ -538,5 +538,6 @@ function contact_room($pdo, $form_data)
         ];
     }
 }
+
 
 

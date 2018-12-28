@@ -75,7 +75,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     include use_template('main');
 }
 
-/* Add serie get */
+/* Add room get */
 elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     /* Check if logged in */
 
@@ -97,7 +97,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     include use_template('new');
 }
 
-/* Add serie POST */
+/* Add room POST */
 elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
     /* Check if logged in */
 
@@ -108,9 +108,9 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
         json_encode($feedback)));
 }
 
-/* Single Serie */
+/* Single room */
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
-    /* Get series from db */
+    /* Get rooms from db */
     $room_id = $_GET['room_id'];
     $user_name = get_name($db, $room_id);
     $room_info = get_room_info($db, $room_id);
