@@ -112,8 +112,8 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get rooms from db */
     $room_id = $_GET['room_id'];
-    $user_name = ge_name($db, $room_id);
     $room_info = get_room_info($db, $room_id);
+    $owner_name = get_name($db, $room_info['owner']);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Page info */
@@ -181,15 +181,6 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     /* Page content */
     $user_name = get_name($db, $_SESSION['user_id']);
     $user = $user_name['firstname']." ".$user_name['lastname'];
-    $user_first = $user_name['firstname'];
-    $user_last = $user_name['lastname'];
-    $user_role = $user_name['role'];
-    $user_dob = $user_name['dateofbirth'];
-    $user_bio = $user_name['biography'];
-    $user_study = $user_name['study'];
-    $user_language = $user_name['language'];
-    $user_mail = $user_name['email'];
-    $user_phone = $user_name['phonenumber'];
     $page_subtitle = 'My account on Rooms Overview!';
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -207,7 +198,8 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
     $user_name = get_name($db, $_SESSION['user_id']);
-    $owner = owner_name($db, $room_info['owner'])['firstname'];
+    $owner_name = owner_name($db, $room_info['owner']);
+    $owner = $owner_name['firstname']." ".$owner_name['lastname'];
     $address = $room_info['street']." ".$room_info['house_number'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $language = $user_name['language'];
