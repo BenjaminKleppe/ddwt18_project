@@ -252,7 +252,7 @@ function add_room($pdo, $room_info){
     }
 
     /* Add room */
-    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant, owner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -262,7 +262,8 @@ function add_room($pdo, $room_info){
         $room_info['price'],
         $room_info['size'],
         $room_info['description'],
-        $room_info['tenant']
+        $room_info['tenant'],
+        get_user_id()
     ]);
     $inserted = $stmt->rowCount();
     if ($inserted ==  1) {
@@ -320,20 +321,20 @@ function redirect($location){
  * @return bool current user id or False if not logged in
  */
 function get_user_id(){
-    if (isset($_SESSION['username'])){
-        return $_SESSION['username'];
+    if (isset($_SESSION['user_id'])){
+        return $_SESSION['user_id'];
     } else {
         return False;
     }
 }
 
-/* returns first- and lastname, and birth date from user */
 function get_name($pdo, $user) {
-    /* Get rooms */
-    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user, room WHERE user.username = room.owner;');
+    /* Get series */
+    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
+
 }
 
 /* returns first- and lastname, and birth date from owner */
@@ -386,11 +387,11 @@ function login_user($pdo, $form_data)
         ];
     } else {
         session_start();
-        $_SESSION['user_id'] = $user_info['username'];
+        $_SESSION['user_id'] = $user_info['id'];
         $feedback = [
             'type' => 'success',
             'message' => sprintf('%s, you were logged in successfully!',
-                get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
+                get_name($pdo, $_SESSION['user_id'])['firstname'] . " " . get_name($pdo, $_SESSION['user_id'])['lastname'])
         ];
         redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
             json_encode($feedback)));
@@ -481,9 +482,10 @@ lastname, role, dateofbirth, study, language, email, phonenumber, biography) VAL
     $_SESSION['user_id'] = $user_id;
     $feedback = [
         'type' => 'success',
-        'message' => sprintf('%s %s, your account was successfully created!', $form_data['firstname'], $form_data['lastname'])
+        'message' => sprintf('%s, your account was successfully
+created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
     ];
-    redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
+    redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
         json_encode($feedback)));
 }
 

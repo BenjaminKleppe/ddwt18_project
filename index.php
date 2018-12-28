@@ -113,7 +113,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get rooms from db */
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
-    $owner_name = owner_name($db, $room_info['owner']);
+    $owner_info = get_name($db, $room_info['owner']);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Page info */
@@ -122,7 +122,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
 
     /* Page content */
 
-    $added_by = $owner_name['firstname']." ".$owner_name['lastname'];
+    $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
     $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
     $description = $room_info['description'];
     $type = $room_info['type'];
@@ -130,10 +130,10 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $price = $room_info['price'];
     $tenant = $room_info['tenant'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
-    $birthdate = $owner_name['dateofbirth'];
-    $language = $owner_name['language'];
-    $phonenumber = $owner_name['phonenumber'];
-    $email = $owner_name['email'];
+    $birthdate = $owner_info['dateofbirth'];
+    $language = $owner_info['language'];
+    $phonenumber = $owner_info['phonenumber'];
+    $email = $owner_info['email'];
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);;
 
     /* always use template 'cards' */
@@ -200,14 +200,11 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
 /* Contact GET */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     /* Check if logged in */
-    if (!check_login()) {
-        redirect('/DDWT18/ddwt18_project/login/');
-    }
 
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
     $user_name = get_name($db, $_SESSION['user_id']);
-    $owner_name = owner_name($db, $room_info['owner']);
+    $owner_name = get_name($db, $room_info['owner']);
     $owner = $owner_name['firstname']." ".$owner_name['lastname'];
     $address = $room_info['street']." ".$room_info['house_number'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
@@ -263,7 +260,8 @@ elseif (new_route('/DDWT18/ddwt18_project/login/', 'post')){
     /* Login user */
     $feedback = login_user($db, $_POST);
     /* Redirect to homepage */
-    redirect(sprintf('/DDWT18/ddwt18_project/login/?error_msg=%s', json_encode($feedback)));
+    redirect(sprintf('/DDWT18/ddwt18_project/login/?error_msg=%s',
+        json_encode($feedback)));
 }
 
 /* Log out GET */
