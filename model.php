@@ -331,12 +331,19 @@ function get_user_id(){
 /* returns first- and lastname, and birth date from user */
 function get_name($pdo, $user) {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, language, email, phonenumber FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
+    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
-
 }
+
+/* returns first- and lastname, and birth date from user */
+function owner_name($pdo, $user) {
+    /* Get series */
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+    $stmt->execute([$user]);
+    $user_info = $stmt->fetch();
+    return $user_info;
 
 function login_user($pdo, $form_data)
 {
@@ -353,7 +360,7 @@ function login_user($pdo, $form_data)
 
     /* Check if user exists */
     try {
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
         $stmt->execute([$form_data['username']]);
         $user_info = $stmt->fetch();
     } catch (\PDOException $e) {
@@ -472,7 +479,7 @@ lastname, role, dateofbirth, study, language, email, phonenumber, biography) VAL
     $_SESSION['user_id'] = $user_id;
     $feedback = [
         'type' => 'success',
-        'message' => sprintf('%s, your account was successfully created!', $form_data['firstname'])
+        'message' => sprintf('%s %s, your account was successfully created!', $form_data['firstname'], $form_data['lastname'])
     ];
     redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
         json_encode($feedback)));
@@ -486,3 +493,48 @@ function get_user($pdo, $id)
     $user_info = $stmt->fetch();
     return $user_info;
 }
+
+function contact_room($pdo, $form_data)
+{
+    /* Check if all fields are set */
+    if (
+    empty($form_data['message'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'You should fill in a message.'
+        ];
+    }
+    /* Check if user already exists */
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+        $stmt->execute([$form_data['username']]);
+        $tenant_exists = $stmt->rowCount();
+    } catch (\PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+
+    /* Return error message for existing username */
+    if (!empty($tenant_exists)) {
+        return [
+            'type' => 'danger',
+            'message' => 'The username you entered does already exist!'
+        ];
+    }
+
+    try {
+        $stmt = $pdo->prepare('INSERT INTO opt-in (room_id, tenant, message) VALUES (?, ?, ?)');
+        $stmt->execute([$form_data['room_id'], $form_data['username'], $form_data['message']]);
+        $user_id = $pdo->lastInsertId();
+    } catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+}
+
+

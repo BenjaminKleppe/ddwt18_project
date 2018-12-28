@@ -10,6 +10,6 @@
         <p>Language: <?= $language ?></p>
         <p>Email: <?= $email ?></p>
         <p>Phone number: <?= $phonenumber ?></p>
-        <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Contact</a>
+        <a href="/DDWT18/ddwt18_project/contact/" class="btn btn-primary">Opt-in</a>
     </div>
 </div>

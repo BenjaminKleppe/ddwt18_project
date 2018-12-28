@@ -177,7 +177,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $navigation = get_navigation($template, 4);
     /* Page content */
     $user_name = get_name($db, $_SESSION['user_id']);
-    $user = $user_name['firstname'];
+    $user = $user_name['firstname']." ".$user_name['lastname'];
     $page_subtitle = 'My account on Rooms Overview!';
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -185,12 +185,53 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     include use_template('account');
 }
 
+/* Contact GET */
+elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
+    /* Check if logged in */
+    if (!check_login()) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
 
-/*
+    $room_id = $_GET['room_id'];
+    $user_name = get_name($db, $room_id);
+    $user_name = owner_name($db, $room_id);
+
+    $name = $user_name['firstname']." ".$user_name['lastname'];
+    $language = $user_name['language'];
+    $study = $user_name['study'];
+    $phonenumber = $user_name['phonenumber'];
+    $email = $user_name['email'];
+    $birthdate = $user_name['dateofbirth'];
+    $room_info = get_room_info($db, $room_id);
+    $page_title = $room_info['street'];
+    $navigation = get_navigation($template, '0');
+    $address = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
+    $display_buttons = get_user_id() == $room_info['room_id'];
+
+
+
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    /* Choose Template */
+    include use_template('contact');
+}
+
+/* Contact Post */
+elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
+    /* Add room to database */
+    $feedback = contact_room($db, $_POST);
+    /* Redirect to room GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
+
+}
+
+
 else {
     http_response_code(404);
 }
-*/
+
 
 
 
