@@ -198,8 +198,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
     $user_name = get_name($db, $_SESSION['user_id']);
-    $owner_name = ge_name($db, $room_id);
-    $owner = $owner_name['firstname']." ".$user_name['lastname'];
+    $owner = owner_name($db, $room_info['owner'])['firstname'];
     $address = $room_info['street']." ".$room_info['house_number'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $language = $user_name['language'];
