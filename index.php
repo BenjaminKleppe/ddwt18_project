@@ -272,7 +272,7 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
     $feedback = logout_user();
     if ( isset($_GET['error_msg']) ) {
         $error_msg = get_error($_GET['error_msg']); }
-    redirect(sprintf('/DDWT18/ddwt18_project/', json_encode($feedback)));
+    redirect(sprintf('/DDWT18/ddwt18_project/?error_msg=%s', json_encode($feedback)));
 }
 
 else {
