@@ -26,10 +26,7 @@ $template = Array(
         'url' => '/DDWT18/ddwt18_project/myaccount/'),
     5 => Array(
         'name' => 'Register',
-        'url' => '/DDWT18/ddwt18_project/register/'),
-    6 => Array(
-        'name' => 'Log in',
-        'url' => '/DDWT18/ddwt18_project/login/')
+        'url' => '/DDWT18/ddwt18_project/register/')
 );
 
 /* Home page */
@@ -78,6 +75,9 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
 /* Add room get */
 elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     /* Check if logged in */
+    if (!check_login()) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
 
     /* Page info */
     $page_title = 'Add Room';
@@ -112,7 +112,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get rooms from db */
     $room_id = $_GET['room_id'];
-    $user_name = get_name($db, $room_id);
+    $user_name = ge_name($db, $room_id);
     $room_info = get_room_info($db, $room_id);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
@@ -164,7 +164,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'post')){
     /* Register user */
     $feedback = register_user($db, $_POST)
         /* Redirect to homepage */;
-    redirect(sprintf('/DDWT18/ddwt18_project/register/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
 }
 
@@ -196,7 +196,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     }
 
     $room_id = $_GET['room_id'];
-    $user_name = get_name($db, $room_id);
+    $user_name = ge_name($db, $room_id);
     $owner_name = owner_name($db, $room_id);
 
     $name = $user_name['firstname']." ".$user_name['lastname'];
@@ -210,9 +210,6 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $navigation = get_navigation($template, '0');
     $address = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
     $display_buttons = get_user_id() == $room_info['room_id'];
-
-
-
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -240,7 +237,7 @@ elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
 
     /* Page info */
     $page_title = 'Login';
-    $navigation = get_navigation($template, 6);
+    $navigation = get_navigation($template, 0);
 
     /* Page content */
     $page_subtitle = 'Use your username and password to login';

@@ -328,8 +328,17 @@ function get_user_id(){
     }
 }
 
+function get_name($pdo, $user)
+{
+    /* Get series */
+    $stmt = $pdo->prepare('SELECT firstname, lastname FROM user WHERE username = ?');
+    $stmt->execute([$user]);
+    $user_info = $stmt->fetch();
+    return $user_info;
+}
+
 /* returns first- and lastname, and birth date from user */
-function get_name($pdo, $user) {
+function ge_name($pdo, $user) {
     /* Get rooms */
     $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
     $stmt->execute([$user]);
@@ -337,7 +346,7 @@ function get_name($pdo, $user) {
     return $user_info;
 }
 
-/* returns first- and lastname, and birth date from user */
+/* returns first- and lastname, and birth date from owner */
 function owner_name($pdo, $user)
 {
     /* Get rooms */
@@ -393,10 +402,11 @@ function login_user($pdo, $form_data)
             'message' => sprintf('%s, you were logged in successfully!',
                 get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
         ];
-        redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
             json_encode($feedback)));
     }
 }
+
 
 function check_login()
 {
