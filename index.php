@@ -194,7 +194,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
 
     $room_id = $_GET['room_id'];
     $user_name = get_name($db, $room_id);
-    $user_name = owner_name($db, $room_id);
+    $owner_name = owner_name($db, $room_id);
 
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $language = $user_name['language'];
