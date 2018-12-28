@@ -113,7 +113,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     /* Get rooms from db */
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
-    $owner_name = get_name($db, $room_info['owner']);
+    $owner_name = owner_name($db, $room_info['owner']);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Page info */
@@ -122,7 +122,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
 
     /* Page content */
 
-    $added_by = $user_name['firstname']." ".$user_name['lastname'];
+    $added_by = $owner_name['firstname']." ".$owner_name['lastname'];
     $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
     $description = $room_info['description'];
     $type = $room_info['type'];
@@ -130,10 +130,10 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $price = $room_info['price'];
     $tenant = $room_info['tenant'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
-    $birthdate = $user_name['dateofbirth'];
-    $language = $user_name['language'];
-    $phonenumber = $user_name['phonenumber'];
-    $email = $user_name['email'];
+    $birthdate = $owner_name['dateofbirth'];
+    $language = $owner_name['language'];
+    $phonenumber = $owner_name['phonenumber'];
+    $email = $owner_name['email'];
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);;
 
     /* always use template 'cards' */
