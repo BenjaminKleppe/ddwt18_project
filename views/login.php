@@ -31,7 +31,7 @@
 
                     <div class="pd-15">&nbsp;</div>
 
-                    <form action="/DDWT18/week2/login/" method="POST">
+                    <form action="/DDWT18/ddwt18_project/login/" method="POST">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
                             <input type="text" class="form-control" id="inputUsername" placeholder="Enter username" name="username" required>

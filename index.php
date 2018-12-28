@@ -26,7 +26,10 @@ $template = Array(
         'url' => '/DDWT18/ddwt18_project/myaccount/'),
     5 => Array(
         'name' => 'Register',
-        'url' => '/DDWT18/ddwt18_project/register/')
+        'url' => '/DDWT18/ddwt18_project/register/'),
+    6 => Array(
+        'name' => 'Log in',
+        'url' => '/DDWT18/ddwt18_project/login/')
 );
 
 /* Home page */
@@ -225,6 +228,46 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
 
+}
+
+
+/* Login GET */
+elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
+    /* Check if the user is logged in */
+    if ( check_login() ) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
+    }
+
+    /* Page info */
+    $page_title = 'Login';
+    $navigation = get_navigation($template, 6);
+
+    /* Page content */
+    $page_subtitle = 'Use your username and password to login';
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']); }
+
+    /* Choose Template */
+    include use_template('login');
+}
+
+/* Login POST */
+elseif (new_route('/DDWT18/ddwt18_project/login/', 'post')){
+    /* Login user */
+    $feedback = login_user($db, $_POST);
+    /* Redirect to homepage */
+    redirect(sprintf('/DDWT18/ddwt18_project/login/?error_msg=%s', json_encode($feedback)));
+}
+
+/* Log out GET */
+elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
+    /* Get error msg from POST route */
+    $feedback = logout_user();
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']); }
+    redirect(sprintf('/DDWT18/ddwt18_project/', json_encode($feedback)));
 }
 
 
