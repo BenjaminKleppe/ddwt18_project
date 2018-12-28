@@ -396,13 +396,13 @@ function login_user($pdo, $form_data)
         ];
     } else {
         session_start();
-        $_SESSION['user_id'] = $user_info['id'];
+        $_SESSION['user_id'] = $user_info['username'];
         $feedback = [
             'type' => 'success',
             'message' => sprintf('%s, you were logged in successfully!',
                 get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
         ];
-        redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
+        redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
             json_encode($feedback)));
     }
 }
