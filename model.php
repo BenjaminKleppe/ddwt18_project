@@ -331,7 +331,7 @@ function get_user_id(){
 function get_name($pdo, $user)
 {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname FROM user WHERE username = ?');
+    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;

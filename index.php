@@ -196,19 +196,19 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     }
 
     $room_id = $_GET['room_id'];
-    $user_name = ge_name($db, $room_id);
-    $owner_name = owner_name($db, $room_id);
+    $user_name = get_name($db, $_SESSION['user_id']);
+    $owner_name = ge_name($db, $room_id);
+    $room_info = get_room_info($db, $room_id);
 
+    $address = $room_info['street'];
+    $owner = $owner_name['firstname']." ".$owner_name['lastname'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $language = $user_name['language'];
     $study = $user_name['study'];
     $phonenumber = $user_name['phonenumber'];
     $email = $user_name['email'];
     $birthdate = $user_name['dateofbirth'];
-    $room_info = get_room_info($db, $room_id);
-    $page_title = $room_info['street'];
     $navigation = get_navigation($template, '0');
-    $address = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
     $display_buttons = get_user_id() == $room_info['room_id'];
 
     /* Get error msg from POST route */
