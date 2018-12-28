@@ -111,6 +111,7 @@
                     </div>
                 </div>
                 <?php if(isset($room_id)){ ?><input type="hidden" name="room_id" value="<?php echo $room_id ?>"><?php } ?>
+                <?php if(isset($username)){ ?><input type="hidden" name="owner" value="<?php echo $username ?>"><?php } ?>
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>

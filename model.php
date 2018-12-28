@@ -339,7 +339,7 @@ function get_name($pdo, $user)
 /* returns first- and lastname, and birth date from user */
 function ge_name($pdo, $user) {
     /* Get rooms */
-    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user, room, owns  WHERE user.username = owns.owner AND room.room_id = owns.room_id ;');
+    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, study, language, email, phonenumber FROM user, room WHERE user.username = room.owner;');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
