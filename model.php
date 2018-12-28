@@ -338,12 +338,14 @@ function get_name($pdo, $user) {
 }
 
 /* returns first- and lastname, and birth date from user */
-function owner_name($pdo, $user) {
+function owner_name($pdo, $user)
+{
     /* Get series */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
+}
 
 function login_user($pdo, $form_data)
 {
