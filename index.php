@@ -191,6 +191,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $page_subtitle = 'My account on Rooms Overview!';
+    $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */

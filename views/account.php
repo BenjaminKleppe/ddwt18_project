@@ -78,7 +78,17 @@
                         </div>
                     </div>
                 </div>
-
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            Opt-in rooms
+                        </div>
+                        <div class="card-body">
+                            <p>The rooms you opt-in for.</p>
+                            <?= $optinrooms ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
