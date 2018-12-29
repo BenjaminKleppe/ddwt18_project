@@ -219,7 +219,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $navigation = get_navigation($template, '0');
-    $display_buttons = get_user_id() == $room_info['room'];
+    $display_buttons = get_user_id() == $room_info['room_id'];
 
 
     /* Get error msg from POST route */
