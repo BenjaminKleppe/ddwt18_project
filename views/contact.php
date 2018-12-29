@@ -47,23 +47,23 @@
                 </tr>
                 <tr>
                     <th scope="row">Language</th>
-                    <td><?= $language ?></td>
+                    <td><?= $user_language ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Study</th>
-                    <td><?= $study ?></td>
+                    <td><?= $user_study ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Birth date</th>
-                    <td><?= $birthdate ?></td>
+                    <td><?= $user_dob ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Phone number</th>
-                    <td><?= $phonenumber ?></td>
+                    <td><?= $user_phone ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Email</th>
-                    <td><?= $email ?></td>
+                    <td><?= $user_mail ?></td>
                 </tr>
 
                 </tbody>

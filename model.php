@@ -321,7 +321,6 @@ function redirect($location){
  * @return bool current user id or False if not logged in
  */
 function get_user_id(){
-    session_start();
     if (isset($_SESSION['user_id'])){
         return $_SESSION['user_id'];
     } else {
@@ -486,7 +485,7 @@ lastname, role, dateofbirth, study, language, email, phonenumber, biography) VAL
         'message' => sprintf('%s, your account was successfully
 created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, $_SESSION['user_id'])['lastname'])
     ];
-    redirect(sprintf('/DDWT18/week2/myaccount/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
 }
 

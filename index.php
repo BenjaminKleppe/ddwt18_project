@@ -200,6 +200,9 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
 /* Contact GET */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
 
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
@@ -208,11 +211,13 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $owner = $owner_name['firstname']." ".$owner_name['lastname'];
     $address = $room_info['street']." ".$room_info['house_number'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
-    $language = $user_name['language'];
-    $study = $user_name['study'];
-    $phonenumber = $user_name['phonenumber'];
-    $email = $user_name['email'];
-    $birthdate = $user_name['dateofbirth'];
+    $user_role = $user_name['role'];
+    $user_dob = $user_name['dateofbirth'];
+    $user_bio = $user_name['biography'];
+    $user_study = $user_name['study'];
+    $user_language = $user_name['language'];
+    $user_mail = $user_name['email'];
+    $user_phone = $user_name['phonenumber'];
     $navigation = get_navigation($template, '0');
     $display_buttons = get_user_id() == $room_info['room_id'];
 
