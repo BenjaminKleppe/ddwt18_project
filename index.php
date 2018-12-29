@@ -219,7 +219,8 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $navigation = get_navigation($template, '0');
-    $display_buttons = get_user_id() == $room_info['room_id'];
+    $display_buttons = get_user_id() == $room_info['room'];
+
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -230,6 +231,8 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
 /* Contact Post */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     /* Add room to database */
+    $room_id = $_POST['room'];
+    $room_info = get_room_info($db, $room_id);
     $feedback = contact_room($db, $_POST);
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',

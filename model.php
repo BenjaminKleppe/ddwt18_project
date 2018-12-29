@@ -320,8 +320,7 @@ function redirect($location){
  * Get current user id
  * @return bool current user id or False if not logged in
  */
-function get_user_id()
-{
+function get_user_id(){
     if (!isset($_SESSION)) {
         session_start();
         if (isset($_SESSION['user_id'])) {
@@ -508,7 +507,7 @@ function get_user($pdo, $id)
     return $user_info;
 }
 
-function contact_room($pdo, $form_data, $room_info)
+function contact_room($pdo, $form_data)
 {
     /* Check if all fields are set */
     if (
@@ -521,15 +520,15 @@ function contact_room($pdo, $form_data, $room_info)
     }
 
     try {
-        $stmt = $pdo->prepare('INSERT INTO opt-in (room_id, tenant, message) VALUES (?, ?, ?)');
-        $stmt->execute([$room_info['room_id'], $_SESSION['user_id'], $form_data['message']]);
-        $user_id = $pdo->lastInsertId();
+        $stmt = $pdo->prepare('INSERT INTO optin (room, tenant, message) VALUES (?, ?, ?)');
+        $stmt->execute([$form_data['room_id'], get_user_id(), $form_data['message']]);
     } catch (PDOException $e) {
         return [
             'type' => 'danger',
             'message' => sprintf('There was an error: %s', $e->getMessage())
         ];
     }
+
 }
 
 
