@@ -519,6 +519,25 @@ function contact_room($pdo, $form_data)
         ];
     }
 
+    /* Check if user already exists */
+    try {
+        $stmt = $pdo->prepare('SELECT tenant FROM optin WHERE room = ? AND tenant = ?');
+        $stmt->execute([$form_data['room_id'], get_user_id()]);
+        $user_exists = $stmt->rowCount();
+    } catch (\PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    /* Return error message for existing username */
+    if (!empty($user_exists)) {
+        return [
+            'type' => 'danger',
+            'message' => 'You have already opt-in for this room!'
+        ];
+    }
+
     try {
         $stmt = $pdo->prepare('INSERT INTO optin (room, tenant, message) VALUES (?, ?, ?)');
         $stmt->execute([$form_data['room_id'], get_user_id(), $form_data['message']]);
