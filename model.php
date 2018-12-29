@@ -541,10 +541,17 @@ function contact_room($pdo, $form_data)
     try {
         $stmt = $pdo->prepare('INSERT INTO optin (room, tenant, message) VALUES (?, ?, ?)');
         $stmt->execute([$form_data['room_id'], get_user_id(), $form_data['message']]);
+        $inserted = $stmt->rowCount();
     } catch (PDOException $e) {
         return [
             'type' => 'danger',
             'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    if ($inserted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Your opt-in has been sent")
         ];
     }
 
