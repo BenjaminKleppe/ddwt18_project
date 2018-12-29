@@ -73,6 +73,7 @@
                     <label for="message">Message:</label>
                     <textarea class="form-control" id="message" rows="3" name="message" placeholder="Write here your message to the owner..." required></textarea>
                 </div>
+                <?php if(isset($room_id)){ ?><input type="hidden" name="room_id" value="<?php echo $room_id ?>"><?php } ?>
                 <?php if ($display_buttons) {} ?>
                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
                 <button type="submit" class="btn btn-primary">Opt-in</button>

@@ -252,7 +252,7 @@ function add_room($pdo, $room_info){
     }
 
     /* Add room */
-    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant, owner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -320,11 +320,21 @@ function redirect($location){
  * Get current user id
  * @return bool current user id or False if not logged in
  */
-function get_user_id(){
-    if (isset($_SESSION['user_id'])){
-        return $_SESSION['user_id'];
-    } else {
-        return False;
+function get_user_id()
+{
+    if (!isset($_SESSION)) {
+        session_start();
+        if (isset($_SESSION['user_id'])) {
+            return $_SESSION['user_id'];
+        } else {
+            return False;
+        }}
+    else{
+        if (isset($_SESSION['user_id'])) {
+            return $_SESSION['user_id'];
+        } else {
+            return False;
+        }
     }
 }
 
@@ -498,7 +508,7 @@ function get_user($pdo, $id)
     return $user_info;
 }
 
-function contact_room($pdo, $form_data)
+function contact_room($pdo, $form_data, $room_info)
 {
     /* Check if all fields are set */
     if (
@@ -509,29 +519,10 @@ function contact_room($pdo, $form_data)
             'message' => 'You should fill in a message.'
         ];
     }
-    /* Check if user already exists */
-    try {
-        $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-        $stmt->execute([$form_data['username']]);
-        $tenant_exists = $stmt->rowCount();
-    } catch (\PDOException $e) {
-        return [
-            'type' => 'danger',
-            'message' => sprintf('There was an error: %s', $e->getMessage())
-        ];
-    }
-
-    /* Return error message for existing username */
-    if (!empty($tenant_exists)) {
-        return [
-            'type' => 'danger',
-            'message' => 'The username you entered does already exist!'
-        ];
-    }
 
     try {
         $stmt = $pdo->prepare('INSERT INTO opt-in (room_id, tenant, message) VALUES (?, ?, ?)');
-        $stmt->execute([$form_data['room_id'], $form_data['username'], $form_data['message']]);
+        $stmt->execute([$room_info['room_id'], $_SESSION['user_id'], $form_data['message']]);
         $user_id = $pdo->lastInsertId();
     } catch (PDOException $e) {
         return [
