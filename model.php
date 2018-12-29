@@ -343,7 +343,6 @@ function get_name($pdo, $user) {
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
-
 }
 
 /* returns first- and lastname, and birth date from owner */
@@ -554,7 +553,6 @@ function contact_room($pdo, $form_data)
             'message' => sprintf("Your opt-in has been sent")
         ];
     }
-
 }
 
 function get_optin_info($pdo) {
@@ -600,5 +598,34 @@ function get_optin_room_table($rooms, $pdo){
     </table>
     ';
     return $table_exp;
+}
+
+/**
+ * Removes a room with a specific series-ID
+ * @param object $pdo db object
+ * @param int $room_id id of the to be deleted series
+ * @return array
+ */
+function remove_room($pdo, $room_id){
+
+    /* Get series info */
+    $serie_info = get_room_info($pdo, $room_id);
+
+    /* Delete Serie */
+    $stmt = $pdo->prepare("DELETE FROM room WHERE room_id = ?");
+    $stmt->execute([$room_id]);
+    $deleted = $stmt->rowCount();
+    if ($deleted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Room '%s %s' was removed!", $serie_info['street'], $serie_info['house_number'])
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'An error occurred. The series was not removed.'
+        ];
+    }
 }
 

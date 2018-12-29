@@ -114,7 +114,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
     $owner_info = get_name($db, $room_info['user_id']);
-    $display_buttons = get_user_id() == $room_info['room_id'];
+    $display_buttons = get_user_id() == $room_info['user_id'];
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
@@ -241,6 +241,19 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
 
 }
 
+/* Remove room */
+elseif (new_route('/DDWT18/ddwt18_project/remove/', 'post')){
+    /* Remove room in database */
+    $room_id = $_POST['room_id'];
+    $feedback = remove_room($db, $room_id);
+
+    /* Redirect to homepage */
+    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+        json_encode($feedback)));
+
+    /* Choose Template */
+    include use_template('main');
+}
 
 /* Login GET */
 elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
