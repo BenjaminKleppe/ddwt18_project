@@ -33,13 +33,11 @@
                     <?php if ($display_buttons) { ?>
                         <div>
                             <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
-                                <label>Name</label>
-                                <input type="text" name="name">
-                                <br>
+                                <br/>
                                 <label>Select Image to upload</label>
                                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
                                 <input type="file" name="image">
-                                <input type="submit" value="Save this profile picture">
+                                <input type="submit" value="Add picture to room">
                             </form>
                         </div>
                     <?php } ?>

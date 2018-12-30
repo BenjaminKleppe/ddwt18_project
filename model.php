@@ -737,8 +737,8 @@ function upload_photos($pdo, $form_data)
     $img = $_FILES['image']['name'];
 
     try {
-        $stmt = $pdo->prepare('INSERT INTO roompics (room_id, name, imagename) VALUES (?, ?, ?)');
-        $stmt->execute([$form_data['room_id'], $form_data['name'], $img]);
+        $stmt = $pdo->prepare('INSERT INTO roompics (room_id, imagename) VALUES (?, ?)');
+        $stmt->execute([$form_data['room_id'], $img]);
         $inserted = $stmt->rowCount();
     } catch (PDOException $e) {
         return [
