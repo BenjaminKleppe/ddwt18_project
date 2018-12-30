@@ -31,6 +31,17 @@
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
                     <div>
+                        <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
+                            <label>Name</label>
+                            <input type="text" name="name">
+                            <br>
+                            <label>Select Image to upload</label>
+                            <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                            <input type="file" name="image">
+                            <input type="submit" value="Save this profile picture">
+                        </form>
+                    </div>
+                    <div>
                         <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
                     </div>
                     <h4>Information about the room:</h4>

@@ -690,13 +690,13 @@ function update_serie($pdo, $room_info){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
     $room = $stmt->fetch();
-    $current_name = $room['street'];
+    $current_name = $room['postalcode'];
 
     /* Check if serie already exists */
-    $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ?');
-    $stmt->execute([$room_info['street']]);
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE postalcode = ?');
+    $stmt->execute([$room_info['postalcode']]);
     $room = $stmt->fetch();
-    if ($room_info['street'] == $room['street'] and $room['street'] != $current_name){
+    if ($room_info['postalcode'] == $room['postalcode'] and $room['postalcode'] != $current_name){
         return [
             'type' => 'danger',
             'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
@@ -728,6 +728,34 @@ function update_serie($pdo, $room_info){
         return [
             'type' => 'warning',
             'message' => 'The room was not edited. No changes were detected'
+        ];
+    }
+}
+
+function upload_photos($pdo, $form_data)
+{
+    $img = $_FILES['image']['name'];
+
+    try {
+        $stmt = $pdo->prepare('INSERT INTO roompics (room_id, name, imagename) VALUES (?, ?, ?)');
+        $stmt->execute([$form_data['room_id'], $form_data['name'], $img]);
+        $inserted = $stmt->rowCount();
+    } catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    if ($inserted == 1) {
+        move_uploaded_file($_FILES['image']['tmp_name'], "pictures/pics/$img");
+        return [
+            'type' => 'success',
+            'message' => 'Image has been uploaded to folder'
+        ];
+    } else {
+        return [
+            'type' => 'danger',
+            'message' => 'Image does not upload to folder'
         ];
     }
 }

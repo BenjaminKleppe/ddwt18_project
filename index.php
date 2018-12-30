@@ -146,6 +146,17 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     include use_template('room');
 }
 
+elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')) {
+    /* Upload images of the room */
+    $feedback = upload_photos($db, $_POST);
+    $room_id = $_POST['room_id'];
+
+        /* Redirect to homepage */;
+    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+        json_encode($feedback)));
+}
+
+
 /* Register GET */
 elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     /* Page info */
