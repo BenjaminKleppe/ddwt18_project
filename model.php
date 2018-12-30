@@ -760,3 +760,16 @@ function upload_photos($pdo, $form_data)
     }
 }
 
+function displayimage(){
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM roompics');
+        $stmt->execute();
+        $roompics = $stmt->fetchAll();
+        $roompics_exp = Array();
+    } catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    }
