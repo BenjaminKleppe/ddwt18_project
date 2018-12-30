@@ -747,7 +747,7 @@ function upload_photos($pdo, $form_data)
         ];
     }
     if ($inserted == 1) {
-        move_uploaded_file($_FILES['image']['tmp_name'], "pictures/pics/$img");
+        move_uploaded_file($_FILES['image']['tmp_name'], "pictures/$img");
         return [
             'type' => 'success',
             'message' => 'Image has been uploaded to folder'
