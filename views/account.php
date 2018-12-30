@@ -34,20 +34,7 @@
             <div class="pd-15">&nbsp;</div>
 
             <div class="row">
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Welcome, <?= $user ?>
-                        </div>
-                        <div class="card-body">
-                            <p>You're logged in to Series Overview.</p>
-                            <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             Add rooms
@@ -59,7 +46,29 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Welcome, <?= $user ?>
+                        </div>
+                        <div class="card-body">
+                            <p>You're logged in to Series Overview.</p>
+                            <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Opt-in rooms
+                        </div>
+                        <div class="card-body">
+                            <p>The rooms you opt-in for.</p>
+                            <?= $optinrooms ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">
                             Your account details:
@@ -75,17 +84,6 @@
                             <p>E-mail: <?= $user_mail ?></p>
                             <p>Phone number: <?= $user_phone ?></p>
                             <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Edit details</a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="card">
-                        <div class="card-header">
-                            Opt-in rooms
-                        </div>
-                        <div class="card-body">
-                            <p>The rooms you opt-in for.</p>
-                            <?= $optinrooms ?>
                         </div>
                     </div>
                 </div>

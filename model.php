@@ -690,15 +690,13 @@ function update_serie($pdo, $room_info){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
     $room = $stmt->fetch();
-    $current_name = sprintf("%s %s", $room['street'], $room['house_number']);
+    $current_name = $room['street'];
 
     /* Check if serie already exists */
-    $strnum = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
-    $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ? AND house_number = ?');
-    $stmt->execute([$strnum]);
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ?');
+    $stmt->execute([$room_info['street']]);
     $room = $stmt->fetch();
-    $strnum2 = sprintf("%s %s", $room['street'], $room['house_number']);
-    if ($strnum == $strnum2 and $strnum2 != $current_name){
+    if ($room_info['street'] == $room['street'] and $room['street'] != $current_name){
         return [
             'type' => 'danger',
             'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
