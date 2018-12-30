@@ -629,3 +629,108 @@ function remove_room($pdo, $room_id){
     }
 }
 
+/**
+ * Updates a room in the database using post array
+ * @param object $pdo db object
+ * @param array $room_info post array
+ * @return array
+ */
+function update_serie($pdo, $room_info){
+    /* Check if all fields are set */
+    if (
+        empty($room_info['street']) or
+        empty($room_info['house_number']) or
+        empty($room_info['postalcode']) or
+        empty($room_info['city']) or
+        empty($room_info['type']) or
+        empty($room_info['price']) or
+        empty($room_info['size']) or
+        empty($room_info['description']) or
+        empty($room_info['tenant']) or
+        empty($room_info['room_id'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. Not all fields were filled in.'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['price'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field price.'
+        ];
+    }
+
+    /* Check data type */
+    if (!is_numeric($room_info['size'])) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. You should enter a number in the field size.'
+        ];
+    }
+
+    /* Check if postal code is entered correctly */
+    if (strlen($room_info['postalcode']) !== 6) {
+        return [
+            'type' => 'danger',
+            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
+        ];}
+    else {
+        if (PostalCheck($room_info['postalcode']) == false ){
+            return [
+                'type' => 'danger',
+                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
+            ];
+        }
+    }
+
+    /* Get current room name */
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
+    $stmt->execute([$room_info['room_id']]);
+    $room = $stmt->fetch();
+    $current_name = sprintf("%s %s", $room['street'], $room['house_number']);
+
+    /* Check if serie already exists */
+    $strnum = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ? AND house_number = ?');
+    $stmt->execute([$strnum]);
+    $room = $stmt->fetch();
+    $strnum2 = sprintf("%s %s", $room['street'], $room['house_number']);
+    if ($strnum == $strnum2 and $strnum2 != $current_name){
+        return [
+            'type' => 'danger',
+            'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
+        ];
+    }
+
+    /* Update Serie */
+    $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postalcode = ?, city = ?, type = ?, price = ?, size = ?, description = ?, tenant = ? WHERE room_id = ?");
+    $stmt->execute([
+        $room_info['street'],
+        $room_info['house_number'],
+        $room_info['postalcode'],
+        $room_info['city'],
+        $room_info['type'],
+        $room_info['price'],
+        $room_info['size'],
+        $room_info['description'],
+        $room_info['tenant'],
+        $room_info['room_id']
+    ]);
+    $updated = $stmt->rowCount();
+    if ($updated ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Series '%s %s' was edited!", $room_info['street'], $room_info['house_number'])
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'The room was not edited. No changes were detected'
+        ];
+    }
+}
+

@@ -295,11 +295,54 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
     redirect(sprintf('/DDWT18/ddwt18_project/?error_msg=%s', json_encode($feedback)));
 }
 
+/* Edit serie GET */
+elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Get serie info from db */
+
+    $room_id = $_GET['room_id'];
+    $room_info = get_room_info($db, $room_id);
+
+    /* Page info */
+    $page_title = 'Edit room';
+    $navigation = get_navigation($template, '3');
+
+    /* Page content */
+    $page_subtitle = sprintf("Edit %s %s", $room_info['street'], $room_info['house_number']);
+    $page_content = 'Edit the room below.';
+    $submit_btn = "Edit room";
+    $form_action = '/DDWT18/ddwt18_project/edit/';
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+
+    /* Choose Template */
+    include use_template('new');
+}
+
+/* Edit serie POST */
+elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Edit serie to database */
+    $feedback = update_serie($db, $_POST);
+    $room_id = $_POST['room_id'];
+    /* Redirect to serie GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s', json_encode($feedback)));
+
+    /* Choose Template */
+    include use_template('room');
+}
+
 else {
     http_response_code(404);
 }
-
-
-
 
 
