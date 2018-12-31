@@ -83,18 +83,78 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="facilities" class="col-sm-3 col-form-label"> Select your facilities: </label>
-                    <div class="col-sm-3 col-form-label">
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Kitchen"> Kitchen<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Wi-Fi"> Wi-Fi<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Dishwasher"> Dishwasher<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Private"> Private bathroom<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Shared"> Shared bathroom<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Shower"> Shower<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Furniture"> Furniture<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Stove"> Stove<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="Microwave"> Microwave<br>
-                        <input type="checkbox" id="facilities" name="facilities[]" value="living"> Shared living room<br>
+                    <label for="living" class="col-sm-3 col-form-label"> Living room: </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="living" name="living">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="shardliv">Shared</option>
+                            <option value="noliv">None</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="kitchen" class="col-sm-3 col-form-label"> Kitchen </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="kitchen" name="kitchen">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="sharedkit">Shared</option>
+                            <option value="privatkit">Privat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="bath" class="col-sm-3 col-form-label"> Bathroom </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="bath" name="bath">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="sharedbath">Shared</option>
+                            <option value="privatbath">Privat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="toilet" class="col-sm-3 col-form-label"> Toilet </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="toilet" name="toilet">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="sharedtoi">Shared</option>
+                            <option value="privattoi">Privat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="wifi" class="col-sm-3 col-form-label"> Internet </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="wifi" name="wifi">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mate" class="col-sm-3 col-form-label"> Housemates </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="mate" name="mate">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="0">0</option>
+                            <option value="1">0</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">/>6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="smoke" class="col-sm-3 col-form-label"> Smoking </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="smoke" name="smoke">
+                            <option value="" disabled selected hidden>Choose one...</option>
+                            <option value="allowed">Allowed</option>
+                            <option value="notallowed">Not allowed</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">

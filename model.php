@@ -211,6 +211,13 @@ function add_room($pdo, $room_info){
         empty($room_info['type']) or
         empty($room_info['price']) or
         empty($room_info['size']) or
+        empty($room_info['living']) or
+        empty($room_info['kitchen']) or
+        empty($room_info['bathroom']) or
+        empty($room_info['toilet']) or
+        empty($room_info['internet']) or
+        empty($room_info['mate']) or
+        empty($room_info['smoke']) or
         empty($room_info['description']) or
         empty($room_info['tenant'])
     ) {
@@ -252,7 +259,7 @@ function add_room($pdo, $room_info){
     }
 
     /* Add room */
-    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, description, tenant, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, living, kitchen, bathroom, toilet, internet, mate, smoke, description, tenant, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -261,6 +268,13 @@ function add_room($pdo, $room_info){
         $room_info['type'],
         $room_info['price'],
         $room_info['size'],
+        $room_info['living'],
+        $room_info['kitchen'],
+        $room_info['bathroom'],
+        $room_info['toilet'],
+        $room_info['internet'],
+        $room_info['mate'],
+        $room_info['smoke'],
         $room_info['description'],
         $room_info['tenant'],
         get_user_id()
@@ -574,10 +588,10 @@ function get_optin_room_table($rooms, $pdo){
     <table class="table table-hover">
     <thead
     <tr>
-        <th scope="col">Photo</th>
         <th scope="col">Address</th>
         <th scope="col">Squere Metre</th>
         <th scope="col">Price</th>
+        <th scope="col"></th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -585,11 +599,11 @@ function get_optin_room_table($rooms, $pdo){
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row"></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
             <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">opt-out</a></td>
         </tr>
         ';
     }
@@ -690,6 +704,13 @@ function update_serie($pdo, $room_info){
         empty($room_info['type']) or
         empty($room_info['price']) or
         empty($room_info['size']) or
+        empty($room_info['living']) or
+        empty($room_info['kitchen']) or
+        empty($room_info['bathroom']) or
+        empty($room_info['toilet']) or
+        empty($room_info['internet']) or
+        empty($room_info['mate']) or
+        empty($room_info['smoke']) or
         empty($room_info['description']) or
         empty($room_info['tenant']) or
         empty($room_info['room_id'])
@@ -735,13 +756,13 @@ function update_serie($pdo, $room_info){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
     $room = $stmt->fetch();
-    $current_name = $room['postal_code'];
+    $current_name = $room['street'];
 
     /* Check if room already exists */
-    $stmt = $pdo->prepare('SELECT * FROM room WHERE postal_code = ?');
-    $stmt->execute([$room_info['postalcode']]);
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ?');
+    $stmt->execute([$room_info['street']]);
     $room = $stmt->fetch();
-    if ($room_info['postalcode'] == $room['postal_code'] and $room['postal_code'] != $current_name){
+    if ($room_info['street'] == $room['street'] and $room['street'] != $current_name){
         return [
             'type' => 'danger',
             'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
@@ -749,7 +770,7 @@ function update_serie($pdo, $room_info){
     }
 
     /* Update Serie */
-    $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, description = ?, tenant = ? WHERE room_id = ?");
+    $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, living = ?, kitchen = ?, bathroom = ?, toilet = ?, internet = ?, mate = ?, smoke = ?, description = ?, tenant = ? WHERE room_id = ?");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -758,6 +779,13 @@ function update_serie($pdo, $room_info){
         $room_info['type'],
         $room_info['price'],
         $room_info['size'],
+        $room_info['living'],
+        $room_info['kitchen'],
+        $room_info['bathroom'],
+        $room_info['toilet'],
+        $room_info['internet'],
+        $room_info['mate'],
+        $room_info['smoke'],
         $room_info['description'],
         $room_info['tenant'],
         $room_info['room_id']
