@@ -215,6 +215,20 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     include use_template('account');
 }
 
+/* Remove account */
+elseif (new_route('/DDWT18/ddwt18_project/removeaccount/', 'post')){
+    /* Remove account in database */
+    $user_id = $_POST['user_id'];
+    $feedback = remove_account($db, $user_id);
+
+    /* Redirect to homepage */
+    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+        json_encode($feedback)));
+
+    /* Choose Template */
+    include use_template('main');
+}
+
 /* Contact GET */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     /* Check if logged in */

@@ -500,7 +500,7 @@ created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, 
 
 function get_user($pdo, $id)
 {
-    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE id = ?');
     $stmt->execute([$id]);
     $user_info = $stmt->fetch();
     return $user_info;
@@ -654,7 +654,7 @@ function get_offered_room_table($rooms, $pdo){
 function remove_room($pdo, $room_id){
 
     /* Get series info */
-    $serie_info = get_room_info($pdo, $room_id);
+    $room_info = get_room_info($pdo, $room_id);
 
     /* Delete Serie */
     $stmt = $pdo->prepare("DELETE FROM room WHERE room_id = ?");
@@ -663,7 +663,7 @@ function remove_room($pdo, $room_id){
     if ($deleted ==  1) {
         return [
             'type' => 'success',
-            'message' => sprintf("Room '%s %s' was removed!", $serie_info['street'], $serie_info['house_number'])
+            'message' => sprintf("Room '%s %s' was removed!", $room_info['street'], $room_info['house_number'])
         ];
     }
     else {
@@ -822,4 +822,31 @@ function displayimage($pdo){
         ];
     }
     }
+function remove_account($pdo, $user_id){
+
+    /* Get series info */
+    $user_id = get_user_id();
+    $account_info = get_user($pdo, $user_id);
+
+    /* Delete Serie */
+    $stmt = $pdo->prepare('DELETE FROM room WHERE room.user_id = ?');
+    $stmt->execute([$user_id]);
+    $stmt = $pdo->prepare('DELETE FROM user WHERE user.id = ?');
+    $stmt->execute([$user_id]);
+    $stmt = $pdo->prepare('DELETE FROM optin WHERE optin.tenant = ?');
+    $stmt->execute([$user_id]);
+    $deleted = $stmt->rowCount();
+    if ($deleted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("User '%s' was removed!", $account_info['username'])
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'An error occurred. The user was not removed.'
+        ];
+    }
+}
 
