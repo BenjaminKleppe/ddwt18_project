@@ -155,7 +155,7 @@
                             <label for="inputbiography">Biography</label>
                             <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required><?php if (isset($owner_info)){echo $owner_info['biography'];} ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary"><?php $button ?></button>
+                        <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
                     </form>
 
                 </div>

@@ -166,7 +166,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
 
     $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
-    $button = "Register now";
+    $submit_btn = "Register now";
     $navigation = get_navigation($template, 5);
     /* Page content */
     $page_subtitle = 'Register here to add rooms or to opt-in for a room';
@@ -386,7 +386,7 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     $navigation = get_navigation($template, '4');
     $page_title = 'Edit details';
     $page_subtitle = 'You can edit your details of your myaccount here';
-    $button = "Edit account";
+    $submit_btn = "Edit account";
 
     /* Choose Template */
     include use_template('register');
