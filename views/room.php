@@ -30,6 +30,7 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
+
                     <?php if ($display_buttons) { ?>
                         <div>
                             <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">

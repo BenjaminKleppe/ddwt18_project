@@ -116,6 +116,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $owner_info = get_name($db, $room_info['user_id']);
     $display_buttons = get_user_id() == $room_info['user_id'];
     $disp_buttons = get_user_id() != $room_info['user_id'];
+    $photo = displayimage($db);
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);

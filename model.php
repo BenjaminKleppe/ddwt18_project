@@ -760,12 +760,16 @@ function upload_photos($pdo, $form_data)
     }
 }
 
-function displayimage(){
+function displayimage($pdo){
     try {
         $stmt = $pdo->prepare('SELECT * FROM roompics');
         $stmt->execute();
         $roompics = $stmt->fetchAll();
-        $roompics_exp = Array();
+        $pics = Array();
+        while($data = $pics){
+            echo "<img src='{$pics['imagename']}' height='300' width='300'>";
+        }
+
     } catch (PDOException $e) {
         return [
             'type' => 'danger',
