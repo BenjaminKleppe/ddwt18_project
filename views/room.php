@@ -32,16 +32,17 @@
                     <p><?= $address ?></p>
 
                     <?php if ($display_buttons) { ?>
-                        <div>
-                            <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
-                                <br/>
-                                <label>Select Image to upload</label>
-                                <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                                <input type="file" name="image">
-                                <input type="submit" value="Add picture to room">
-                            </form>
-                        </div>
+                    <div>
+                        <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
+                            <br/>
+                            <label>Select Image to upload</label>
+                            <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                            <input type="file" name="image">
+                            <input type="submit" value="Add picture to room">
+                        </form>
+                    </div>
                     <?php } ?>
+
                     <?php if ($disp_buttons) { ?>
                     <div>
                         <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
@@ -90,7 +91,8 @@
             <?php
             $address = str_replace(" ", "+",$address_variable);
             ?>
-            <iframe style="width:100%;height:100%;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+            <iframe style="width:100%;height:50%;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+
 
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
                 <a class="a2a_button_twitter"></a>

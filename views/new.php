@@ -34,8 +34,7 @@
             <p><?= $page_content ?></p>
 
             <div class="pd-15">&nbsp;</div>
-
-            <form action="<?= $form_action ?>" method="POST">
+            <form action="<?= $form_action ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>
                     <div class="col-sm-9">
