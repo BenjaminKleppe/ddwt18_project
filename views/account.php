@@ -83,7 +83,7 @@
                             <p>Language: <?= $user_language ?></p>
                             <p>E-mail: <?= $user_mail ?></p>
                             <p>Phone number: <?= $user_phone ?></p>
-                            <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Edit details</a>
+                            <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
                         </div>
                     </div>
                 </div>

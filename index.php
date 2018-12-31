@@ -163,6 +163,8 @@ elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')) {
 /* Register GET */
 elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     /* Page info */
+
+    $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
     $navigation = get_navigation($template, 5);
     /* Page content */
@@ -354,6 +356,24 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
 
     /* Choose Template */
     include use_template('room');
+}
+
+
+/* Edit details myaccount GET */
+elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    $form_action = "/DDWT18/ddwt18_project/editdet/";
+    $owner_info = get_name($db, get_user_id());
+    $navigation = get_navigation($template, '4');
+    $page_title = 'Edit details';
+    $page_subtitle = 'You can edit your details of your myaccount here';
+
+    /* Choose Template */
+    include use_template('register');
 }
 
 else {

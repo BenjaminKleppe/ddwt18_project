@@ -64,9 +64,9 @@
                     <div class="col-sm-3">
                         <select class="form-control" id="type" name="type">
                             <option value="" disabled selected hidden>Choose a type...</option>
-                            <option selected value="room">Room</option>
-                            <option selected value="apartment">Apartment</option>
-                            <option selected value="studio">Studio</option>
+                            <option value="room">Room</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="studio">Studio</option>
                         </select>
                     </div>
                 </div>

@@ -32,22 +32,22 @@
 
                     <div class="pd-15">&nbsp;</div>
 
-                    <form action="/DDWT18/ddwt18_project/register/" method="POST">
+                    <form action=<?php $form_action ?> method="POST">
                         <div class="form-group">
                             <label for="inputusername">Username</label>
-                            <input type="text" class="form-control" id="inputusername" placeholder="j.jansen" name="username" required>
+                            <input type="text" class="form-control" id="inputusername" placeholder="j.jansen" name="username" value="<?php if (isset($owner_info)){echo $owner_info['username'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputpassword">Password</label>
-                            <input type="password" class="form-control" id="inputpassword" placeholder="******" name="password" required>
+                            <input type="password" class="form-control" id="inputpassword" placeholder="******" name="password" value="<?php if (isset($owner_info)){echo $owner_info['password'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputfirstname">First name</label>
-                            <input type="text" class="form-control" id="inputfirstname" placeholder="Jan" name="firstname" required>
+                            <input type="text" class="form-control" id="inputfirstname" placeholder="Jan" name="firstname" value="<?php if (isset($owner_info)){echo $owner_info['firstname'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputlastname">Last name</label>
-                            <input type="text" class="form-control" id="inputlastname" placeholder="Jansen" name="lastname" required>
+                            <input type="text" class="form-control" id="inputlastname" placeholder="Jansen" name="lastname" value="<?php if (isset($owner_info)){echo $owner_info['lastname'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputrole">Role</label>
@@ -59,17 +59,16 @@
                         </div>
                         <div class="form-group">
                             <label for="inputdateofbirth">Date of birth</label>
-                            <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" required>
+                            <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" value="<?php if (isset($owner_info)){echo $owner_info['dateofbirth'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputstudy">Study</label>
-                            <input type="text" class="form-control" id="inputstudy" name="study" placeholder="Information Science" required>
+                            <input type="text" class="form-control" id="inputstudy" name="study" placeholder="Information Science" value="<?php if (isset($owner_info)){echo $owner_info['study'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputlanguage">Language</label>
                             <select class="form-control col-sm-3" data-placeholder="Choose a Language..." name="language" required>
                                 <option value="" disabled selected hidden>Choose a Language...</option>
-                                <option value="Afrikanns">Afrikanns</option>
                                 <option value="Afrikanns">Afrikanns</option>
                                 <option value="Albanian">Albanian</option>
                                 <option value="Arabic">Arabic</option>
@@ -146,17 +145,17 @@
                         </div>
                         <div class="form-group">
                             <label for="inputemail">Email</label>
-                            <input type="text" class="form-control" id="inputemail" name="email" placeholder="someone@example.com" required>
+                            <input type="text" class="form-control" id="inputemail" name="email" placeholder="someone@example.com" value="<?php if (isset($owner_info)){echo $owner_info['email'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputphonenumber">Phone number</label>
-                            <input type="tel" class="form-control" id="inputphonenumber" name="phonenumber" placeholder="+31612345678" required>
+                            <input type="tel" class="form-control" id="inputphonenumber" name="phonenumber" placeholder="+31612345678" value="<?php if (isset($owner_info)){echo $owner_info['phonenumber'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputbiography">Biography</label>
-                            <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required></textarea>
+                            <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required><?php if (isset($owner_info)){echo $owner_info['biography'];} ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Register now</button>
+                        <button type="submit" class="btn btn-primary">Edit details</button>
                     </form>
 
                 </div>
