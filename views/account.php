@@ -87,6 +87,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Offered rooms
+                        </div>
+                        <div class="card-body">
+                            <p>The rooms you offered.</p>
+                            <?= $offeredrooms ?>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

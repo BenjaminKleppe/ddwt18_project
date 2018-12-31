@@ -600,6 +600,51 @@ function get_optin_room_table($rooms, $pdo){
     return $table_exp;
 }
 
+function get_offered_info($pdo) {
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE user_id = ?');
+    $stmt->execute([$_SESSION['user_id']]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
+}
+function get_offered_room_table($rooms, $pdo){
+    $table_exp = '
+    <table class="table table-hover">
+    <thead
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Address</th>
+        <th scope="col">Squere Metre</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>';
+    foreach($rooms as $key => $value){
+        $table_exp .= '
+        <tr>
+            <th scope="row"></th>
+            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
+            <th scope="row">'.$value['size'].'m2</th>
+            <th scope="row">€'.$value['price'].',-</th>           
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+        </tr>
+        ';
+    }
+    $table_exp .= '
+    </tbody>
+    </table>
+    ';
+    return $table_exp;
+}
+
 /**
  * Removes a room with a specific series-ID
  * @param object $pdo db object
@@ -777,3 +822,4 @@ function displayimage($pdo){
         ];
     }
     }
+
