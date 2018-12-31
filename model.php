@@ -831,16 +831,20 @@ function remove_account($pdo, $user_id){
     /* Delete Serie */
     $stmt = $pdo->prepare('DELETE FROM room WHERE room.user_id = ?');
     $stmt->execute([$user_id]);
+    $deletedroom = $stmt->rowCount();
     $stmt = $pdo->prepare('DELETE FROM user WHERE user.id = ?');
     $stmt->execute([$user_id]);
+    $deleteduser = $stmt->rowCount();
     $stmt = $pdo->prepare('DELETE FROM optin WHERE optin.tenant = ?');
     $stmt->execute([$user_id]);
-    $deleted = $stmt->rowCount();
-    if ($deleted ==  1) {
+    $deletedoptin = $stmt->rowCount();
+    if ($deletedroom == 1 or $deleteduser == 1 or $deletedoptin == 1) {
+        session_destroy();
         return [
             'type' => 'success',
             'message' => sprintf("User '%s' was removed!", $account_info['username'])
         ];
+
     }
     else {
         return [

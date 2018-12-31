@@ -32,7 +32,7 @@
 
                     <div class="pd-15">&nbsp;</div>
 
-                    <form action=<?php $form_action ?> method="POST">
+                    <form action='<?php $form_action ?>' method="POST">
                         <div class="form-group">
                             <label for="inputusername">Username</label>
                             <input type="text" class="form-control" id="inputusername" placeholder="j.jansen" name="username" value="<?php if (isset($owner_info)){echo $owner_info['username'];} ?>" required>
@@ -155,7 +155,7 @@
                             <label for="inputbiography">Biography</label>
                             <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required><?php if (isset($owner_info)){echo $owner_info['biography'];} ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Edit details</button>
+                        <button type="submit" class="btn btn-primary"><?php $button ?></button>
                     </form>
 
                 </div>
