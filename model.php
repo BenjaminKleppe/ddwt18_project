@@ -690,13 +690,13 @@ function update_serie($pdo, $room_info){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
     $room = $stmt->fetch();
-    $current_name = $room['postalcode'];
+    $current_name = $room['postal_code'];
 
-    /* Check if serie already exists */
-    $stmt = $pdo->prepare('SELECT * FROM room WHERE postalcode = ?');
+    /* Check if room already exists */
+    $stmt = $pdo->prepare('SELECT * FROM room WHERE postal_code = ?');
     $stmt->execute([$room_info['postalcode']]);
     $room = $stmt->fetch();
-    if ($room_info['postalcode'] == $room['postalcode'] and $room['postalcode'] != $current_name){
+    if ($room_info['postalcode'] == $room['postal_code'] and $room['postal_code'] != $current_name){
         return [
             'type' => 'danger',
             'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
@@ -704,7 +704,7 @@ function update_serie($pdo, $room_info){
     }
 
     /* Update Serie */
-    $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postalcode = ?, city = ?, type = ?, price = ?, size = ?, description = ?, tenant = ? WHERE room_id = ?");
+    $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, description = ?, tenant = ? WHERE room_id = ?");
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
@@ -721,7 +721,7 @@ function update_serie($pdo, $room_info){
     if ($updated ==  1) {
         return [
             'type' => 'success',
-            'message' => sprintf("Series '%s %s' was edited!", $room_info['street'], $room_info['house_number'])
+            'message' => sprintf("Room '%s %s' was edited!", $room_info['street'], $room_info['house_number'])
         ];
     }
     else {
