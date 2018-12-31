@@ -30,6 +30,7 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
+                    <p><?php $photo ?></p>
 
                     <?php if ($display_buttons) { ?>
                     <div>

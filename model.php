@@ -339,7 +339,7 @@ function get_user_id(){
 
 function get_name($pdo, $user) {
     /* Get series */
-    $stmt = $pdo->prepare('SELECT firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT username, password, firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
@@ -809,10 +809,10 @@ function displayimage($pdo){
     try {
         $stmt = $pdo->prepare('SELECT * FROM roompics');
         $stmt->execute();
-        $roompics = $stmt->fetchAll();
+        $roompics = $stmt->fetch();
         $pics = Array();
         while($data = $pics){
-            echo "<img height='300' width='300'  src='{$pics['imagename']}'>";
+            echo "<img height='300' width='300'  src='{$data['imagename']}'>";
         }
 
     } catch (PDOException $e) {
