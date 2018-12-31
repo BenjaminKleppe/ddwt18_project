@@ -767,7 +767,7 @@ function displayimage($pdo){
         $roompics = $stmt->fetchAll();
         $pics = Array();
         while($data = $pics){
-            echo "<img src='{$pics['imagename']}' height='300' width='300'>";
+            echo "<img height='300' width='300'  src='{$pics['imagename']}'>";
         }
 
     } catch (PDOException $e) {
