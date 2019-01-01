@@ -131,7 +131,13 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $size = $room_info['size'];
     $price = $room_info['price'];
     $tenant = $room_info['tenant'];
-    $facilities = $room_info['facilities'];
+    $living = $room_info['living'];
+    $kitchen = $room_info['kitchen'];
+    $bathroom = $room_info['bathroom'];
+    $toilet = $room_info['toilet'];
+    $internet = $room_info['internet'];
+    $mate = $room_info['mate'];
+    $smoke = $room_info['smoke'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
     $birthdate = $owner_info['dateofbirth'];
     $language = $owner_info['language'];

@@ -87,8 +87,8 @@
                     <div class="col-sm-3">
                         <select class="form-control" id="living" name="living">
                             <option value="" disabled selected hidden>Choose one...</option>
-                            <option value="shardliv">Shared</option>
-                            <option value="noliv">None</option>
+                            <option value="Shared">Shared</option>
+                            <option value="None">None</option>
                         </select>
                     </div>
                 </div>
@@ -97,18 +97,18 @@
                     <div class="col-sm-3">
                         <select class="form-control" id="kitchen" name="kitchen">
                             <option value="" disabled selected hidden>Choose one...</option>
-                            <option value="sharedkit">Shared</option>
-                            <option value="privatkit">Privat</option>
+                            <option value="Shared">Shared</option>
+                            <option value="Privat">Privat</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="bath" class="col-sm-3 col-form-label"> Bathroom </label>
+                    <label for="bathroom" class="col-sm-3 col-form-label"> Bathroom </label>
                     <div class="col-sm-3">
-                        <select class="form-control" id="bath" name="bath">
+                        <select class="form-control" id="bathroom" name="bathroom">
                             <option value="" disabled selected hidden>Choose one...</option>
-                            <option value="sharedbath">Shared</option>
-                            <option value="privatbath">Privat</option>
+                            <option value="Shared">Shared</option>
+                            <option value="Privat">Privat</option>
                         </select>
                     </div>
                 </div>
@@ -117,33 +117,33 @@
                     <div class="col-sm-3">
                         <select class="form-control" id="toilet" name="toilet">
                             <option value="" disabled selected hidden>Choose one...</option>
-                            <option value="sharedtoi">Shared</option>
-                            <option value="privattoi">Privat</option>
+                            <option value="Shared">Shared</option>
+                            <option value="Privat">Privat</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="wifi" class="col-sm-3 col-form-label"> Internet </label>
+                    <label for="internet" class="col-sm-3 col-form-label"> Internet </label>
                     <div class="col-sm-3">
-                        <select class="form-control" id="wifi" name="wifi">
+                        <select class="form-control" id="internet" name="internet">
                             <option value="" disabled selected hidden>Choose one...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="mate" class="col-sm-3 col-form-label"> Housemates </label>
+                    <label for="mate" class="col-sm-3 col-form-label"> Housemate(s) </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="mate" name="mate">
                             <option value="" disabled selected hidden>Choose one...</option>
                             <option value="0">0</option>
-                            <option value="1">0</option>
+                            <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            <option value="6">/>6</option>
+                            <option value="6">>6</option>
                         </select>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                         <select class="form-control" id="smoke" name="smoke">
                             <option value="" disabled selected hidden>Choose one...</option>
                             <option value="allowed">Allowed</option>
-                            <option value="notallowed">Not allowed</option>
+                            <option value="Not allowed">Not allowed</option>
                         </select>
                     </div>
                 </div>

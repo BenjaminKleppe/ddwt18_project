@@ -65,17 +65,46 @@
                             <td><?= $size ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Facilities</th>
-                            <td><?= $facilities ?></td>
-                        </tr>
-                        <tr>
                             <th scope="row">Desired tenant</th>
                             <td><?= $tenant ?></td>
                         </tr>
 
                         </tbody>
                     </table>
+                    <h4>Roomdetails:</h4>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Living room</th>
+                            <td><?= $living ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Kitchen</th>
+                            <td><?= $kitchen ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Bathroom</th>
+                            <td><?= $bathroom ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Toilet</th>
+                            <td><?= $toilet ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Internet</th>
+                            <td><?= $internet ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Housemate(s)</th>
+                            <td><?= $mate ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Smoking</th>
+                            <td><?= $smoke ?></td>
+                        </tr>
 
+                        </tbody>
+                    </table>
 
 
 
