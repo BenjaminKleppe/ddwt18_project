@@ -743,7 +743,7 @@ function update_room($pdo, $room_info){
     if (
         empty($room_info['street']) or
         empty($room_info['house_number']) or
-        empty($room_info['postalcode']) or
+        empty($room_info['postal_code']) or
         empty($room_info['city']) or
         empty($room_info['type']) or
         empty($room_info['price']) or
@@ -782,13 +782,13 @@ function update_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postalcode']) !== 6) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
             'message' => 'The postal code consists of exactly 6 characters (1234AB)'
         ];}
     else {
-        if (PostalCheck($room_info['postalcode']) == false ){
+        if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
                 'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
@@ -818,7 +818,7 @@ function update_room($pdo, $room_info){
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
-        $room_info['postalcode'],
+        $room_info['postal_code'],
         $room_info['city'],
         $room_info['type'],
         $room_info['price'],
@@ -858,7 +858,6 @@ function update_room($pdo, $room_info){
 function edit_details($pdo, $owner_info){
     /* Check if all fields are set */
     if (
-        empty($owner_info['owner']) or
         empty($owner_info['username']) or
         empty($owner_info['password']) or
         empty($owner_info['firstname']) or
@@ -869,7 +868,8 @@ function edit_details($pdo, $owner_info){
         empty($owner_info['language']) or
         empty($owner_info['email']) or
         empty($owner_info['biography']) or
-        empty($owner_info['phonenumber'])
+        empty($owner_info['phonenumber']) or
+        empty($owner_info['owner'])
     ) {
         return [
             'type' => 'danger',
@@ -895,19 +895,19 @@ function edit_details($pdo, $owner_info){
     }
 
     /* Update user */
-    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, biography = ?, study = ?, language = ?, email = ?, phonenumber = ?, role = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, role = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
     $stmt->execute([
         $owner_info['username'],
         $owner_info['password'],
         $owner_info['firstname'],
         $owner_info['lastname'],
+        $owner_info['role'],
         $owner_info['dateofbirth'],
-        $owner_info['biography'],
         $owner_info['study'],
         $owner_info['language'],
         $owner_info['email'],
+        $owner_info['biography'],
         $owner_info['phonenumber'],
-        $owner_info['role'],
         $owner_info['id']
     ]);
     $updated = $stmt->rowCount();
