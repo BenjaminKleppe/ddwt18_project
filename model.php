@@ -879,15 +879,15 @@ function edit_details($pdo, $owner_info){
 
     /* Get current user name */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-    $stmt->execute([$user_info['username']]);
+    $stmt->execute([$owner_info['username']]);
     $user = $stmt->fetch();
     $current_name = $user['username'];
 
     /* Check if user already exists */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-    $stmt->execute([$user_info['username']]);
+    $stmt->execute([$owner_info['username']]);
     $user = $stmt->fetch();
-    if ($user_info['username'] == $user['username'] and $user['username'] != $current_name){
+    if ($owner_info['username'] == $user['username'] and $user['username'] != $current_name){
         return [
             'type' => 'danger',
             'message' => 'The username cannot be changed'
@@ -897,17 +897,18 @@ function edit_details($pdo, $owner_info){
     /* Update user */
     $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, biography = ?, study = ?, language = ?, email = ?, phonenumber = ?, role = ? WHERE id = ?");
     $stmt->execute([
-        $user_info['username'],
-        $user_info['password'],
-        $user_info['firstname'],
-        $user_info['lastname'],
-        $user_info['dateofbirth'],
-        $user_info['biography'],
-        $user_info['study'],
-        $user_info['language'],
-        $user_info['email'],
-        $user_info['phonenumber'],
-        $user_info['role']
+        $owner_info['username'],
+        $owner_info['password'],
+        $owner_info['firstname'],
+        $owner_info['lastname'],
+        $owner_info['dateofbirth'],
+        $owner_info['biography'],
+        $owner_info['study'],
+        $owner_info['language'],
+        $owner_info['email'],
+        $owner_info['phonenumber'],
+        $owner_info['role'],
+        $owner_info['id']
     ]);
     $updated = $stmt->rowCount();
     if ($updated ==  1) {
