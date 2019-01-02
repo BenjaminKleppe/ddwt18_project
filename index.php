@@ -169,8 +169,11 @@ elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')) {
 
 /* Register GET */
 elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
+    /* Check if the user is logged in */
+    if ( check_login() ) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
+    }
     /* Page info */
-
     $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
     $submit_btn = "Register now";
