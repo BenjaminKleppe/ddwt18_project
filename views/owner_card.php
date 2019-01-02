@@ -1,4 +1,5 @@
 <!-- Series count -->
+<?php if ($disp_buttons) { ?>
 <div class="card">
     <div class="card-header">
         Owner
@@ -12,3 +13,4 @@
         <p>Phone number: <?= $phonenumber ?></p>
     </div>
 </div>
+<?php } ?>

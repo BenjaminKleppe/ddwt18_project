@@ -121,7 +121,7 @@
             <?php
             $address = str_replace(" ", "+",$address_variable);
             ?>
-            <iframe style="width:100%;height:50%;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+            <iframe style="width:100%;height:300px;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
 
 
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
