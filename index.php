@@ -230,7 +230,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
 elseif (new_route('/DDWT18/ddwt18_project/removeaccount/', 'post')){
     /* Remove account in database */
     $user_id = $_POST['user_id'];
-    $feedback = remove_account($db, $user_id);
+    $feedback = remove_account($db);
 
     /* Redirect to homepage */
     redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
@@ -271,6 +271,15 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     include use_template('contact');
 }
 
+/* Optout Post */
+elseif (new_route('/DDWT18/ddwt18_project/optout/', 'post')){
+    /* Add room to database */
+    $feedback = optout($db);
+    /* Redirect to room GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
+}
+
 /* Contact Post */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     /* Add room to database */
@@ -280,7 +289,6 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
-
 }
 
 /* Remove room */

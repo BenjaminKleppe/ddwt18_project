@@ -632,7 +632,9 @@ function get_optin_room_table($rooms, $pdo){
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
             <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">opt-out</a></td>
+            <td><form action="/DDWT18/ddwt18_project/optout/" method="POST">
+                            <button type="submit" class="btn btn-danger">Opt-out</button>
+                        </form></td>
         </tr>
         ';
     }
@@ -862,13 +864,14 @@ function upload_photos($pdo, $form_data)
     }
 }
 
-function displayimage($pdo){
+function displayimage($pdo)
+{
     try {
         $stmt = $pdo->prepare('SELECT * FROM roompics');
         $stmt->execute();
         $roompics = $stmt->fetch();
         $pics = Array();
-        while($data = $pics){
+        while ($data = $pics) {
             echo "<img height='300' width='300'  src='{$data['imagename']}'>";
         }
 
@@ -878,8 +881,30 @@ function displayimage($pdo){
             'message' => sprintf('There was an error: %s', $e->getMessage())
         ];
     }
+}
+
+function optout($pdo){
+    /* get user info */
+    $user_id = get_user_id();
+
+    $stmt = $pdo->prepare('DELETE FROM optin WHERE optin.tenant = ?');
+    $stmt->execute([$user_id]);
+    $deletedoptin = $stmt->rowCount();
+    if ($deletedoptin == 1) {
+        return [
+            'type' => 'success',
+            'message' => 'Your opt-in has been removed!'
+        ];
     }
-function remove_account($pdo, $user_id){
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'An error occurred. The user was not removed.'
+        ];
+    }
+}
+
+function remove_account($pdo){
 
     /* Get room info */
     $user_id = get_user_id();
