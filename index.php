@@ -340,12 +340,13 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
 /* Edit room GET */
 elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     /* Check if logged in */
-    if ( !check_login() ) {
-        redirect('/DDWT18/ddwt18_project/login/');
+    $user_id = get_user_id();
+    $room_info = get_room_table($db, $user_id);
+    if ($room_info['user'] != $user_id) {
+        redirect('/DDWT18/ddwt18_project/overview/');
     }
 
     /* Get room info from db */
-
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
 
@@ -360,7 +361,8 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     $form_action = '/DDWT18/ddwt18_project/edit/';
 
     /* Get error msg from POST route */
-    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']); }
 
     /* Choose Template */
     include use_template('new');
@@ -377,7 +379,8 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
     $feedback = update_room($db, $_POST);
     $room_id = $_POST['room_id'];
     /* Redirect to room GET route */
-    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s', json_encode($feedback)));
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
+        json_encode($feedback)));
 
     /* Choose Template */
     include use_template('room');
