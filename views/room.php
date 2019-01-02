@@ -30,7 +30,7 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
-                    <p><?php $photo ?></p>
+                    <p><?= "<img src=".$filepath."height=200 width=300 />" ?></p>
 
                     <?php if ($display_buttons) { ?>
                     <div>
@@ -39,7 +39,7 @@
                             <label>Select Image to upload</label>
                             <input type="hidden" value="<?= $room_id ?>" name="room_id">
                             <input type="file" name="image">
-                            <input type="submit" value="Add picture to room">
+                            <input type="submit" value="Add picture to room" name="picture">
                         </form>
                     </div>
                     <?php } ?>

@@ -412,6 +412,10 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
+elseif(isset($_POST['picture'])){
+    $filepath = 'DDWT18/ddwt18_project/pictures/' .$_FILES["file"]["name"];
+}
+
 else {
     http_response_code(404);
 }
