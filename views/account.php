@@ -86,8 +86,8 @@
                             <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
                             <div>
                                 <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
-                                    <input type="hidden" value="<?= $user_id ?>" name="user_id" onclick="return confirm('Are you sure?')">
-                                    <button type="submit" class="btn btn-danger">Remove account</button>
+                                    <input type="hidden" value="<?= $user_id ?>" name="user_id">
+                                    <a onclick="return confirm('Do you want to delete your account Y/N')"><button type="submit" class="btn btn-danger">Remove account</button></a>
                                 </form>
                             </div>
                         </div>
