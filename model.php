@@ -583,6 +583,39 @@ function get_optin_info($pdo) {
     }
     return $room_exp;
 }
+
+function get_optin_owner_table($rooms, $pdo){
+    $table_exp = '
+    <table class="table table-hover">
+    <thead
+    <tr>
+        <th scope="col">Address</th>
+        <th scope="col">Squere Metre</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>';
+    foreach($rooms as $key => $value){
+        $table_exp .= '
+        <tr>
+            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
+            <th scope="row">'.$value['size'].'m2</th>
+            <th scope="row">€'.$value['price'].',-</th>           
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">opt-out</a></td>
+        </tr>
+        ';
+    }
+    $table_exp .= '
+    </tbody>
+    </table>
+    ';
+    return $table_exp;
+}
+
+
 function get_optin_room_table($rooms, $pdo){
     $table_exp = '
     <table class="table table-hover">

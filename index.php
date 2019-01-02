@@ -143,7 +143,8 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $language = $owner_info['language'];
     $phonenumber = $owner_info['phonenumber'];
     $email = $owner_info['email'];
-    $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);;
+    $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
+    $optinusers = get_optin_owner_table(get_optin_info($db), $db);
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');

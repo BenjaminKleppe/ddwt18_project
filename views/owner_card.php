@@ -14,3 +14,14 @@
     </div>
 </div>
 <?php } ?>
+<?php if ($display_buttons) { ?>
+<div class="card">
+    <div class="card-header">
+        Users that have opt-in for this room:
+    </div>
+    <div class="card-body">
+        <?php $optinusers ?>
+    </div>
+</div>
+<?php } ?>
+
