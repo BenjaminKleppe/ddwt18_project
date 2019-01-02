@@ -144,7 +144,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $phonenumber = $owner_info['phonenumber'];
     $email = $owner_info['email'];
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
-    $optinusers = get_optin_owner_table(get_optin_info($db), $db);
+    $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');
@@ -298,10 +298,8 @@ elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
-
-    $user = get_optin_info($db);
-
-    $user_name = get_name($db, $user['tenant']);
+    $user = $_GET['user_id'];
+    $user_name = get_name($db, $_GET['user_id']);
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $user_role = $user_name['role'];
     $user_dob = $user_name['dateofbirth'];

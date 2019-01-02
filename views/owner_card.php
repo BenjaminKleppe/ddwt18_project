@@ -20,7 +20,7 @@
         Users that have opt-in for this room:
     </div>
     <div class="card-body">
-        <?php $optinusers ?>
+        <?= $optinusers ?>
     </div>
 </div>
 <?php } ?>
