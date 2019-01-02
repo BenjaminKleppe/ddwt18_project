@@ -133,7 +133,7 @@
                     <div class="col-sm-2">
                         <form action="/DDWT18/ddwt18_project/remove/" method="POST">
                             <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                            <button type="submit" class="btn btn-danger">Remove</button>
+                            <a onclick="return confirm('Do you want to delete this room Y/N')"><button type="submit" class="btn btn-danger">Remove</button></a>
                         </form>
                     </div>
                 </div>
