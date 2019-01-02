@@ -570,7 +570,7 @@ function contact_room($pdo, $form_data)
 }
 
 function get_optin_info($pdo) {
-    $stmt = $pdo->prepare('SELECT room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
+    $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
