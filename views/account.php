@@ -34,7 +34,7 @@
             <div class="pd-15">&nbsp;</div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             Add rooms
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
                             Welcome, <?= $user ?>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             Opt-in rooms
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
                             Your account details:
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             Offered rooms
