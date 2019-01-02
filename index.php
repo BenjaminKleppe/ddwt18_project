@@ -143,6 +143,8 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $language = $owner_info['language'];
     $phonenumber = $owner_info['phonenumber'];
     $email = $owner_info['email'];
+    $owner = $room_info['user_id'];
+    $ownerlink = "/DDWT18/ddwt18_project/user/?user_id=$owner";
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
 
