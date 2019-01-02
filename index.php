@@ -220,6 +220,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $page_subtitle = 'My account on Rooms Overview!';
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
+
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */
@@ -271,15 +272,6 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     include use_template('contact');
 }
 
-/* Optout Post */
-elseif (new_route('/DDWT18/ddwt18_project/optout/', 'post')){
-    /* Add room to database */
-    $feedback = optout($db);
-    /* Redirect to room GET route */
-    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
-        json_encode($feedback)));
-}
-
 /* Contact Post */
 elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     /* Add room to database */
@@ -289,6 +281,42 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'post')){
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
+}
+
+/* Optout Post */
+elseif (new_route('/DDWT18/ddwt18_project/optout/', 'post')){
+    /* Add room to database */
+    $feedback = optout($db);
+    /* Redirect to room GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
+}
+
+/* User GET */
+elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    $user = get_optin_info($db);
+
+    $user_name = get_name($db, $user['tenant']);
+    $name = $user_name['firstname']." ".$user_name['lastname'];
+    $user_role = $user_name['role'];
+    $user_dob = $user_name['dateofbirth'];
+    $user_bio = $user_name['biography'];
+    $user_study = $user_name['study'];
+    $user_language = $user_name['language'];
+    $user_mail = $user_name['email'];
+    $user_phone = $user_name['phonenumber'];
+    $navigation = get_navigation($template, '0');
+
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
+    /* Choose Template */
+    include use_template('user');
 }
 
 /* Remove room */
@@ -419,5 +447,6 @@ elseif(isset($_POST['picture'])){
 else {
     http_response_code(404);
 }
+
 
 
