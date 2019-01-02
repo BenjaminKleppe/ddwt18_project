@@ -341,14 +341,13 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
 elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     /* Check if logged in */
     $user_id = get_user_id();
-    $room_info = get_room_table($db, $user_id);
-    if ($room_info['user'] != $user_id) {
-        redirect('/DDWT18/ddwt18_project/overview/');
-    }
 
     /* Get room info from db */
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
+    if ($room_info['user_id'] != $user_id) {
+        redirect('/DDWT18/ddwt18_project/overview/');
+    }
 
     /* Page info */
     $page_title = 'Edit room';
