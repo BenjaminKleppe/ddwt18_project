@@ -86,7 +86,7 @@
                     <label for="living" class="col-sm-3 col-form-label"> Living room: </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="living" name="living">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['living'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['living'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['living'];} else {echo "Choose one...";} ?></option>
                             <option value="Shared">Shared</option>
                             <option value="None">None</option>
                         </select>
@@ -96,7 +96,7 @@
                     <label for="kitchen" class="col-sm-3 col-form-label"> Kitchen </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="kitchen" name="kitchen">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['kitchen'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['kitchen'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['kitchen'];} else {echo "Choose one...";} ?></option>
                             <option value="Shared">Shared</option>
                             <option value="Privat">Private</option>
                         </select>
@@ -106,7 +106,7 @@
                     <label for="bathroom" class="col-sm-3 col-form-label"> Bathroom </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="bathroom" name="bathroom">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['bathroom'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['bathroom'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['bathroom'];} else {echo "Choose one...";} ?></option>
                             <option value="Shared">Shared</option>
                             <option value="Private">Private</option>
                         </select>
@@ -116,7 +116,7 @@
                     <label for="toilet" class="col-sm-3 col-form-label"> Toilet </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="toilet" name="toilet">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['toilet'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['toilet'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['toilet'];} else {echo "Choose one...";} ?></option>
                             <option value="Shared">Shared</option>
                             <option value="Private">Private</option>
                         </select>
@@ -126,7 +126,7 @@
                     <label for="internet" class="col-sm-3 col-form-label"> Internet </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="internet" name="internet">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['internet'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['internet'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['internet'];} else {echo "Choose one...";} ?></option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -136,7 +136,7 @@
                     <label for="mate" class="col-sm-3 col-form-label"> Housemate(s) </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="mate" name="mate">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['mate'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['mate'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['mate'];} else {echo "Choose one...";} ?></option>
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -151,7 +151,7 @@
                     <label for="smoke" class="col-sm-3 col-form-label"> Smoking </label>
                     <div class="col-sm-3">
                         <select class="form-control" id="smoke" name="smoke">
-                            <option value="" disabled selected hidden><?php if (isset($room_info)){echo $room_info['smoke'];} else {echo "Choose one...";} ?></option>
+                            <option value="<?php if (isset($room_info)){echo $room_info['smoke'];} else {echo "";}?>" disabled selected hidden><?php if (isset($room_info)){echo $room_info['smoke'];} else {echo "Choose one...";} ?></option>
                             <option value="Allowed">Allowed</option>
                             <option value="Not allowed">Not allowed</option>
                         </select>

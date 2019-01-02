@@ -438,12 +438,23 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
-/* Pictures POST*/
-elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')){
-    $id = $_POST['room_id'];
-    $roompic = displayimage($db);
-    $filepath = 'DDWT18/ddwt18_project/pictures/' .$_FILES["file"]["name"];
+elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Edit room to database */
+    $feedback = edit_details($db, $_POST);
+    $room_id = $_POST['id'];
+    /* Redirect to room GET route */
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
+
+    /* Choose Template */
+    include use_template('room');
 }
+
 
 else {
     http_response_code(404);

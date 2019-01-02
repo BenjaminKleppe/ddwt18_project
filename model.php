@@ -849,6 +849,82 @@ function update_room($pdo, $room_info){
     }
 }
 
+/**
+ * Updates a user in the database using post array
+ * @param object $pdo db object
+ * @param array $user_info post array
+ * @return array
+ */
+function edit_details($pdo, $user_info){
+    /* Check if all fields are set */
+    if (
+        empty($user_info['id']) or
+        empty($user_info['username']) or
+        empty($user_info['password']) or
+        empty($user_info['firstname']) or
+        empty($user_info['lastname']) or
+        empty($user_info['dateofbirth']) or
+        empty($user_info['biography']) or
+        empty($user_info['study']) or
+        empty($user_info['language']) or
+        empty($user_info['email']) or
+        empty($user_info['phonenumber']) or
+        empty($user_info['role'])
+    ) {
+        return [
+            'type' => 'danger',
+            'message' => 'There was an error. Not all fields were filled in.'
+        ];
+    }
+
+    /* Get current user name */
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+    $stmt->execute([$user_info['username']]);
+    $user = $stmt->fetch();
+    $current_name = $user['username'];
+
+    /* Check if user already exists */
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
+    $stmt->execute([$user_info['username']]);
+    $user = $stmt->fetch();
+    if ($user_info['username'] == $user['username'] and $user['username'] != $current_name){
+        return [
+            'type' => 'danger',
+            'message' => 'The username cannot be changed'
+        ];
+    }
+
+    /* Update user */
+    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, biography = ?, study = ?, language = ?, email = ?, phonenumber = ?, role = ? WHERE id = ?");
+    $stmt->execute([
+        $user_info['username'],
+        $user_info['password'],
+        $user_info['firstname'],
+        $user_info['lastname'],
+        $user_info['dateofbirth'],
+        $user_info['biography'],
+        $user_info['study'],
+        $user_info['language'],
+        $user_info['email'],
+        $user_info['phonenumber'],
+        $user_info['role']
+    ]);
+    $updated = $stmt->rowCount();
+    if ($updated ==  1) {
+        return [
+            'type' => 'success',
+            'message' => 'User details are edited!'
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'The user details are not edited. No changes were detected'
+        ];
+    }
+}
+
+
 function upload_photos($pdo, $form_data)
 {
     $img = $_FILES['image']['name'];

@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="inputrole">Role</label>
                             <select class="form-control col-sm-3" id="inputrole" name="role" required>
-                                <option value="" disabled selected hidden><?php if (isset($owner_info)){echo $owner_info['role'];} else {echo "Choose a role...";} ?></option>
+                                <option value="<?php if (isset($owner_info)){echo $owner_info['role'];} ?>" disabled selected hidden><?php if (isset($owner_info)){echo $owner_info['role'];} else {echo "Choose a role...";} ?></option>
                                 <option value="Owner">Owner</option>
                                 <option value="Tenant">Tenant</option>
                             </select>
@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label for="inputlanguage">Language</label>
                             <select class="form-control col-sm-3" data-placeholder="Choose a Language..." name="language" required>
-                                <option value="" disabled selected hidden><?php if (isset($owner_info)){echo $owner_info['language'];} else {echo "Choose a language...";} ?></option>
+                                <option value="<?php if (isset($owner_info)){echo $owner_info['language'];} ?>" disabled selected hidden><?php if (isset($owner_info)){echo $owner_info['language'];} else {echo "Choose a language...";} ?></option>
                                 <option value="Afrikanns">Afrikanns</option>
                                 <option value="Albanian">Albanian</option>
                                 <option value="Arabic">Arabic</option>
