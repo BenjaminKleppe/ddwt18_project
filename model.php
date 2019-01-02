@@ -584,23 +584,36 @@ function get_optin_info($pdo) {
     return $room_exp;
 }
 
-function get_optin_owner_table($rooms, $pdo){
+function get_user_optin_info($pdo, $roomid) {
+    $stmt = $pdo->prepare('SELECT optin.message, user.firstname, user.lastname, user.id FROM user, optin WHERE optin.tenant = user.id and optin.room = ?');
+    $stmt->execute([$roomid]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
+}
+function get_user_optin_room_table($optin, $pdo){
     $table_exp = '
     <table class="table table-hover">
     <thead
     <tr>
-        <th scope="col">Tenant</th>
+        <th scope="col">User</th>
         <th scope="col">Message</th>
-        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>';
-    foreach($rooms as $key => $value){
+    foreach($optin as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row">'.$value['firstname'].' '.$value['lastname'].'</th>    
-            <th scope="row">'.$value['message'].'</th>     
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info user</a></td>
+            <th scope="row">'.$value['firstname'].' '.$value['lastname'].'</th>
+            <th scope="row">'.$value['message'].'</th>       
+            <td><a href="/DDWT18/ddwt18_project/user/?user_id='.$value['id'].'" role="button" class="btn btn-primary">User info</a></td>
         </tr>
         ';
     }
