@@ -52,7 +52,7 @@
                             Welcome, <?= $user ?>
                         </div>
                         <div class="card-body">
-                            <p>You're logged in to Series Overview.</p>
+                            <p>You're logged in to Rooms overview.</p>
                             <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
                         </div>
                     </div>

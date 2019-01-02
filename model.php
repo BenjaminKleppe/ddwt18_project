@@ -283,7 +283,7 @@ function add_room($pdo, $room_info){
     if ($inserted ==  1) {
         return [
             'type' => 'success',
-            'message' => sprintf("Room %s %s added to Series Overview.", $room_info['street'], $room_info['house_number'])
+            'message' => sprintf("Room %s %s added to room overview.", $room_info['street'], $room_info['house_number'])
         ];
     }
     else {
@@ -296,7 +296,7 @@ function add_room($pdo, $room_info){
 }
 
 /**
- * Count the number of users listed on Series Overview
+ * Count the number of users listed on room overview
  * @param object $pdo database object
  * @return mixed
  */
@@ -352,7 +352,7 @@ function get_user_id(){
 }
 
 function get_name($pdo, $user) {
-    /* Get series */
+    /* Get rooms */
     $stmt = $pdo->prepare('SELECT username, password, firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
@@ -660,17 +660,17 @@ function get_offered_room_table($rooms, $pdo){
 }
 
 /**
- * Removes a room with a specific series-ID
+ * Removes a room with a specific room-ID
  * @param object $pdo db object
- * @param int $room_id id of the to be deleted series
+ * @param int $room_id id of the to be deleted rooms
  * @return array
  */
 function remove_room($pdo, $room_id){
 
-    /* Get series info */
+    /* Get room info */
     $room_info = get_room_info($pdo, $room_id);
 
-    /* Delete Serie */
+    /* Delete room */
     $stmt = $pdo->prepare("DELETE FROM room WHERE room_id = ?");
     $stmt->execute([$room_id]);
     $deleted = $stmt->rowCount();
@@ -683,7 +683,7 @@ function remove_room($pdo, $room_id){
     else {
         return [
             'type' => 'warning',
-            'message' => 'An error occurred. The series was not removed.'
+            'message' => 'An error occurred. The room was not removed.'
         ];
     }
 }
@@ -694,7 +694,7 @@ function remove_room($pdo, $room_id){
  * @param array $room_info post array
  * @return array
  */
-function update_serie($pdo, $room_info){
+function update_room($pdo, $room_info){
     /* Check if all fields are set */
     if (
         empty($room_info['street']) or
@@ -769,7 +769,7 @@ function update_serie($pdo, $room_info){
         ];
     }
 
-    /* Update Serie */
+    /* Update room */
     $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, living = ?, kitchen = ?, bathroom = ?, toilet = ?, internet = ?, mate = ?, smoke = ?, description = ?, tenant = ? WHERE room_id = ?");
     $stmt->execute([
         $room_info['street'],
@@ -852,11 +852,11 @@ function displayimage($pdo){
     }
 function remove_account($pdo, $user_id){
 
-    /* Get series info */
+    /* Get room info */
     $user_id = get_user_id();
     $account_info = get_user($pdo, $user_id);
 
-    /* Delete Serie */
+    /* Delete room */
     $stmt = $pdo->prepare('DELETE FROM room WHERE room.user_id = ?');
     $stmt->execute([$user_id]);
     $deletedroom = $stmt->rowCount();

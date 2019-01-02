@@ -1,4 +1,4 @@
-<!-- Series count -->
+<!-- Room count -->
 <?php if ($disp_buttons) { ?>
 <div class="card">
     <div class="card-header">

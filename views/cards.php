@@ -1,4 +1,4 @@
-<!-- Series count -->
+<!-- Room count -->
 <div class="card">
     <div class="card-header">
         Rooms

@@ -30,7 +30,6 @@
                     <h5><?= $page_subtitle ?></h5>
 
                     <div class="pd-15">&nbsp;</div>
-
                     <form action="/DDWT18/ddwt18_project/login/" method="POST">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>

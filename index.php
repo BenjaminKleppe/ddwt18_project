@@ -333,14 +333,14 @@ elseif (new_route('/DDWT18/ddwt18_project/logout/', 'get')) {
     redirect(sprintf('/DDWT18/ddwt18_project/?error_msg=%s', json_encode($feedback)));
 }
 
-/* Edit serie GET */
+/* Edit room GET */
 elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Get serie info from db */
+    /* Get room info from db */
 
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
@@ -362,17 +362,17 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     include use_template('new');
 }
 
-/* Edit serie POST */
+/* Edit room POST */
 elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Edit serie to database */
-    $feedback = update_serie($db, $_POST);
+    /* Edit room to database */
+    $feedback = update_room($db, $_POST);
     $room_id = $_POST['room_id'];
-    /* Redirect to serie GET route */
+    /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s', json_encode($feedback)));
 
     /* Choose Template */
