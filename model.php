@@ -867,13 +867,9 @@ function upload_photos($pdo, $form_data)
 function displayimage($pdo)
 {
     try {
-        $stmt = $pdo->prepare('SELECT * FROM roompics');
+        $stmt = $pdo->prepare('SELECT imagename FROM roompics');
         $stmt->execute();
         $roompics = $stmt->fetch();
-        $pics = Array();
-        while ($data = $pics) {
-            echo "<img height='300' width='300'  src='{$data['imagename']}'>";
-        }
 
     } catch (PDOException $e) {
         return [
@@ -881,6 +877,7 @@ function displayimage($pdo)
             'message' => sprintf('There was an error: %s', $e->getMessage())
         ];
     }
+    return $roompics;
 }
 
 function optout($pdo){
@@ -935,5 +932,4 @@ function remove_account($pdo){
         ];
     }
 }
-
 

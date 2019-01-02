@@ -440,7 +440,10 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
-elseif(isset($_POST['picture'])){
+/* Pictures POST*/
+elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')){
+    $id = $_POST['room_id'];
+    $roompic = displayimage($db);
     $filepath = 'DDWT18/ddwt18_project/pictures/' .$_FILES["file"]["name"];
 }
 

@@ -30,7 +30,7 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
-                    <p><?= "<img src=".$filepath."height=200 width=300 />" ?></p>
+                    <p></p>
 
                     <?php if ($display_buttons) { ?>
                     <div>
