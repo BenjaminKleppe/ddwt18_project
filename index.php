@@ -440,7 +440,7 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
-elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
+elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
