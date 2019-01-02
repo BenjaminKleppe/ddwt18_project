@@ -98,7 +98,7 @@
                         <select class="form-control" id="kitchen" name="kitchen">
                             <option value="" disabled selected hidden>Choose one...</option>
                             <option value="Shared">Shared</option>
-                            <option value="Privat">Privat</option>
+                            <option value="Privat">Private</option>
                         </select>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <select class="form-control" id="bathroom" name="bathroom">
                             <option value="" disabled selected hidden>Choose one...</option>
                             <option value="Shared">Shared</option>
-                            <option value="Privat">Privat</option>
+                            <option value="Private">Private</option>
                         </select>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         <select class="form-control" id="toilet" name="toilet">
                             <option value="" disabled selected hidden>Choose one...</option>
                             <option value="Shared">Shared</option>
-                            <option value="Privat">Privat</option>
+                            <option value="Private">Private</option>
                         </select>
                     </div>
                 </div>
