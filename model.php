@@ -570,7 +570,7 @@ function contact_room($pdo, $form_data)
 }
 
 function get_optin_info($pdo) {
-    $stmt = $pdo->prepare('SELECT room.* FROM room,optin WHERE room.room_id = optin.room AND optin.tenant = ?');
+    $stmt = $pdo->prepare('SELECT room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
@@ -589,10 +589,8 @@ function get_optin_owner_table($rooms, $pdo){
     <table class="table table-hover">
     <thead
     <tr>
-        <th scope="col">Address</th>
-        <th scope="col">Squere Metre</th>
-        <th scope="col">Price</th>
-        <th scope="col"></th>
+        <th scope="col">Tenant</th>
+        <th scope="col">Message</th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -600,11 +598,9 @@ function get_optin_owner_table($rooms, $pdo){
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
-            <th scope="row">'.$value['size'].'m2</th>
-            <th scope="row">€'.$value['price'].',-</th>           
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">opt-out</a></td>
+            <th scope="row">'.$value['firstname'].' '.$value['lastname'].'</th>    
+            <th scope="row">'.$value['message'].'</th>     
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info user</a></td>
         </tr>
         ';
     }
