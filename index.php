@@ -446,7 +446,7 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
 
     /* Edit room to database */
     $feedback = edit_details($db, $_POST);
-    $room_id = $_POST['id'];
+    $user_id = $_POST['id'];
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));

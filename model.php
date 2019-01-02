@@ -855,21 +855,21 @@ function update_room($pdo, $room_info){
  * @param array $user_info post array
  * @return array
  */
-function edit_details($pdo, $user_info){
+function edit_details($pdo, $owner_info){
     /* Check if all fields are set */
     if (
-        empty($user_info['id']) or
-        empty($user_info['username']) or
-        empty($user_info['password']) or
-        empty($user_info['firstname']) or
-        empty($user_info['lastname']) or
-        empty($user_info['dateofbirth']) or
-        empty($user_info['biography']) or
-        empty($user_info['study']) or
-        empty($user_info['language']) or
-        empty($user_info['email']) or
-        empty($user_info['phonenumber']) or
-        empty($user_info['role'])
+        empty($owner_info['owner']) or
+        empty($owner_info['username']) or
+        empty($owner_info['password']) or
+        empty($owner_info['firstname']) or
+        empty($owner_info['lastname']) or
+        empty($owner_info['role']) or
+        empty($owner_info['dateofbirth']) or
+        empty($owner_info['study']) or
+        empty($owner_info['language']) or
+        empty($owner_info['email']) or
+        empty($owner_info['biography']) or
+        empty($owner_info['phonenumber'])
     ) {
         return [
             'type' => 'danger',
