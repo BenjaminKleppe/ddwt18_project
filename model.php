@@ -206,7 +206,7 @@ function add_room($pdo, $room_info){
     if(
         empty($room_info['street']) or
         empty($room_info['house_number']) or
-        empty($room_info['postalcode']) or
+        empty($room_info['postal_code']) or
         empty($room_info['city']) or
         empty($room_info['type']) or
         empty($room_info['price']) or
@@ -244,13 +244,13 @@ function add_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postalcode']) !== 6) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
             'message' => 'The postal code consists of exactly 6 characters (1234AB)'
         ];}
     else {
-        if (PostalCheck($room_info['postalcode']) == false ){
+        if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
                 'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
@@ -263,7 +263,7 @@ function add_room($pdo, $room_info){
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
-        $room_info['postalcode'],
+        $room_info['postal_code'],
         $room_info['city'],
         $room_info['type'],
         $room_info['price'],
