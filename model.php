@@ -133,7 +133,7 @@ function get_room_table($rooms, $pdo){
     <table class="table table-hover">
     <thead
     <tr>
-        <th scope="col">Photo</th>
+        <th scope="col"></th>
         <th scope="col">Address</th>
         <th scope="col">Squere Metre</th>
         <th scope="col">Price</th>
@@ -144,7 +144,7 @@ function get_room_table($rooms, $pdo){
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row"></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
@@ -359,23 +359,24 @@ function get_name($pdo, $user) {
     return $user_info;
 }
 
-function get_image($pdo) {
+function get_image($pdo, $room_id)
+{
     /* Get image */
-    $img = $_FILES['image']['tmp_name'];
+    $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
 
-    try {
-        $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
-        $stmt->execute([$img]);
-        $image_info = $stmt->fetch();
-        return $image_info;
-    }
-    catch (PDOException $e) {
-        return [
-            'type' => 'danger',
-            'message' => sprintf('There was an error: %s', $e->getMessage())
-        ];
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value) {
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key] = htmlspecialchars($user_input);
+            $key = $room_exp[$key];
+            echo "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
+        }
     }
 }
+
 
 /* returns first- and lastname, and birth date from owner */
 function owner_name($pdo, $user)
@@ -713,7 +714,7 @@ function get_offered_room_table($rooms, $pdo){
     <table class="table table-hover">
     <thead
     <tr>
-        <th scope="col">Photo</th>
+        <th scope="col"></th>
         <th scope="col">Address</th>
         <th scope="col">Squere Metre</th>
         <th scope="col">Price</th>
@@ -724,7 +725,7 @@ function get_offered_room_table($rooms, $pdo){
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
-            <th scope="row"></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
