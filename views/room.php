@@ -113,7 +113,8 @@
 
                 </div>
         </div>
-
+        <div>
+            </br>
             <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
             <?php
             $address = str_replace(" ", "+",$address_variable);
@@ -139,6 +140,7 @@
                 </div>
             <?php } ?>
             <script async src="https://static.addtoany.com/menu/page.js"></script>
+        </div>
 
         <!-- Optional JavaScript -->
 
