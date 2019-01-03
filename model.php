@@ -359,12 +359,22 @@ function get_name($pdo, $user) {
     return $user_info;
 }
 
-function get_image($pdo, $room_id) {
-    /* Get rooms */
-    $stmt = $pdo->prepare('SELECT room_id, imagename FROM roompics WHERE room_id = ?');
-    $stmt->execute([$room_id]);
-    $image_info = $stmt->fetch();
-    return $image_info;
+function get_image($pdo) {
+    /* Get image */
+    $img = $_FILES['image']['tmp_name'];
+
+    try {
+        $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
+        $stmt->execute([$img]);
+        $image_info = $stmt->fetch();
+        return $image_info;
+    }
+    catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
 }
 
 /* returns first- and lastname, and birth date from owner */
@@ -575,6 +585,21 @@ function contact_room($pdo, $form_data)
             'message' => sprintf("Your opt-in has been sent")
         ];
     }
+}
+
+function get_image_info($pdo, $room_id) {
+    $stmt = $pdo->prepare('SELECT imagename FROM roompics user WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
 }
 
 function get_optin_info($pdo) {
@@ -960,26 +985,6 @@ function upload_photos($pdo, $form_data)
             'message' => 'Image does not upload to folder'
         ];
     }
-}
-
-function photo($pdo){
-    $img = $_FILES['image']['name'];
-}
-
-function displayimage($pdo)
-{
-    try {
-        $stmt = $pdo->prepare('SELECT imagename FROM roompics');
-        $stmt->execute();
-        $roompics = $stmt->fetch();
-
-    } catch (PDOException $e) {
-        return [
-            'type' => 'danger',
-            'message' => sprintf('There was an error: %s', $e->getMessage())
-        ];
-    }
-    return $roompics;
 }
 
 function optout($pdo){
