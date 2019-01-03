@@ -206,7 +206,7 @@ function add_room($pdo, $room_info){
     if(
         empty($room_info['street']) or
         empty($room_info['house_number']) or
-        empty($room_info['postalcode']) or
+        empty($room_info['postal_code']) or
         empty($room_info['city']) or
         empty($room_info['type']) or
         empty($room_info['price']) or
@@ -244,13 +244,13 @@ function add_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postalcode']) !== 6) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
             'message' => 'The postal code consists of exactly 6 characters (1234AB)'
         ];}
     else {
-        if (PostalCheck($room_info['postalcode']) == false ){
+        if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
                 'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
@@ -263,7 +263,7 @@ function add_room($pdo, $room_info){
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
-        $room_info['postalcode'],
+        $room_info['postal_code'],
         $room_info['city'],
         $room_info['type'],
         $room_info['price'],
@@ -357,6 +357,24 @@ function get_name($pdo, $user) {
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
+}
+
+function get_image($pdo) {
+    /* Get image */
+    $img = $_FILES['image']['tmp_name'];
+
+    try {
+        $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
+        $stmt->execute([$img]);
+        $image_info = $stmt->fetch();
+        return $image_info;
+    }
+    catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
 }
 
 /* returns first- and lastname, and birth date from owner */
@@ -569,6 +587,24 @@ function contact_room($pdo, $form_data)
     }
 }
 
+function get_image_info($pdo, $room_id) {
+    $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+    $pictures = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key] = htmlspecialchars($user_input);
+            $key = $room_exp[$key];
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
+        }
+    }
+    return $pictures;
+}
+
 function get_optin_info($pdo) {
     $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
     $stmt->execute([$_SESSION['user_id']]);
@@ -743,7 +779,7 @@ function update_room($pdo, $room_info){
     if (
         empty($room_info['street']) or
         empty($room_info['house_number']) or
-        empty($room_info['postalcode']) or
+        empty($room_info['postal_code']) or
         empty($room_info['city']) or
         empty($room_info['type']) or
         empty($room_info['price']) or
@@ -782,13 +818,13 @@ function update_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postalcode']) !== 6) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
             'message' => 'The postal code consists of exactly 6 characters (1234AB)'
         ];}
     else {
-        if (PostalCheck($room_info['postalcode']) == false ){
+        if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
                 'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
@@ -818,7 +854,7 @@ function update_room($pdo, $room_info){
     $stmt->execute([
         $room_info['street'],
         $room_info['house_number'],
-        $room_info['postalcode'],
+        $room_info['postal_code'],
         $room_info['city'],
         $room_info['type'],
         $room_info['price'],
@@ -855,21 +891,21 @@ function update_room($pdo, $room_info){
  * @param array $user_info post array
  * @return array
  */
-function edit_details($pdo, $user_info){
+function edit_details($pdo, $owner_info){
     /* Check if all fields are set */
     if (
-        empty($user_info['id']) or
-        empty($user_info['username']) or
-        empty($user_info['password']) or
-        empty($user_info['firstname']) or
-        empty($user_info['lastname']) or
-        empty($user_info['dateofbirth']) or
-        empty($user_info['biography']) or
-        empty($user_info['study']) or
-        empty($user_info['language']) or
-        empty($user_info['email']) or
-        empty($user_info['phonenumber']) or
-        empty($user_info['role'])
+        empty($owner_info['username']) or
+        empty($owner_info['password']) or
+        empty($owner_info['firstname']) or
+        empty($owner_info['lastname']) or
+        empty($owner_info['role']) or
+        empty($owner_info['dateofbirth']) or
+        empty($owner_info['study']) or
+        empty($owner_info['language']) or
+        empty($owner_info['email']) or
+        empty($owner_info['biography']) or
+        empty($owner_info['phonenumber']) or
+        empty($owner_info['owner'])
     ) {
         return [
             'type' => 'danger',
@@ -879,15 +915,15 @@ function edit_details($pdo, $user_info){
 
     /* Get current user name */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-    $stmt->execute([$user_info['username']]);
+    $stmt->execute([$owner_info['username']]);
     $user = $stmt->fetch();
     $current_name = $user['username'];
 
     /* Check if user already exists */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-    $stmt->execute([$user_info['username']]);
+    $stmt->execute([$owner_info['username']]);
     $user = $stmt->fetch();
-    if ($user_info['username'] == $user['username'] and $user['username'] != $current_name){
+    if ($owner_info['username'] == $user['username'] and $user['username'] != $current_name){
         return [
             'type' => 'danger',
             'message' => 'The username cannot be changed'
@@ -895,19 +931,20 @@ function edit_details($pdo, $user_info){
     }
 
     /* Update user */
-    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, biography = ?, study = ?, language = ?, email = ?, phonenumber = ?, role = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, role = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
     $stmt->execute([
-        $user_info['username'],
-        $user_info['password'],
-        $user_info['firstname'],
-        $user_info['lastname'],
-        $user_info['dateofbirth'],
-        $user_info['biography'],
-        $user_info['study'],
-        $user_info['language'],
-        $user_info['email'],
-        $user_info['phonenumber'],
-        $user_info['role']
+        $owner_info['username'],
+        $owner_info['password'],
+        $owner_info['firstname'],
+        $owner_info['lastname'],
+        $owner_info['role'],
+        $owner_info['dateofbirth'],
+        $owner_info['study'],
+        $owner_info['language'],
+        $owner_info['email'],
+        $owner_info['biography'],
+        $owner_info['phonenumber'],
+        $owner_info['id']
     ]);
     $updated = $stmt->rowCount();
     if ($updated ==  1) {
@@ -951,22 +988,6 @@ function upload_photos($pdo, $form_data)
             'message' => 'Image does not upload to folder'
         ];
     }
-}
-
-function displayimage($pdo)
-{
-    try {
-        $stmt = $pdo->prepare('SELECT imagename FROM roompics');
-        $stmt->execute();
-        $roompics = $stmt->fetch();
-
-    } catch (PDOException $e) {
-        return [
-            'type' => 'danger',
-            'message' => sprintf('There was an error: %s', $e->getMessage())
-        ];
-    }
-    return $roompics;
 }
 
 function optout($pdo){
@@ -1022,3 +1043,20 @@ function remove_account($pdo){
     }
 }
 
+/* check if user is an owner in order to add a room */
+function check_owner($pdo){
+    /* get user information */
+    $user_id = get_user_id();
+
+    /* get role from user */
+    $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $array_role = $stmt->fetch();
+    $role = $array_role['role'];
+    if ($role == 'Owner') {
+        return True;
+    }
+    else {
+        return False;
+    }
+}

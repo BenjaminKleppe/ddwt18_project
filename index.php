@@ -78,6 +78,10 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     if (!check_login()) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
+    /* Check if the role is owner */
+    if (!check_owner($db)) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
+    }
 
     /* Page info */
     $page_title = 'Add Room';
@@ -116,7 +120,6 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $owner_info = get_name($db, $room_info['user_id']);
     $display_buttons = get_user_id() == $room_info['user_id'];
     $disp_buttons = get_user_id() != $room_info['user_id'];
-    $photo = displayimage($db);
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
@@ -147,6 +150,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $ownerlink = "/DDWT18/ddwt18_project/user/?user_id=$owner";
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
+    $imagename = get_image_info($db, $room_id);
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');
@@ -440,15 +444,16 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
+/* Edit details myaccount POST */
 elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Edit room to database */
+    /* Edit details to database */
     $feedback = edit_details($db, $_POST);
-    $room_id = $_POST['id'];
+    $user_id = $_POST['id'];
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));

@@ -32,9 +32,9 @@
             </div>
 
             <div class="pd-15">&nbsp;</div>
-
             <div class="row">
-                <div class="col-md-7">
+                <?php if (check_owner($db)) { ?>
+                    <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             Add rooms
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-
+                <?php } ?>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -57,6 +57,19 @@
                         </div>
                     </div>
                 </div>
+                <?php if (check_owner($db)) { ?>
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                Offered rooms
+                            </div>
+                            <div class="card-body">
+                                <p>The rooms you offered.</p>
+                                <?= $offeredrooms ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
@@ -93,17 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Offered rooms
-                        </div>
-                        <div class="card-body">
-                            <p>The rooms you offered.</p>
-                            <?= $offeredrooms ?>
-                        </div>
-                    </div>
-                </div>
+
 
             </div>
         </div>
