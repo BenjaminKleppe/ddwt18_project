@@ -906,7 +906,7 @@ function edit_details($pdo, $owner_info){
         empty($owner_info['email']) or
         empty($owner_info['biography']) or
         empty($owner_info['phonenumber']) or
-        empty($owner_info['owner'])
+        empty($owner_info['id'])
     ) {
         return [
             'type' => 'danger',

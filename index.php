@@ -457,7 +457,7 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
         json_encode($feedback)));
 
     /* Choose Template */
-    include use_template('room');
+    include use_template('register');
 }
 
 
