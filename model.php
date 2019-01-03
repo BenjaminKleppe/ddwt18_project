@@ -1040,3 +1040,20 @@ function remove_account($pdo){
     }
 }
 
+/* check if user is an owner in order to add a room */
+function check_owner($pdo){
+    /* get user information */
+    $user_id = get_user_id();
+
+    /* get role from user */
+    $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $array_role = $stmt->fetch();
+    $role = $array_role['role'];
+    if ($role == 'owner') {
+        return True;
+    }
+    else {
+        return False;
+    }
+}

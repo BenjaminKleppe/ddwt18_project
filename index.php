@@ -78,6 +78,10 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     if (!check_login()) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
+    /* Check if the role is owner */
+    if (!check_owner($db)) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
+    }
 
     /* Page info */
     $page_title = 'Add Room';
