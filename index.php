@@ -224,7 +224,6 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $page_subtitle = 'My account on Rooms Overview!';
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
-    $one = print_r(get_image($db, $room_id));
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
