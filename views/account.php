@@ -70,17 +70,6 @@
                         </div>
                     </div>
                 <?php } ?>
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Opt-in rooms
-                        </div>
-                        <div class="card-body">
-                            <p>The rooms you opt-in for.</p>
-                            <?= $optinrooms ?>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -106,6 +95,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header">
+                            Opt-in rooms
+                        </div>
+                        <div class="card-body">
+                            <p>The rooms you opt-in for.</p>
+                            <?= $optinrooms ?>
+                        </div>
+                    </div>
+                </div>
+
 
 
             </div>
