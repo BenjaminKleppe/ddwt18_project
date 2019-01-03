@@ -57,6 +57,19 @@
                         </div>
                     </div>
                 </div>
+                <?php if (check_owner($db)) { ?>
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                Offered rooms
+                            </div>
+                            <div class="card-body">
+                                <p>The rooms you offered.</p>
+                                <?= $offeredrooms ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
@@ -93,19 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if (check_owner($db)) { ?>
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Offered rooms
-                        </div>
-                        <div class="card-body">
-                            <p>The rooms you offered.</p>
-                            <?= $offeredrooms ?>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
+
 
             </div>
         </div>
