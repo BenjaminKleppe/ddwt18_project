@@ -33,6 +33,18 @@
                     <div><img src="<?= $path ?>" width="30%" height="20%"/></div>
 
                     <?php if ($display_buttons) { ?>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" class="btn btn-warning">Edit</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <form action="/DDWT18/ddwt18_project/remove/" method="POST">
+                                    <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                                    <a onclick="return confirm('Do you want to delete this room Y/N')"><button type="submit" class="btn btn-danger">Remove</button></a>
+                                </form>
+                            </div>
+                        </div>
                     <div>
                         <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
                             <br/>
@@ -126,19 +138,6 @@
                 <a class="a2a_button_google_gmail"></a>
                 <a class="a2a_button_whatsapp"></a>
             </div>
-            <?php if ($display_buttons) { ?>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" class="btn btn-warning">Edit</a>
-                    </div>
-                    <div class="col-sm-2">
-                        <form action="/DDWT18/ddwt18_project/remove/" method="POST">
-                            <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                            <a onclick="return confirm('Do you want to delete this room Y/N')"><button type="submit" class="btn btn-danger">Remove</button></a>
-                        </form>
-                    </div>
-                </div>
-            <?php } ?>
             <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
 
