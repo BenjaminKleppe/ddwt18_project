@@ -359,6 +359,14 @@ function get_name($pdo, $user) {
     return $user_info;
 }
 
+function get_image($pdo, $room_id) {
+    /* Get rooms */
+    $stmt = $pdo->prepare('SELECT room_id, imagename FROM roompics WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $image_info = $stmt->fetch();
+    return $image_info;
+}
+
 /* returns first- and lastname, and birth date from owner */
 function owner_name($pdo, $user)
 {
@@ -952,6 +960,10 @@ function upload_photos($pdo, $form_data)
             'message' => 'Image does not upload to folder'
         ];
     }
+}
+
+function photo($pdo){
+    $img = $_FILES['image']['name'];
 }
 
 function displayimage($pdo)
