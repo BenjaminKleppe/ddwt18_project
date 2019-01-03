@@ -77,13 +77,13 @@ function use_template($template){
  */
 function get_navigation($template, $active_id){
     $navigation_exp = '
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="200" height="50"/></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="230" height="60"/></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">';
+    <ul class="navbar-nav ml-auto">';
     foreach ($template as $id => $info) {
         if ($id == $active_id){
             $navigation_exp .= '<li class="nav-item active">';

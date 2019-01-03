@@ -7,6 +7,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 
         <!-- Own CSS -->
         <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
@@ -16,6 +17,25 @@
     <body>
         <!-- Menu -->
         <?= $navigation ?>
+
+        <!-- Sliding pictures -->
+        <div id="slides" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#slides" data-slide-to="0" class="active"></li>
+                <li data-target="#slides" data-slide-to="1"></li>
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="pictures/background.jpg"
+                         <div class="carousel-caption">
+                             <h1 class="display-2">InterRooms </h1>
+                         </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="pictures/background2.jpg"
+                </div>
+            </div>
+        </div>
 
         <!-- Content -->
         <div class="container">
