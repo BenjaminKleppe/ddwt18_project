@@ -148,8 +148,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $email = $owner_info['email'];
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
-    $imagename = implode("", get_image_info($db, $room_id));
-    $path = "/DDWT18/ddwt18_project/pictures/$imagename";
+    $imagename = get_image_info($db, $room_id);
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');
@@ -225,6 +224,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $page_subtitle = 'My account on Rooms Overview!';
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
+    $one = print_r(get_image($db, $room_id));
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
