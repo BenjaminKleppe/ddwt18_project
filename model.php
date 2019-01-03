@@ -1050,7 +1050,7 @@ function check_owner($pdo){
     $stmt->execute([$user_id]);
     $array_role = $stmt->fetch();
     $role = $array_role['role'];
-    if ($role == 'owner') {
+    if ($role == 'Owner') {
         return True;
     }
     else {
