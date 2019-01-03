@@ -443,13 +443,14 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     include use_template('register');
 }
 
+/* Edit details myaccount POST */
 elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Edit room to database */
+    /* Edit details to database */
     $feedback = edit_details($db, $_POST);
     $user_id = $_POST['id'];
     /* Redirect to room GET route */
