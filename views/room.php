@@ -30,7 +30,7 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
-                    <div><?php $imagename ?></div>
+                    <div><?= print_r($imagename) ?></div>
 
                     <?php if ($display_buttons) { ?>
                         <br/>

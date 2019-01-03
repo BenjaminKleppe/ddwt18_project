@@ -592,15 +592,17 @@ function get_image_info($pdo, $room_id) {
     $stmt->execute([$room_id]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
+    $pictures = Array();
 
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            echo "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
+            $pictures[$key][$user_key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
         }
     }
+    return $pictures;
 }
 
 function get_optin_info($pdo) {
