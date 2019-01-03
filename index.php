@@ -144,8 +144,8 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $email = $owner_info['email'];
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
-    $imagename = print_r(json_encode(get_image_info($db, $room_id)));
-    $path = "/DDWT18/ddwt18_project/pictures/?imagename='.$imagename.'";
+    $imagename = implode("", get_image_info($db, $room_id));
+    $path = "/DDWT18/ddwt18_project/pictures/$imagename";
 
     /* always use template 'cards' */
     $right_column = use_template('owner_card');

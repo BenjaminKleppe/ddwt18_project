@@ -588,7 +588,7 @@ function contact_room($pdo, $form_data)
 }
 
 function get_image_info($pdo, $room_id) {
-    $stmt = $pdo->prepare('SELECT imagename FROM roompics user WHERE room_id = ?');
+    $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
@@ -596,7 +596,7 @@ function get_image_info($pdo, $room_id) {
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
-            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+            $room_exp[$key] = htmlspecialchars($user_input);
         }
     }
     return $room_exp;
