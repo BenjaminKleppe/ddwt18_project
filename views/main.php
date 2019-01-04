@@ -7,7 +7,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet"
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Own CSS -->
         <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
@@ -34,9 +34,34 @@
                     <?php if(isset($left_content)){echo $left_content;} ?>
                 </div>
                 <!-- Right column -->
-                <div class="col-md-4">
+                <div class="col-sm-12 col-md-4">
 
-                    <?php include $right_column ?>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Rooms
+                            </div>
+                            <div class="card-body">
+                                <p class="count">Room overview already has</p>
+                                <h2><?= $nbr_rooms ?></h2>
+                                <p>rooms listed</p>
+                                <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">List yours</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Users
+                            </div>
+                            <div class="card-body">
+                                <p class="count">Room overview already has</p>
+                                <h2><?= $nbr_users ?></h2>
+                                <p>active users</p>
+                                <a href="/DDWT18/ddwt18_project/register/" class="btn btn-primary">Join now</a>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

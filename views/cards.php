@@ -1,5 +1,5 @@
 <!-- Room count -->
-<div class="card">
+<div class="card col-xs-6">
     <div class="card-header">
         Rooms
     </div>
@@ -10,7 +10,7 @@
         <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">List yours</a>
     </div>
 </div>
-<div class="card">
+<div class="card col-xs-6">
     <div class="card-header">
         Users
         </div>

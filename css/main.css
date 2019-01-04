@@ -11,3 +11,8 @@
 }
 
 select:invalid { color: gray; }
+
+.nav {
+    background-color: darkred;
+}
+
