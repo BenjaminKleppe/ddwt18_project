@@ -35,7 +35,7 @@
                 <!-- Right column -->
                 <div class="container col-sm-12 col-md-4">
 
-                    <div class="col-sm-12 col-md-12">
+                    <div class="py-5 col-sm-12 col-md-12">
                         <div class="card row">
                             <div class="card-header">
                                 Rooms

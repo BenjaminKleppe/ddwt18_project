@@ -41,7 +41,7 @@
             <div class="col-md-7">
                 <div class="row">
                     <?php if (check_owner($db)) { ?>
-                        <div class="col-md-12" style="padding-bottom: 10px">
+                        <div class="col-md-12 pb-3">
                             <div class="card">
                                 <div class="card-header">
                                     Add rooms
@@ -54,7 +54,7 @@
                         </div>
                     <?php } ?>
                     <?php if (check_owner($db)) { ?>
-                        <div class="col-md-12" style="padding-bottom: 2%">
+                        <div class="col-md-12 py-3">
                             <div class="card">
                                 <div class="card-header">
                                     Offered rooms
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="col-md-12" style="padding-bottom: 10%">
+                    <div class="col-md-12 pt-3" style="padding-bottom: 5%">
                         <div class="card">
                             <div class="card-header">
                                 Opt-in rooms
@@ -82,7 +82,7 @@
 
 
             <div class="col-md-5">
-                    <div class="col-md-12" style="padding-bottom: 10px">
+                    <div class="col-md-12 pb-3">
                         <div class="card">
                             <div class="card-header">
                                 Welcome, <?= $user ?>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12" style="padding-bottom: 10%">
+                    <div class="col-md-12 pt-3" style="padding-bottom: 5%">
                         <div class="card">
                             <div class="card-header">
                                 Your account details:
