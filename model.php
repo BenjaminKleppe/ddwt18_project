@@ -77,8 +77,8 @@ function use_template($template){
  */
 function get_navigation($template, $active_id){
     $navigation_exp = '
-    <div class="container">
-        <nav class="navbar navbar-static-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid bg-light" style="padding-bottom: 0">
+        <nav class="navbar navbar-static-top navbar-expand-lg navbar-light container">
             <a href="/DDWT18/ddwt18_project/"><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="230" height="60"/></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

@@ -16,3 +16,6 @@ select:invalid { color: gray; }
     background-color: darkred;
 }
 
+.card-header{
+    background-color: red;
+}
