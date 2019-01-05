@@ -738,9 +738,10 @@ function get_offered_room_table($rooms, $pdo){
     </thead>
     <tbody>';
     foreach($rooms as $key => $value){
+        $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
