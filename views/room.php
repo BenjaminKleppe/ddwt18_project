@@ -30,11 +30,19 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
-                    <div><?= implode(" ", $imagename) ?></div>
+                    <div class="pb-4"><?= implode(" ", $imagename) ?></div>
 
                     <?php if ($display_buttons) { ?>
-                        <br/>
-                        <div class="row">
+                        <div class="pb-4">
+                            <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
+                                <br/>
+                                <label>Select Image to upload</label>
+                                <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                                <input class="pb-3" type="file" name="image">
+                                <input type="submit" value="Add picture to room" name="picture">
+                            </form>
+                        </div>
+                        <div class="row pb-5">
                             <div class="col-sm-2">
                                 <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" class="btn btn-warning">Edit</a>
                             </div>
@@ -45,19 +53,10 @@
                                 </form>
                             </div>
                         </div>
-                    <div>
-                        <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
-                            <br/>
-                            <label>Select Image to upload</label>
-                            <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                            <input type="file" name="image">
-                            <input type="submit" value="Add picture to room" name="picture">
-                        </form>
-                    </div>
                     <?php } ?>
 
                     <?php if ($disp_buttons) { ?>
-                    <div>
+                    <div class="pb-5">
                         <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
                     </div>
                     <?php } ?>
