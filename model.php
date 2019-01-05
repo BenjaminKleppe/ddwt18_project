@@ -105,7 +105,7 @@ function get_navigation($template, $active_id){
                     $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Logout</a ></li >';
                 }else {
                     $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/login/" ><span class="glyphicon glyphicon-log-in" ></span > Login</a ></li>';
-                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> Signup</a></li>';
+                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> SignUp</a></li>';
                         }
                  $navigation_exp .= '
             </div>
