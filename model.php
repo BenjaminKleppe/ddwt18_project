@@ -154,9 +154,10 @@ function get_room_table($rooms, $pdo){
     </thead>
     <tbody>';
     foreach($rooms as $key => $value){
+        $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
@@ -376,17 +377,19 @@ function get_image($pdo, $room_id)
     /* Get image */
     $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
-    $rooms = $stmt->fetchAll();
+    $rooms = $stmt->fetch();
+    return $rooms['imagename'];
+    /*
     $room_exp = Array();
 
-    /* Create array with htmlspecialchars */
+    /* Create array with htmlspecialchars
     foreach ($rooms as $key => $value) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
             echo "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
         }
-    }
+    } */
 }
 
 
