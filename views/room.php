@@ -13,7 +13,7 @@
 
         <title><?= $page_title ?></title>
     </head>
-    <body style="padding-bottom: 5%">
+    <body>
         <!-- Menu -->
         <?= $navigation ?>
 
@@ -130,7 +130,7 @@
             <?php
             $address = str_replace(" ", "+",$address_variable);
             ?>
-            <iframe style="width:100%;height:300px;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+            <iframe class="pb-3" style="width:100%;height:300px;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
                 <a class="a2a_button_twitter"></a>
                 <a class="a2a_button_linkedin"></a>
@@ -140,7 +140,9 @@
             <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
 
-        <!-- Optional JavaScript -->
+            <?php include $footer ?>
+
+            <!-- Optional JavaScript -->
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

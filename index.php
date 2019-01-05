@@ -92,6 +92,8 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     $page_content = 'Fill in the details of your room.';
     $submit_btn = "Add room";
     $form_action = '/DDWT18/ddwt18_project/add/';
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -150,8 +152,9 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
     $imagename = get_image_info($db, $room_id);
 
-    /* always use template 'cards' */
+    /* always use template 'footer' */
     $right_column = use_template('owner_card');
+    $footer = use_template('footer');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -182,6 +185,10 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     $page_title = 'Register';
     $submit_btn = "Register now";
     $navigation = get_navigation($template, 5);
+
+    /* always use template 'footer' */
+    $footer = use_template('footer');
+
     /* Page content */
     $page_subtitle = 'Register here to add rooms or to opt-in for a room';
     /* Get error msg from POST route */
@@ -224,6 +231,8 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $page_subtitle = 'Your account details on InterRooms';
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
@@ -268,6 +277,8 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $user_phone = $user_name['phonenumber'];
     $navigation = get_navigation($template, '0');
     $display_buttons = get_user_id() == $room_info['room_id'];
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
 
     /* Get error msg from POST route */
@@ -313,6 +324,8 @@ elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $navigation = get_navigation($template, '0');
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
 
     /* Get error msg from POST route */
@@ -348,6 +361,8 @@ elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
 
     /* Page content */
     $page_subtitle = 'Use your username and password to login';
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -396,6 +411,8 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
     $page_content = 'Edit the room below.';
     $submit_btn = "Edit room";
     $form_action = '/DDWT18/ddwt18_project/edit/';
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -437,6 +454,8 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     $page_title = 'Edit details';
     $page_subtitle = 'You can edit your details of your myaccount here';
     $submit_btn = "Edit account";
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Choose Template */
     include use_template('register');

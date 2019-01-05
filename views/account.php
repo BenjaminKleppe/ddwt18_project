@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="col-md-12 pt-3" style="padding-bottom: 5%">
+                    <div class="col-md-12 pt-3">
                         <div class="card">
                             <div class="card-header">
                                 Opt-in rooms
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 pt-3" style="padding-bottom: 5%">
+                    <div class="col-md-12 pt-3">
                         <div class="card">
                             <div class="card-header">
                                 Your account details:
@@ -124,9 +124,7 @@
             </div>
         </div>
 
-
-
-
+        <?php include $footer ?>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
