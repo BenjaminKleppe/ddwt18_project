@@ -33,7 +33,9 @@ $template = Array(
 if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     /* Page info */
     $page_title = 'InterRooms';
+    $display_right_nav = get_user_id();
     $navigation = get_navigation($template, '1');
+
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
     $nbr_users = count_users($db);
@@ -48,12 +50,14 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
 if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     /* Page info */
     $page_title = 'Overview';
+    $display_right_nav = get_user_id();
     $navigation = get_navigation($template, '2');
 
     /* Page content */
     $page_subtitle = 'The overview of all rooms available';
     $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
+    $display_buttons = get_user_id();
 
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);

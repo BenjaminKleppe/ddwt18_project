@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Own CSS -->
-    <link rel="stylesheet" href="DDWT18/ddwt18_project/css/main.css">
+    <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
 
     <title><?= $page_title ?></title>
 </head>
