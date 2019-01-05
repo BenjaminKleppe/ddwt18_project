@@ -37,8 +37,6 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
     $nbr_users = count_users($db);
-    /* always use template 'cards' */
-    $right_column = use_template('cards');
 
     /* Page content */
     $page_subtitle = 'Rooms, especially for internationals.';
@@ -60,8 +58,6 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
     $nbr_users = count_users($db);
-    /* always use template 'cards' */
-    $right_column = use_template('cards');
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -150,9 +146,6 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
     $imagename = get_image_info($db, $room_id);
 
-    /* always use template 'cards' */
-    $right_column = use_template('owner_card');
-
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
 
@@ -221,7 +214,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $user_language = $user_name['language'];
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
-    $page_subtitle = 'My account on Rooms Overview!';
+    $page_subtitle = 'Your account details on InterRooms';
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
 

@@ -118,12 +118,6 @@
                         </tbody>
                     </table>
             </div>
-                <!-- Right column -->
-                <div class="col-md-4">
-
-                    <?php include $right_column ?>
-
-                </div>
         </div>
         <div>
             </br>
