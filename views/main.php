@@ -33,7 +33,7 @@
                     <?php if(isset($left_content)){echo $left_content;} ?>
                 </div>
                 <!-- Right column -->
-                <div class="container col-sm-12 col-md-4">
+                <div class="container col-sm-12 col-md-3">
 
                     <div class="py-5 col-sm-12 col-md-12">
                         <div class="card row">
