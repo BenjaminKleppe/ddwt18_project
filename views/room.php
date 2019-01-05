@@ -119,7 +119,7 @@
                     </table>
             </div>
                 <!-- Right column -->
-                <div class="col-md-4">
+                <div class="col-md-4 pt-5">
 
                     <?php include $right_column ?>
 
