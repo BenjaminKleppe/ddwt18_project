@@ -38,8 +38,10 @@
                         <div class="form-group">
                             <label for="inputPassword">Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder="Enter password" name="password" required>
+
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
+
                     </form>
 
                 </div>
