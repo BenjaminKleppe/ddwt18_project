@@ -7,7 +7,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Own CSS -->
         <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
 
@@ -155,14 +155,20 @@
                             <label for="inputbiography">Biography</label>
                             <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required><?php if (isset($owner_info)){echo $owner_info['biography'];} ?></textarea>
                         </div>
-                        <?php if(isset($_SESSION['user_id'])){ ?><input type="hidden" name="owner" value="<?php echo $_SESSION['user_id'] ?>"><?php } ?>
-                        <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
+                        <label></label>
+                            <input type="checkbox" required>By creating an account you agree to our <a href="https://www.sitrion.com/terms-and-privacy" style="color:dodgerblue">Terms & Privacy</a>.
+                        <div class="pt-4">
+                            <?php if(isset($_SESSION['user_id'])){ ?><input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>"><?php } ?>
+                            <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
+                        </div>
                     </form>
 
                 </div>
 
             </div>
         </div>
+
+        <?php include $footer ?>
 
 
         <!-- Optional JavaScript -->

@@ -7,13 +7,13 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Own CSS -->
         <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
 
         <title><?= $page_title ?></title>
     </head>
-    <body style="padding-bottom: 5%">
+    <body>
         <!-- Menu -->
         <?= $navigation ?>
 
@@ -30,11 +30,19 @@
                     <h1><?= $page_title ?></h1>
                     <h3>€<?= $price ?>,-</h3>
                     <p><?= $address ?></p>
-                    <div><?= implode(" ", $imagename) ?></div>
+                    <div class="pb-4"><?= implode(" ", $imagename) ?></div>
 
                     <?php if ($display_buttons) { ?>
-                        <br/>
-                        <div class="row">
+                        <div class="pb-4">
+                            <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
+                                <br/>
+                                <label>Select Image to upload</label>
+                                <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                                <input class="pb-3" type="file" name="image">
+                                <input type="submit" value="Add picture to room" name="picture">
+                            </form>
+                        </div>
+                        <div class="row pb-5">
                             <div class="col-sm-2">
                                 <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" class="btn btn-warning">Edit</a>
                             </div>
@@ -45,19 +53,10 @@
                                 </form>
                             </div>
                         </div>
-                    <div>
-                        <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
-                            <br/>
-                            <label>Select Image to upload</label>
-                            <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                            <input type="file" name="image">
-                            <input type="submit" value="Add picture to room" name="picture">
-                        </form>
-                    </div>
                     <?php } ?>
 
                     <?php if ($disp_buttons) { ?>
-                    <div>
+                    <div class="pb-5">
                         <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
                     </div>
                     <?php } ?>
@@ -119,7 +118,7 @@
                     </table>
             </div>
                 <!-- Right column -->
-                <div class="col-md-4">
+                <div class="col-md-3 pt-5">
 
                     <?php include $right_column ?>
 
@@ -131,7 +130,7 @@
             <?php
             $address = str_replace(" ", "+",$address_variable);
             ?>
-            <iframe style="width:100%;height:300px;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+            <iframe class="pb-3" style="width:100%;height:300px;" frameborder="0" id="cusmap" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?php echo $address; ?>&output=embed"></iframe>
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
                 <a class="a2a_button_twitter"></a>
                 <a class="a2a_button_linkedin"></a>
@@ -141,7 +140,9 @@
             <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
 
-        <!-- Optional JavaScript -->
+            <?php include $footer ?>
+
+            <!-- Optional JavaScript -->
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

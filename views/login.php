@@ -7,7 +7,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Own CSS -->
         <link rel="stylesheet" href="/DDWT18/ddwt18_project/css/main.css">
 
@@ -38,8 +38,10 @@
                         <div class="form-group">
                             <label for="inputPassword">Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder="Enter password" name="password" required>
+
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
+
                     </form>
 
                 </div>
@@ -47,6 +49,7 @@
             </div>
         </div>
 
+        <?php include $footer ?>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

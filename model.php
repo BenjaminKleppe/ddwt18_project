@@ -77,28 +77,40 @@ function use_template($template){
  */
 function get_navigation($template, $active_id){
     $navigation_exp = '
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="200" height="50"/></div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">';
-    foreach ($template as $id => $info) {
-        if ($id == $active_id){
-            $navigation_exp .= '<li class="nav-item active">';
-            $navigation_exp .= '<a class="nav-link" href="'.$template[$active_id]['url'].'">'.$template[$active_id]['name'].'</a>';
-        }else {
-            $navigation_exp .= '<li class="nav-item">';
-            $navigation_exp .= '<a class="nav-link" href="'.$template[$id]['url'].'">'.$template[$id]['name'].'</a>';
-        }
+    <div class="container-fluid bg-light bg-clearfix" style="height: 70px">
+        <nav class="navbar navbar-static-top navbar-expand-lg navbar-light container">
+            <a href="/DDWT18/ddwt18_project/"><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="230" height="60"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">';
+                foreach ($template as $id => $info) {
+                    if ($id == $active_id){
+                        $navigation_exp .= '<li class="nav-item active">';
+                        $navigation_exp .= '<a class="nav-link" href="'.$template[$active_id]['url'].'">'.$template[$active_id]['name'].'</a>';
+                    }else {
+                        $navigation_exp .= '<li class="nav-item">';
+                        $navigation_exp .= '<a class="nav-link" href="'.$template[$id]['url'].'">'.$template[$id]['name'].'</a>';
+                    }
 
-        $navigation_exp .= '</li>';
-    }
-    $navigation_exp .= '
-    </ul>
-    </div>
-    </nav>';
+                    $navigation_exp .= '</li>';
+                }
+                $navigation_exp .= '
+                </ul>
+            </div>
+            <div>
+                <ul class=" navbar-right nav navbar-nav">';
+                if (isset($_SESSION['user_id'])) {
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Logout</a ></li >';
+                }else {
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/login/" ><span class="glyphicon glyphicon-log-in" ></span > Login</a ></li>';
+                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> SignUp</a></li>';
+                        }
+                 $navigation_exp .= '
+            </div>
+        </nav>
+    </div>';
     return $navigation_exp;
 }
 
@@ -135,16 +147,17 @@ function get_room_table($rooms, $pdo){
     <tr>
         <th scope="col"></th>
         <th scope="col">Address</th>
-        <th scope="col">Squere Metre</th>
+        <th scope="col">Square Metre</th>
         <th scope="col">Price</th>
         <th scope="col"></th>
     </tr>
     </thead>
     <tbody>';
     foreach($rooms as $key => $value){
+        $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
@@ -364,17 +377,19 @@ function get_image($pdo, $room_id)
     /* Get image */
     $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
-    $rooms = $stmt->fetchAll();
+    $rooms = $stmt->fetch();
+    return $rooms['imagename'];
+    /*
     $room_exp = Array();
 
-    /* Create array with htmlspecialchars */
+    /* Create array with htmlspecialchars
     foreach ($rooms as $key => $value) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
             echo "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
         }
-    }
+    } */
 }
 
 
@@ -600,7 +615,7 @@ function get_image_info($pdo, $room_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='40%' height='40%' />";
         }
     }
     return $pictures;
@@ -723,9 +738,10 @@ function get_offered_room_table($rooms, $pdo){
     </thead>
     <tbody>';
     foreach($rooms as $key => $value){
+        $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/kamer.jpg" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
@@ -906,7 +922,7 @@ function edit_details($pdo, $owner_info){
         empty($owner_info['email']) or
         empty($owner_info['biography']) or
         empty($owner_info['phonenumber']) or
-        empty($owner_info['owner'])
+        empty($owner_info['id'])
     ) {
         return [
             'type' => 'danger',
