@@ -69,7 +69,7 @@
         <!-- Footer -->
         <footer class="page-footer font-small blue-grey lighten-5">
 
-            <div style="background-color: #grey;">
+            <div>
                 <div class="container">
 
                     <!-- Grid row-->
