@@ -20,6 +20,7 @@
 
         <!-- Content -->
         <div class="container">
+            <div class="col-md-12">
             <div class="row">
 
                 <div class="col-md-12">
@@ -31,88 +32,98 @@
                 </div>
 
             </div>
-
-            <!-- Left content -->
-            <div class="pd-15">&nbsp;</div>
-            <div class="row">
-                <?php if (check_owner($db)) { ?>
-                    <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Add rooms
-                        </div>
-                        <div class="card-body">
-                            <p>Add your contribution to Rooms Overview.</p>
-                            <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Add a room</a>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Welcome, <?= $user ?>
-                        </div>
-                        <div class="card-body">
-                            <p>You're logged in to Rooms overview.</p>
-                            <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
-                        </div>
-                    </div>
-                </div>
-                <?php if (check_owner($db)) { ?>
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="card-header">
-                                Offered rooms
-                            </div>
-                            <div class="card-body">
-                                <p>The rooms you offered.</p>
-                                <?= $offeredrooms ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Your account details:
-                        </div>
-                        <div class="card-body">
-                            <p>First name: <?= $user_first ?></p>
-                            <p>Last name: <?= $user_last ?></p>
-                            <p>Role: <?= $user_role ?></p>
-                            <p>Date of birth: <?= $user_dob ?></p>
-                            <p>Biography: <?= $user_bio ?></p>
-                            <p>Study: <?= $user_study ?></p>
-                            <p>Language: <?= $user_language ?></p>
-                            <p>E-mail: <?= $user_mail ?></p>
-                            <p>Phone number: <?= $user_phone ?></p>
-                            <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
-                            <div>
-                                <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
-                                    <input type="hidden" value="<?= $user_id ?>" name="user_id">
-                                    <a onclick="return confirm('Do you want to delete your account Y/N')"><button type="submit" class="btn btn-danger">Remove account</button></a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            Opt-in rooms
-                        </div>
-                        <div class="card-body">
-                            <p>The rooms you opt-in for.</p>
-                            <?= $optinrooms ?>
-                        </div>
-                    </div>
-                </div>
-
-
-
             </div>
         </div>
+
+            <!-- Left content -->
+        <div class="container">
+            <div class="pd-15">&nbsp;</div>
+            <div class="col-md-7">
+                <div class="row">
+                    <?php if (check_owner($db)) { ?>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Add rooms
+                                </div>
+                                <div class="card-body">
+                                    <p>Add your contribution to Rooms Overview.</p>
+                                    <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Add a room</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <?php if (check_owner($db)) { ?>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Offered rooms
+                                </div>
+                                <div class="card-body">
+                                    <p>The rooms you offered.</p>
+                                    <?= $offeredrooms ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Opt-in rooms
+                            </div>
+                            <div class="card-body">
+                                <p>The rooms you opt-in for.</p>
+                                <?= $optinrooms ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Welcome, <?= $user ?>
+                            </div>
+                            <div class="card-body">
+                                <p>You're logged in to Rooms overview.</p>
+                                <a href="/DDWT18/ddwt18_project/logout/" class="btn btn-primary">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Your account details:
+                            </div>
+                            <div class="card-body">
+                                <p>First name: <?= $user_first ?></p>
+                                <p>Last name: <?= $user_last ?></p>
+                                <p>Role: <?= $user_role ?></p>
+                                <p>Date of birth: <?= $user_dob ?></p>
+                                <p>Biography: <?= $user_bio ?></p>
+                                <p>Study: <?= $user_study ?></p>
+                                <p>Language: <?= $user_language ?></p>
+                                <p>E-mail: <?= $user_mail ?></p>
+                                <p>Phone number: <?= $user_phone ?></p>
+                                <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
+                                <div>
+                                    <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
+                                        <input type="hidden" value="<?= $user_id ?>" name="user_id">
+                                        <a onclick="return confirm('Do you want to delete your account Y/N')"><button type="submit" class="btn btn-danger">Remove account</button></a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
 
 
         <!-- Optional JavaScript -->
