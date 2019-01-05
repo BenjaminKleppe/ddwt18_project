@@ -34,10 +34,10 @@
                     <?php if(isset($left_content)){echo $left_content;} ?>
                 </div>
                 <!-- Right column -->
-                <div class="col-sm-12 col-md-4">
+                <div class="container col-sm-12 col-md-4">
 
                     <div class="col-sm-12 col-md-12">
-                        <div class="card">
+                        <div class="card row">
                             <div class="card-header">
                                 Rooms
                             </div>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12">
-                        <div class="card">
+                        <div class="card row">
                             <div class="card-header">
                                 Users
                             </div>
