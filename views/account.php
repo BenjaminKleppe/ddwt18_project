@@ -32,6 +32,7 @@
 
             </div>
 
+            <!-- Left content -->
             <div class="pd-15">&nbsp;</div>
             <div class="row">
                 <?php if (check_owner($db)) { ?>

@@ -150,6 +150,9 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
     $imagename = get_image_info($db, $room_id);
 
+    /* always use template 'cards' */
+    $right_column = use_template('owner_card');
+
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
 
