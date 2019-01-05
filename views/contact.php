@@ -13,7 +13,7 @@
 
         <title><?= $page_title ?></title>
 </head>
-<body style="padding-bottom: 5%">
+<body>
 <!-- Menu -->
 <?= $navigation ?>
 
@@ -82,6 +82,8 @@
     </div>
 
 </div>
+
+<?php include $footer ?>
 
     <!-- Optional JavaScript -->
 
