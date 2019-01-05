@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="col-md-12 pt-3">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 Opt-in rooms
