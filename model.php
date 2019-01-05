@@ -78,7 +78,7 @@ function use_template($template){
 function get_navigation($template, $active_id){
     $navigation_exp = '
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-static-top navbar-expand-lg navbar-light bg-light">
             <a href="/DDWT18/ddwt18_project/"><img src="/DDWT18/ddwt18_project/pictures/interroom.png" alt="Logo" width="230" height="60"/></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -100,10 +100,14 @@ function get_navigation($template, $active_id){
                 </ul>
             </div>
             <div>
-                <ul class=" navbar-right nav navbar-nav">
-                    <li><a href="/DDWT18/ddwt18_project/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li><a href="/DDWT18/ddwt18_project/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                 </ul>
+                <ul class=" navbar-right nav navbar-nav">';
+                if (isset($_SESSION['user_id'])) {
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Logout</a ></li >';
+                }else {
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/login/" ><span class="glyphicon glyphicon-log-in" ></span > Login</a ></li>';
+                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> Signup</a></li>';
+                        }
+                 $navigation_exp .= '
             </div>
         </nav>
     </div>';
