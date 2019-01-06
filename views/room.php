@@ -74,8 +74,10 @@
                     <p><?= $address ?></p>
                     <div class="slideshow-container pb-4">
                         <?= implode(" ", $imagename) ?>
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        <div class="pb-4">
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
                     </div>
                     <?php if ($display_buttons) { ?>
                         <div class="pb-4">
