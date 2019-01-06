@@ -35,6 +35,8 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     $page_title = 'InterRooms';
     $display_right_nav = get_user_id();
     $navigation = get_navigation($template, '1');
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
@@ -58,6 +60,8 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
     $display_buttons = get_user_id();
+    /* always use template 'footer' */
+    $footer = use_template('footer');
 
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);

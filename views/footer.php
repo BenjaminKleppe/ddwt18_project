@@ -1,3 +1,15 @@
+<style>
+    div.inner{
+        background-color: #337ab7;
+        margin: 0 auto
+    }
+
+    .container-fluid{
+        background-color: #337ab7;
+    }
+</style>
+
+
 <footer class="page-footer font-small blue-grey lighten-5 pt-3">
 
     <div>
@@ -10,7 +22,8 @@
         </div>
 
         <!-- Footer Links -->
-        <div class="container text-center text-md-left mt-5" style="background-color: #337ab7">
+        <div class="container-fluid">
+        <div class="container text-center text-md-left inner">
 
             <!-- Grid row -->
             <div class="row mt-3 dark-grey-text" style="color:white">
@@ -77,6 +90,7 @@
             </div>
             <!-- Grid row -->
 
+        </div>
         </div>
         <!-- Footer Links -->
 
