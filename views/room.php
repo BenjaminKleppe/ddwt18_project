@@ -144,7 +144,8 @@
             <script async src="https://static.addtoany.com/menu/page.js"></script>
         </div>
 
-            <?php include $footer ?>
+        </div>
+        <?php include $footer ?>
 
             <!-- Optional JavaScript -->
 <script>
