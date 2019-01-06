@@ -188,7 +188,7 @@ function get_room_table($rooms, $pdo){
     <tr>
         <th scope="col"></th>
         <th scope="col">Address</th>
-        <th scope="col">Square Metre</th>
+        <th scope="col">Square Meter</th>
         <th scope="col">Price</th>
         <th scope="col"></th>
     </tr>
@@ -556,7 +556,7 @@ function register_user($pdo, $form_data)
     if (!empty($user_exists)) {
         return [
             'type' => 'danger',
-            'message' => 'The username you entered does already exist!'
+            'message' => 'The username you entered already exists!'
         ];
     }
     /* Hash password */
@@ -656,7 +656,7 @@ function get_image_info($pdo, $room_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='100%' height='100%' class='mySlides fade'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='100%' height='100%' class='mySlides'/>";
         }
     }
     return $pictures;
@@ -877,16 +877,16 @@ function update_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postal_code']) !== 6) {
+    if (strlen($room_info['postal_code']) !== 7) {
         return [
             'type' => 'danger',
-            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
+            'message' => 'The postal code consists of exactly 7 characters (1234 AB)'
         ];}
     else {
         if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
-                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
+                'message' => 'You entered an invalid postal code. Please write it like "1234 AB"'
             ];
         }
     }
