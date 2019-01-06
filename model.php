@@ -615,11 +615,12 @@ function get_image_info($pdo, $room_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='40%' height='40%' />";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='40%' height='40%' class='mySlides'/>";
         }
     }
     return $pictures;
 }
+
 
 function get_optin_info($pdo) {
     $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
@@ -997,12 +998,12 @@ function upload_photos($pdo, $form_data)
         move_uploaded_file($_FILES['image']['tmp_name'], "pictures/$img");
         return [
             'type' => 'success',
-            'message' => 'Image has been uploaded to folder'
+            'message' => 'Image has been uploaded!'
         ];
     } else {
         return [
             'type' => 'danger',
-            'message' => 'Image does not upload to folder'
+            'message' => 'Image has not been uploaded.'
         ];
     }
 }

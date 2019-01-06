@@ -171,7 +171,7 @@ elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')) {
     $room_id = $_POST['room_id'];
 
         /* Redirect to homepage */;
-    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
         json_encode($feedback)));
 }
 
