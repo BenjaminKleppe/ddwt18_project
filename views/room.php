@@ -100,6 +100,12 @@
                     </div>
                     <?php if ($display_buttons) { ?>
                         <div class="pb-4">
+                            <form action="/DDWT18/ddwt18_project/removeimages/" method="POST">
+                                <input type="hidden" value="<?= $room_id ?>" name="room_id">
+                                <a onclick="return confirm('Do you want to delete all images Y/N')"><button type="submit" class="btn btn-danger">Remove images</button></a>
+                            </form>
+                        </div>
+                        <div class="pb-4">
                             <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
                                 <br/>
                                 <label>Select Image to upload</label>

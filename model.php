@@ -828,6 +828,32 @@ function remove_room($pdo, $room_id){
 }
 
 /**
+ * Remove images with a specific room-ID
+ * @param object $pdo db object
+ * @param int $room_id id of the to be deleted images
+ * @return array
+ */
+function remove_images($pdo, $room_id){
+
+    /* Delete images */
+    $stmt = $pdo->prepare("DELETE FROM roompics WHERE room_id = ?");
+    $stmt->execute([$room_id]);
+    $deleted = $stmt->rowCount();
+    if ($deleted >=  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Images were removed!")
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'An error occurred. The images were not removed.'
+        ];
+    }
+}
+
+/**
  * Updates a room in the database using post array
  * @param object $pdo db object
  * @param array $room_info post array
