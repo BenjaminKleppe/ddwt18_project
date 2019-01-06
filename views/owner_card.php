@@ -11,7 +11,7 @@
         <p>Language: <?= $language ?></p>
         <p>Email: <?= $email ?></p>
         <p>Phone number: <?= $phonenumber ?></p>
-        <p><a href="<?= $ownerlink ?>" role="button" class="btn btn-primary">More info</a></p>
+        <p><a href="<?= $ownerlink ?>" role="button" class="btn btn-primary">Owner info</a></p>
     </div>
 </div>
 <?php } ?>
