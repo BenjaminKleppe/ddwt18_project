@@ -656,7 +656,7 @@ function get_image_info($pdo, $room_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='100%' height='100%' class='mySlides'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='100%' height='100%' class='mySlides fade'/>";
         }
     }
     return $pictures;
