@@ -42,7 +42,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                         <div class="etc-login-form pt-4">
-                            <p>forgot your password? <a onclick="forgetpassword.php" href="">click here</a></p>
+                            <p>forgot your password? <a href="/DDWT18/ddwt18_project/forgetpassword/">click here</a></p>
                             <p>new user? <a href="/DDWT18/ddwt18_project/register">create new account</a></p>
                         </div>
                     </form>

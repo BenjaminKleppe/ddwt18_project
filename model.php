@@ -136,7 +136,7 @@ function get_navigation($template, $active_id){
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="text-center">
-                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                    <a href="/DDWT18/ddwt18_project/forgetpassword/" tabindex="5" class="forgot-password">Forgot Password?</a>
                                                 </div>
                                             </div>
                                         </div>

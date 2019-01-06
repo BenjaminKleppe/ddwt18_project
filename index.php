@@ -485,6 +485,14 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
     include use_template('register');
 }
 
+elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'get')) {
+    include use_template('forgetpassword');
+}
+
+elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'post')) {
+    redirect('/DDWT18/ddwt18_project/login/');
+}
+
 
 else {
     http_response_code(404);
