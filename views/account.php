@@ -41,7 +41,7 @@
             <div class="col-md-7">
                 <div class="row">
                     <?php if (check_owner($db)) { ?>
-                        <div class="col-md-12 pb-3">
+                        <div class="col-md-12 py-3">
                             <div class="card">
                                 <div class="card-header">
                                     Add rooms
@@ -81,8 +81,8 @@
             </div>
 
 
-            <div class="col-md-5">
-                    <div class="col-md-12 pb-3">
+            <div class="col-sm-12 col-md-5">
+                    <div class="col-md-12 py-3">
                         <div class="card">
                             <div class="card-header">
                                 Welcome, <?= $user ?>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 pt-3">
+                    <div class="col-md-12 py-3">
                         <div class="card">
                             <div class="card-header">
                                 Your account details:

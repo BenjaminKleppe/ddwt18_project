@@ -104,7 +104,48 @@ function get_navigation($template, $active_id){
                 if (isset($_SESSION['user_id'])) {
                     $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Logout</a ></li >';
                 }else {
-                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/login/" ><span class="glyphicon glyphicon-log-in" ></span > Login</a ></li>';
+                    $navigation_exp .= '<li class="dropdown">
+                        <a href="/DDWT18/ddwt18_project/login/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in" ></span > Log In </a>
+                        <ul class="dropdown-menu" >
+                            <div class="col-lg-12" style="width:300px">
+                                <div class="text-center"><h3><b>Log In</b></h3></div>
+                                <form id="ajax-login-form" action="/DDWT18/ddwt18_project/login/" method="POST" role="form" autocomplete="off">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
+                                                <label for="remember"> Remember Me</label>
+                                            </div>
+                                            <div class="col-xs-5 pull-right">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+                                </form>
+                            </div>
+                        </ul>
+                    </li>';
                     $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> SignUp</a></li>';
                         }
                  $navigation_exp .= '
