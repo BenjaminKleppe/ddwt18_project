@@ -433,7 +433,14 @@ function get_image($pdo, $room_id)
     } */
 }
 
-
+function get_userpic($pdo, $user_id)
+{
+    /* Get image */
+    $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $rooms = $stmt->fetch();
+    return $rooms['imagename'];
+}
 /* returns first- and lastname, and birth date from owner */
 function owner_name($pdo, $user)
 {
@@ -662,6 +669,24 @@ function get_image_info($pdo, $room_id) {
     return $pictures;
 }
 
+function get_profile_image_info($pdo, $user_id) {
+    $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+    $pictures = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value){
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key] = htmlspecialchars($user_input);
+            $key = $room_exp[$key];
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' width='50%' height='50%'/>";
+        }
+    }
+    return $pictures;
+}
+
 
 function get_optin_info($pdo) {
     $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
@@ -849,6 +874,32 @@ function remove_images($pdo, $room_id){
         return [
             'type' => 'warning',
             'message' => 'An error occurred. The images were not removed.'
+        ];
+    }
+}
+
+/**
+ * Remove images with a specific room-ID
+ * @param object $pdo db object
+ * @param int $room_id id of the to be deleted images
+ * @return array
+ */
+function remove_userpic($pdo, $user_id){
+
+    /* Delete images */
+    $stmt = $pdo->prepare("UPDATE user SET image = null WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $deleted = $stmt->rowCount();
+    if ($deleted ==  1) {
+        return [
+            'type' => 'success',
+            'message' => sprintf("Profile picture was removed!")
+        ];
+    }
+    else {
+        return [
+            'type' => 'warning',
+            'message' => 'An error occurred. The profile picture was not removed.'
         ];
     }
 }
@@ -1075,6 +1126,34 @@ function upload_photos($pdo, $form_data)
     }
 }
 
+function upload_userpic($pdo, $form_data)
+{
+    $img = $_FILES['image']['name'];
+
+    try {
+        $stmt = $pdo->prepare('UPDATE user SET image = ? WHERE id = ? ');
+        $stmt->execute([$img, $form_data['user_id']]);
+        $inserted = $stmt->rowCount();
+    } catch (PDOException $e) {
+        return [
+            'type' => 'danger',
+            'message' => sprintf('There was an error: %s', $e->getMessage())
+        ];
+    }
+    if ($inserted == 1) {
+        move_uploaded_file($_FILES['image']['tmp_name'], "pictures/$img");
+        return [
+            'type' => 'success',
+            'message' => 'Image has been uploaded!'
+        ];
+    } else {
+        return [
+            'type' => 'danger',
+            'message' => 'Image has not been uploaded.'
+        ];
+    }
+}
+
 function optout($pdo){
     /* get user info */
     $user_id = get_user_id();
@@ -1143,5 +1222,50 @@ function check_owner($pdo){
     }
     else {
         return False;
+    }
+}
+
+/* check if user is a tenant */
+function check_tenant($pdo){
+    /* get user information */
+    $user_id = get_user_id();
+
+    /* get role from user */
+    $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $array_role = $stmt->fetch();
+    $role = $array_role['role'];
+    if ($role == 'Tenant') {
+        return True;
+    }
+    else {
+        return False;
+    }
+}
+
+/* check if room has images */
+function check_image($pdo, $room_id){
+    $stmt = $pdo->prepare('SELECT room_id FROM roompics WHERE room_id = ?');
+    $stmt->execute([$room_id]);
+    $role = $stmt->rowCount();
+    if ($role >= 1) {
+        return True;
+    }
+    else {
+        return False;
+    }
+}
+
+/* check if profile has image */
+function check_profile_image($pdo, $user_id){
+    $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $array_role = $stmt->fetch();
+    $role = $array_role['image'];
+    if ($role == null) {
+        return False;
+    }
+    else {
+        return True;
     }
 }

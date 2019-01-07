@@ -74,18 +74,20 @@
                     <p><?= $address ?></p>
                     <div class="slideshow-container pb-4">
                         <?= implode(" ", $imagename) ?>
-                        <div class="pb-4">
+                        <?php if ($checkimage) { ?>
                             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                             <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                        </div>
+                        <?php } ?>
                     </div>
                     <?php if ($display_buttons) { ?>
+                    <?php if ($checkimage) { ?>
                         <div class="pb-4">
                             <form action="/DDWT18/ddwt18_project/removeimages/" method="POST">
                                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
                                 <a onclick="return confirm('Do you want to delete all images Y/N')"><button type="submit" class="btn btn-danger">Remove images</button></a>
                             </form>
                         </div>
+                        <?php } ?>
                         <div class="pb-4">
                             <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
                                 <br/>
@@ -108,7 +110,7 @@
                         </div>
                     <?php } ?>
 
-                    <?php if ($disp_buttons) { ?>
+                    <?php if ($checktenant) { ?>
                     <div class="pb-5">
                         <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
                     </div>

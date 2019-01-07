@@ -26,42 +26,88 @@
         <div class="col-md-8">
             <!-- Error message -->
             <?php if (isset($error_msg)){echo $error_msg;} ?>
-            <h4>User profile:</h4>
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th scope="row">Name</th>
-                    <td><?= $name ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Biography</th>
-                    <td><?= $user_bio ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Language</th>
-                    <td><?= $user_language ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Study</th>
-                    <td><?= $user_study ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Birth date</th>
-                    <td><?= $user_dob ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Phone number</th>
-                    <td><?= $user_phone ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Email</th>
-                    <td><?= $user_mail ?></td>
-                </tr>
-
-                </tbody>
-            </table>
+            <h1><?= $page_title ?></h1>
+            <div class="col-md-12 py-3">
+                <div class="card">
+                    <div class="card-header">
+                        Account details:
+                    </div>
+                    <div class="card-body">
+                        <p><?= implode(" ", $imagename) ?></p>
+                        <p><?php if ($display_buttons) { ?>
+                        <?php if ($checkprofileimage) { ?>
+                            <div class="pb-4">
+                                <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
+                                    <input type="hidden" value="<?= $user ?>" name="user_id">
+                                    <a onclick="return confirm('Do you want to delete your profile picture Y/N')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
+                                </form>
+                            </div>
+                        <?php } ?>
+                        <?php if (!$checkprofileimage) { ?>
+                        <div class="pb-4">
+                            <form action="/DDWT18/ddwt18_project/userpic/" method="post" enctype="multipart/form-data">
+                                <br/>
+                                <label>Select Image to upload</label>
+                                <input type="hidden" value="<?= $user ?>" name="user_id">
+                                <input class="pb-3" type="file" name="image">
+                                <input type="submit" value="Add profile picture" name="picture">
+                            </form>
+                        </div>
+                        <?php } ?>
+                        <?php } ?>
+                        </p>
+                        <p>Name: <?= $name ?></p>
+                        <p>Role: <?= $user_role ?></p>
+                        <p>Date of birth: <?= $user_dob ?></p>
+                        <p>Biography: <?= $user_bio ?></p>
+                        <p>Study: <?= $user_study ?></p>
+                        <p>Language: <?= $user_language ?></p>
+                        <p>E-mail: <?= $user_mail ?></p>
+                        <p>Phone number: <?= $user_phone ?></p>
+                        <?php if ($display_buttons) { ?>
+                        <div class="pb-2">
+                            <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
+                        </div>
+                        <div>
+                            <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
+                                <input type="hidden" value="<?= $user_id ?>" name="user_id">
+                                <a onclick="return confirm('Do you want to delete your account Y/N')"><button type="submit" class="btn btn-danger">Remove account</button></a>
+                            </form>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <?php if ($display_buttons) { ?>
+        <?php if (check_owner($db)) { ?>
+            <div class="col-md-12 py-3">
+                <div class="card">
+                    <div class="card-header">
+                        Offered rooms
+                    </div>
+                    <div class="card-body">
+                        <p>The rooms you offered.</p>
+                        <?= $offeredrooms ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if (check_tenant($db)) { ?>
+            <div class="col-md-12 pt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Opt-in rooms
+                    </div>
+                    <div class="card-body">
+                        <p>The rooms you opt-in for.</p>
+                        <?= $optinrooms ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    <?php } ?>
 
 </div>
 

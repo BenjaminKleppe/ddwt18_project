@@ -5,8 +5,8 @@
         Owner
     </div>
     <div class="card-body">
-        <h2><?= $added_by ?></h2>
-        <p></p>
+        <p><h2><?= $added_by ?></h2></p>
+        <p><?= implode(" ", $profilepicture) ?></p>
         <p>Birth Date: <?= $birthdate ?></p>
         <p>Language: <?= $language ?></p>
         <p>Email: <?= $email ?></p>

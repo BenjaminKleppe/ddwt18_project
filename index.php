@@ -148,6 +148,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $mate = $room_info['mate'];
     $smoke = $room_info['smoke'];
     $address = sprintf("%s %s", $room_info['postal_code'], $room_info['city']);
+    $profilepicture = get_profile_image_info($db, $room_info['user_id']);
     $birthdate = $owner_info['dateofbirth'];
     $language = $owner_info['language'];
     $phonenumber = $owner_info['phonenumber'];
@@ -157,6 +158,8 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $address_variable = sprintf("%s %s, %s", $room_info['street'], $room_info['house_number'], $room_info['city']);
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
     $imagename = get_image_info($db, $room_id);
+    $checkimage = check_image($db, $room_id);
+    $checktenant = check_tenant($db);
 
     /* always use template 'footer' */
     $right_column = use_template('owner_card');
@@ -213,20 +216,19 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'post')){
 }
 
 /* myaccount GET */
-elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
+elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Page info */
-    $page_title = 'My Account';
-    $navigation = get_navigation($template, 4);
-    /* Page content */
+    $display_buttons = get_user_id() == $_SESSION['user_id'];
+    $user = $_SESSION['user_id'];
     $user_name = get_name($db, $_SESSION['user_id']);
-    $user = $user_name['firstname']." ".$user_name['lastname'];
-    $user_first = $user_name['firstname'];
-    $user_last = $user_name['lastname'];
+    $imagename = get_profile_image_info($db, $user);
+    $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
+    $optinrooms = get_optin_room_table(get_optin_info($db), $db);
+    $name = $user_name['firstname']." ".$user_name['lastname'];
     $user_role = $user_name['role'];
     $user_dob = $user_name['dateofbirth'];
     $user_bio = $user_name['biography'];
@@ -234,16 +236,28 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')){
     $user_language = $user_name['language'];
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
-    $page_subtitle = 'Your account details on InterRooms';
-    $optinrooms = get_optin_room_table(get_optin_info($db), $db);
-    $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
+    $checkprofileimage = check_profile_image($db, $user);
+
+    $navigation = get_navigation($template, '0');
     /* always use template 'footer' */
     $footer = use_template('footer');
+
+    $page_title = "My account";
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */
-    include use_template('account');
+    include use_template('user');
+}
+
+elseif (new_route('/DDWT18/ddwt18_project/userpic/', 'post')) {
+    /* Upload images of the room */
+    $feedback = upload_userpic($db, $_POST);
+    $user_id = $_POST['user_id'];
+
+    /* Redirect to homepage */;
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
 }
 
 /* Remove account */
@@ -321,6 +335,8 @@ elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
     }
     $user = $_GET['user_id'];
     $user_name = get_name($db, $_GET['user_id']);
+    $imagename = get_profile_image_info($db, $user);
+    $display_buttons = get_user_id() == $_GET['user_id'];
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $user_role = $user_name['role'];
     $user_dob = $user_name['dateofbirth'];
@@ -329,6 +345,8 @@ elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
     $user_language = $user_name['language'];
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
+
+    $page_title = "User info";
     $navigation = get_navigation($template, '0');
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -354,7 +372,7 @@ elseif (new_route('/DDWT18/ddwt18_project/remove/', 'post')){
     include use_template('main');
 }
 
-/* Remove images */
+/* Remove room images */
 elseif (new_route('/DDWT18/ddwt18_project/removeimages/', 'post')){
     /* Remove room in database */
     $room_id = $_POST['room_id'];
@@ -368,6 +386,19 @@ elseif (new_route('/DDWT18/ddwt18_project/removeimages/', 'post')){
     include use_template('main');
 }
 
+/* Remove profile picture */
+elseif (new_route('/DDWT18/ddwt18_project/removeuserpic/', 'post')) {
+    /* Remove room in database */
+    $user_id = $_POST['user_id'];
+    $feedback = remove_userpic($db, $user_id);
+
+    /* Redirect to homepage */
+    redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
+        json_encode($feedback)));
+
+    /* Choose Template */
+    include use_template('main');
+}
 /* Login GET */
 elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
     /* Check if the user is logged in */
