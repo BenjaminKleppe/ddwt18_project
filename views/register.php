@@ -51,6 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputrole">Role</label>
+                        <br/>
                             <select class="form-control col-sm-3" id="inputrole" name="role" required>
                                 <option value="<?php if (isset($owner_info)){echo $owner_info['role'];} ?>" hidden><?php if (isset($owner_info)){echo $owner_info['role'];} else {echo "Choose a role...";} ?></option>
                                 <option value="Owner">Owner</option>
@@ -58,6 +59,8 @@
                             </select>
                         </div>
                         <div class="form-group">
+                        <br/>
+                        <br/>
                             <label for="inputdateofbirth">Date of birth</label>
                             <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" value="<?php if (isset($owner_info)){echo $owner_info['dateofbirth'];} ?>" required>
                         </div>
@@ -67,6 +70,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputlanguage">Language</label>
+                            <br/>
                             <select class="form-control col-sm-3" data-placeholder="Choose a Language..." name="language" required>
                                 <option value="<?php if (isset($owner_info)){echo $owner_info['language'];} ?>" hidden><?php if (isset($owner_info)){echo $owner_info['language'];} else {echo "Choose a language...";} ?></option>
                                 <option value="Afrikanns">Afrikanns</option>
@@ -144,6 +148,8 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <br/>
+                            <br/>
                             <label for="inputemail">Email</label>
                             <input type="text" class="form-control" id="inputemail" name="email" placeholder="someone@example.com" value="<?php if (isset($owner_info)){echo $owner_info['email'];} ?>" required>
                         </div>
