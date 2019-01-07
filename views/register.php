@@ -62,7 +62,7 @@
                         <br/>
                         <br/>
                             <label for="inputdateofbirth">Date of birth</label>
-                            <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" value="<?php if (isset($owner_info)){echo $owner_info['dateofbirth'];} ?>" required>
+                            <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" placeholder="1998-01-01" value="<?php if (isset($owner_info)){echo $owner_info['dateofbirth'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputstudy">Study</label>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputphonenumber">Phone number</label>
-                            <input type="tel" class="form-control" id="inputphonenumber" name="phonenumber" placeholder="+31612345678" value="<?php if (isset($owner_info)){echo $owner_info['phonenumber'];} ?>" required>
+                            <input type="tel" class="form-control" id="inputphonenumber" name="phonenumber" placeholder="31612345678" value="<?php if (isset($owner_info)){echo $owner_info['phonenumber'];} ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputbiography">Biography</label>

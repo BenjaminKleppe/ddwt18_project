@@ -119,25 +119,11 @@ function get_navigation($template, $active_id){
                                         <label for="password">Password</label>
                                         <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
                                     </div>
-
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-xs-7">
-                                                <input type="checkbox" tabindex="3" name="remember" id="remember">
-                                                <label for="remember"> Remember Me</label>
-                                            </div>
+
                                             <div class="col-xs-5 pull-right">
                                                 <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="text-center">
-                                                    <a href="/DDWT18/ddwt18_project/forgetpassword/" tabindex="5" class="forgot-password">Forgot Password?</a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
