@@ -129,7 +129,6 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $navigation = get_navigation($template, '2');
 
     /* Page content */
-
     $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
     $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
     $description = $room_info['description'];
@@ -282,6 +281,11 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Check if the role is owner */
+    if (check_owner($db)) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
     }
 
     $room_id = $_GET['room_id'];

@@ -82,7 +82,7 @@
                     <p>
                         <i class="fas fa-envelope mr-3"></i> info@interrooms.com</p>
                     <p>
-                        <i class="fas fa-phone mr-3"></i> + 31 06 34763524</p>
+                        <i class="fas fa-phone mr-3"></i> + 316 34763524</p>
 
                 </div>
                 <!-- Grid column -->
