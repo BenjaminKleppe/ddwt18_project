@@ -24,9 +24,6 @@ $template = Array(
     4 => Array(
         'name' => 'My Account',
         'url' => '/DDWT18/ddwt18_project/myaccount/'),
-    5 => Array(
-        'name' => 'Register',
-        'url' => '/DDWT18/ddwt18_project/register/')
 );
 
 /* Home page */
@@ -193,7 +190,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
     $submit_btn = "Register now";
-    $navigation = get_navigation($template, 5);
+    $navigation = get_navigation($template, 0);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
