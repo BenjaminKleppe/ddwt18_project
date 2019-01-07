@@ -19,11 +19,11 @@ $template = Array(
         'name' => 'Overview',
         'url' => '/DDWT18/ddwt18_project/overview/'),
     3 => Array(
-        'name' => 'Add room',
-        'url' => '/DDWT18/ddwt18_project/add/'),
-    4 => Array(
         'name' => 'Search room',
         'url' => '/DDWT18/ddwt18_project/search/'),
+    4 => Array(
+        'name' => 'Add room',
+        'url' => '/DDWT18/ddwt18_project/add/'),
     5 => Array(
         'name' => 'My Account',
         'url' => '/DDWT18/ddwt18_project/myaccount/'),
@@ -90,7 +90,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
 
     /* Page info */
     $page_title = 'Add Room';
-    $navigation = get_navigation($template, '3');
+    $navigation = get_navigation($template, '4');
 
     /* Page content */
     $page_subtitle = 'Search a new roommate';
@@ -117,7 +117,7 @@ elseif (new_route('/DDWT18/ddwt18_project/search/', 'get')) {
 
     /* Page info */
     $page_title = 'Search room';
-    $navigation = get_navigation($template, '4');
+    $navigation = get_navigation($template, '3');
 
     /* Page content */
     $page_subtitle = 'Search a room';
