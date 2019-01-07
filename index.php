@@ -22,8 +22,12 @@ $template = Array(
         'name' => 'Add room',
         'url' => '/DDWT18/ddwt18_project/add/'),
     4 => Array(
+        'name' => 'Search room',
+        'url' => '/DDWT18/ddwt18_project/search/'),
+    5 => Array(
         'name' => 'My Account',
         'url' => '/DDWT18/ddwt18_project/myaccount/'),
+
 );
 
 /* Home page */
@@ -104,15 +108,65 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     include use_template('new');
 }
 
+/* Search room GET */
+elseif (new_route('/DDWT18/ddwt18_project/search/', 'get')) {
+    /* Check if logged in */
+    if (!check_login()) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+
+    /* Page info */
+    $page_title = 'Search room';
+    $navigation = get_navigation($template, '4');
+
+    /* Page content */
+    $page_subtitle = 'Search a room';
+    $page_content = 'Fill in what you are looking for.';
+    $submit_btn = "Search room";
+    $form_action = '/DDWT18/ddwt18_project/results/';
+    /* always use template 'footer' */
+    $footer = use_template('footer');
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']);
+    }
+
+    include use_template('search');
+}
+
 /* Add room POST */
 elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
-    /* Check if logged in */
 
     /* Add room to database */
     $feedback = add_room($db, $_POST);
     /* Redirect to room GET route */
     redirect(sprintf('/DDWT18/ddwt18_project/add/?error_msg=%s',
         json_encode($feedback)));
+}
+
+/* Search room POST */
+if (new_route('/DDWT18/ddwt18_project/results/', 'post')) {
+    /* Page info */
+    $page_title = 'Results';
+    $display_right_nav = get_user_id();
+    $navigation = get_navigation($template, '0');
+
+    /* Page content */
+
+    $left_content = get_result_table($db, search_room($db, $_POST));
+    $display_buttons = get_user_id();
+    /* always use template 'footer' */
+    $footer = use_template('footer');
+
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']);
+    }
+
+    /* Choose Template */
+    include use_template('results');
 }
 
 /* Single room */
@@ -129,6 +183,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $navigation = get_navigation($template, '2');
 
     /* Page content */
+
     $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
     $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
     $description = $room_info['description'];
@@ -189,7 +244,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
     $submit_btn = "Register now";
-    $navigation = get_navigation($template, 0);
+    $navigation = get_navigation($template, 5);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -218,18 +273,9 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Page info */
-    $page_title = 'My Account';
-    $navigation = get_navigation($template, 4);
-    $page_subtitle = 'Your account details on InterRooms';
-    /* Page content */
-
-    $user = $_SESSION['user_id'];
     $display_buttons = get_user_id() == $_SESSION['user_id'];
+    $user = $_SESSION['user_id'];
     $user_name = get_name($db, $_SESSION['user_id']);
-    $usern = $user_name['firstname']." ".$user_name['lastname'];
-    $user_first = $user_name['firstname'];
-    $user_last = $user_name['lastname'];
     $imagename = get_profile_image_info($db, $user);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
@@ -243,13 +289,16 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $user_phone = $user_name['phonenumber'];
     $checkprofileimage = check_profile_image($db, $user);
 
+    $navigation = get_navigation($template, '5');
     /* always use template 'footer' */
     $footer = use_template('footer');
+
+    $page_title = "My account";
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */
-    include use_template('account');
+    include use_template('user');
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/userpic/', 'post')) {
@@ -281,11 +330,6 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     /* Check if logged in */
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
-    }
-
-    /* Check if the role is tenant */
-    if (check_owner($db)) {
-        redirect('/DDWT18/ddwt18_project/myaccount/');
     }
 
     $room_id = $_GET['room_id'];
@@ -536,6 +580,15 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
     /* Choose Template */
     include use_template('register');
 }
+
+elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'get')) {
+    include use_template('forgetpassword');
+}
+
+elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'post')) {
+    redirect('/DDWT18/ddwt18_project/login/');
+}
+
 
 else {
     http_response_code(404);

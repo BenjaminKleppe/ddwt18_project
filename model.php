@@ -132,7 +132,7 @@ function get_navigation($template, $active_id){
                             </div>
                         </ul>
                     </li>';
-                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> SignUp</a></li>';
+                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> Sign Up</a></li>';
                         }
                  $navigation_exp .= '
             </div>
@@ -1254,4 +1254,60 @@ function check_profile_image($pdo, $user_id){
     else {
         return True;
     }
+}
+
+function search_room($pdo, $room_info)
+{
+
+
+    $stmt = $pdo->prepare("SELECT * FROM room WHERE city = ? AND type = ? AND size >= ? AND price <= ?");
+    $stmt->execute(
+        [$room_info['city'],
+            $room_info['type'],
+            $room_info['size'],
+            $room_info['price']
+      ]);
+
+
+    $rooms = $stmt->fetchAll();
+    $room_exp = Array();
+
+    /* Create array with htmlspecialchars */
+    foreach ($rooms as $key => $value) {
+        foreach ($value as $user_key => $user_input) {
+            $room_exp[$key][$user_key] = htmlspecialchars($user_input);
+        }
+    }
+    return $room_exp;
+}
+function get_result_table($pdo, $room_info) {
+    $table_exp = '
+    <table class="table table-hover">
+    <thead
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Address</th>
+        <th scope="col">Square Meter</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>';
+    foreach($room_info as $key => $value){
+        $name = get_image($pdo, $room_info[$key]['room_id']);
+        $table_exp .= '
+        <tr>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
+            <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
+            <th scope="row">'.$value['size'].'m2</th>
+            <th scope="row">€'.$value['price'].',-</th>           
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+        </tr>
+        ';
+    }
+    $table_exp .= '
+    </tbody>
+    </table>
+    ';
+    return $table_exp;
 }
