@@ -240,6 +240,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $footer = use_template('footer');
 
     $page_title = "My account";
+    $page_subtitle = 'On this page you can see your own user info. You are able to edit this info';
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }

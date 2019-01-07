@@ -55,15 +55,42 @@
                         </div>
                         <?php } ?>
                         <?php } ?>
-                        </p>
-                        <p>Name: <?= $name ?></p>
-                        <p>Role: <?= $user_role ?></p>
-                        <p>Date of birth: <?= $user_dob ?></p>
-                        <p>Biography: <?= $user_bio ?></p>
-                        <p>Study: <?= $user_study ?></p>
-                        <p>Language: <?= $user_language ?></p>
-                        <p>E-mail: <?= $user_mail ?></p>
-                        <p>Phone number: <?= $user_phone ?></p>
+                        <div class="pt-4">
+                        <h4>User profile:</h4>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Name</th>
+                                <td><?= $name ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Biography</th>
+                                <td><?= $user_bio ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Language</th>
+                                <td><?= $user_language ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Study</th>
+                                <td><?= $user_study ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Birth date</th>
+                                <td><?= $user_dob ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone number</th>
+                                <td><?= $user_phone ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td><?= $user_mail ?></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        </div>
                         <?php if ($display_buttons) { ?>
                         <div class="pb-2">
                             <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
