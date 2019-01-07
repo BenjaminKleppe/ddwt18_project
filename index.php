@@ -283,7 +283,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
 
-    /* Check if the role is owner */
+    /* Check if the role is tenant */
     if (check_owner($db)) {
         redirect('/DDWT18/ddwt18_project/myaccount/');
     }
