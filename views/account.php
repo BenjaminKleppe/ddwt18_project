@@ -100,6 +100,30 @@
                     Your account details:
                 </div>
                 <div class="card-body">
+                    <p><?= implode(" ", $imagename) ?></p>
+                    <p><?php if ($display_buttons) { ?>
+                        <?php if ($checkprofileimage) { ?>
+                    <div class="pb-4">
+                        <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
+                            <input type="hidden" value="<?= $user ?>" name="user_id">
+                            <a onclick="return confirm('Do you want to delete your profile picture Y/N')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
+                        </form>
+                    </div>
+                    <?php } ?>
+                    <?php if (!$checkprofileimage) { ?>
+                        <div class="pb-4">
+                            <form action="/DDWT18/ddwt18_project/userpic/" method="post" enctype="multipart/form-data">
+                                <br/>
+                                <label>Select Image to upload</label>
+                                <input type="hidden" value="<?= $user ?>" name="user_id">
+                                <input class="pb-3" type="file" name="image">
+                                <input type="submit" value="Add profile picture" name="picture">
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <?php } ?>
+                    </p>
+
                     <p>First name: <?= $user_first ?></p>
                     <p>Last name: <?= $user_last ?></p>
                     <p>Role: <?= $user_role ?></p>
