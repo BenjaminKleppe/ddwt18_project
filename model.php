@@ -119,6 +119,9 @@ function get_navigation($template, $active_id){
                                         <label for="password">Password</label>
                                         <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
                                     </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="remember"> Remember me</label>
+                                    </div>
                                     <div class="form-group">
                                         <div class="row">
 
