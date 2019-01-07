@@ -23,7 +23,7 @@
             <div class="row">
 
                 <!-- Left column -->
-                <div class="col-md-10">
+                <div class="col-md-10 pt-4">
                     <!-- Error message -->
                     <?php if (isset($error_msg)){echo $error_msg;} ?>
 

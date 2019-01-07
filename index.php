@@ -225,9 +225,10 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $page_subtitle = 'Your account details on InterRooms';
     /* Page content */
 
+    $user = $_SESSION['user_id'];
     $display_buttons = get_user_id() == $_SESSION['user_id'];
     $user_name = get_name($db, $_SESSION['user_id']);
-    $user = $user_name['firstname']." ".$user_name['lastname'];
+    $usern = $user_name['firstname']." ".$user_name['lastname'];
     $user_first = $user_name['firstname'];
     $user_last = $user_name['lastname'];
     $imagename = get_profile_image_info($db, $user);

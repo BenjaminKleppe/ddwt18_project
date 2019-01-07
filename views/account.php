@@ -23,7 +23,7 @@
     <div class="col-md-12">
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-md-12 pt-4">
                 <!-- Error message -->
                 <?php if (isset($error_msg)){echo $error_msg;} ?>
 
@@ -85,7 +85,7 @@
         <div class="col-md-12 py-3">
             <div class="card">
                 <div class="card-header">
-                    Welcome, <?= $user ?>
+                    Welcome, <?= $usern ?>
                 </div>
                 <div class="card-body">
                     <p>You're logged in to Rooms overview.</p>

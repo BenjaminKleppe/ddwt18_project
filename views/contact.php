@@ -23,7 +23,7 @@
     <div class="row">
 
         <!-- Left column -->
-        <div class="col-md-8">
+        <div class="col-md-8 pt-4">
             <!-- Error message -->
             <?php if (isset($error_msg)){echo $error_msg;} ?>
             <h4>Information about the room:</h4>
