@@ -183,7 +183,6 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $navigation = get_navigation($template, '2');
 
     /* Page content */
-
     $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
     $page_subtitle = sprintf("Information about %s %s", $room_info['street'], $room_info['house_number']);
     $description = $room_info['description'];
@@ -272,10 +271,17 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     if ( !check_login() ) {
         redirect('/DDWT18/ddwt18_project/login/');
     }
-
-    $display_buttons = get_user_id() == $_SESSION['user_id'];
+    /* Page info */
+    $page_title = 'My Account';
+    $navigation = get_navigation($template, 4);
+    $page_subtitle = 'Your account details on InterRooms';
+    /* Page content */
     $user = $_SESSION['user_id'];
+    $display_buttons = get_user_id() == $_SESSION['user_id'];
     $user_name = get_name($db, $_SESSION['user_id']);
+    $usern = $user_name['firstname']." ".$user_name['lastname'];
+    $user_first = $user_name['firstname'];
+    $user_last = $user_name['lastname'];
     $imagename = get_profile_image_info($db, $user);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
     $optinrooms = get_optin_room_table(get_optin_info($db), $db);
@@ -288,17 +294,12 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $checkprofileimage = check_profile_image($db, $user);
-
-    $navigation = get_navigation($template, '5');
     /* always use template 'footer' */
     $footer = use_template('footer');
-
-    $page_title = "My account";
-
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) { $error_msg = get_error($_GET['error_msg']); }
     /* Choose Template */
-    include use_template('user');
+    include use_template('account');
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/userpic/', 'post')) {

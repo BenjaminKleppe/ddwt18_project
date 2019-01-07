@@ -57,7 +57,7 @@
                                 <p class="count">Our community already has</p>
                                 <h2><?= $nbr_users ?></h2>
                                 <p>active users</p>
-                                <a href="/DDWT18/ddwt18_project/register/" class="btn btn-primary">Join now</a>
+                                <?php if (!isset($_SESSION['user_id'])) { ?><a href="/DDWT18/ddwt18_project/register/" class="btn btn-primary">Join now</a><?php } ?>
                             </div>
                         </div>
                     </div>

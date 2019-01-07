@@ -667,7 +667,7 @@ function get_profile_image_info($pdo, $user_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' width='80%' height='80%'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' width='100%' height='100%'/>";
         }
     }
     return $pictures;
