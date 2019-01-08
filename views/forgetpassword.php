@@ -16,12 +16,16 @@
                         <p>You can reset your password here.</p>
                         <div class="panel-body">
 
-                            <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                            <form id="register-form" action="<?= $form_action ?>" role="form" autocomplete="off" class="form" method="post">
 
                                 <div class="form-group">
                                     <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="username" name="username" placeholder="username" class="form-control"  type="username" required>
+                                    </div>
+                                    <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                        <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                        <input id="email" name="email" placeholder="email address" class="form-control"  type="email" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

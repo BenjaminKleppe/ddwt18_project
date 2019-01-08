@@ -584,12 +584,18 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'post')) {
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'get')) {
+    $form_action = '/DDWT18/ddwt18_project/forgetpassword/';
     include use_template('forgetpassword');
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'post')) {
-
-
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $code = random_str('alphanum', 8);
+    $checkusermail = checkusermail($db, $username, $email);
+    $feedback = forgetpassword($db, $username, $email, $code, $checkusermail);
+    redirect(sprintf('/DDWT18/ddwt18_project/login/?error_msg=%s',
+        json_encode($feedback)));
     redirect('/DDWT18/ddwt18_project/login/');
 }
 

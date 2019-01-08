@@ -1315,3 +1315,88 @@ function get_result_table($pdo, $room_info) {
     ';
     return $table_exp;
 }
+
+/**
+ * Generate and return a random characters string
+ *
+ * Useful for generating passwords or hashes.
+ *
+ * The default string returned is 8 alphanumeric characters string.
+ *
+ * The type of string returned can be changed with the "type" parameter.
+ * Seven types are - by default - available: basic, alpha, alphanum, num, nozero, unique and md5.
+ *
+ * @param   string  $type    Type of random string.  basic, alpha, alphanum, num, nozero, unique and md5.
+ * @param   integer $length  Length of the string to be generated, Default: 8 characters long.
+ * @return  string
+ */
+function random_str($type = 'alphanum', $length = 8)
+{
+    switch($type)
+    {
+        case 'basic'    : return mt_rand();
+            break;
+        case 'alpha'    :
+        case 'alphanum' :
+        case 'num'      :
+        case 'nozero'   :
+            $seedings             = array();
+            $seedings['alpha']    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $seedings['alphanum'] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $seedings['num']      = '0123456789';
+            $seedings['nozero']   = '123456789';
+
+            $pool = $seedings[$type];
+
+            $str = '';
+            for ($i=0; $i < $length; $i++)
+            {
+                $str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);
+            }
+            return $str;
+            break;
+        case 'unique'   :
+        case 'md5'      :
+            return md5(uniqid(mt_rand()));
+            break;
+    }
+}
+
+function checkusermail($pdo, $username, $email) {
+    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ? AND email = ?');
+    $stmt->execute([$username, $email]);
+    $users = $stmt->rowCount();
+    if ($users == 1) {
+        return True;
+    }
+    else {
+        return False;
+    }
+}
+function forgetpassword($pdo, $username, $email, $code, $check)
+{
+    $to = $email;
+    $subject = "Password code";
+    $txt = "Hello". $username .". Your code is". $code . ". Log in with this code to change your password.";
+    mail($to,$subject,$txt);
+
+    /* Put code as password in database */
+    $password = password_hash($code, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("UPDATE user SET password = ? WHERE username = ?");
+    $stmt->execute([$password, $username]);
+
+    /* Feedback */
+    if ($check){
+        return [
+            'type' => 'success',
+            'message' => 'An email is sent with a code. Log in with this code to change your password.'];}
+    else{
+        return [
+            'type' => 'danger',
+            'message' => 'Incorrect username or email.'
+
+        ];
+    }
+
+}
+
