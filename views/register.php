@@ -49,18 +49,22 @@
                             <label for="inputlastname">Last name</label>
                             <input type="text" class="form-control" id="inputlastname" placeholder="Jansen" name="lastname" value="<?php if (isset($owner_info)){echo $owner_info['lastname'];} ?>" required>
                         </div>
+                        <?php if (!isset($owner_info['role'])) { ?>
                         <div class="form-group">
                             <label for="inputrole">Role</label>
-                        <br/>
-                            <select class="form-control col-sm-3" id="inputrole" name="role" required>
+                            <br/>
+                                <select class="form-control col-sm-3" id="inputrole" name="role" required>
                                 <option value="<?php if (isset($owner_info)){echo $owner_info['role'];} ?>" hidden><?php if (isset($owner_info)){echo $owner_info['role'];} else {echo "Choose a role...";} ?></option>
                                 <option value="Owner">Owner</option>
                                 <option value="Tenant">Tenant</option>
                             </select>
                         </div>
+
+                        <?php } else { echo "";}; ?>
                         <div class="form-group">
-                        <br/>
-                        <br/>
+                            <?php if (!isset($owner_info['role'])) { ?>
+                                <br/><br/>
+                            <?php } ?>
                             <label for="inputdateofbirth">Date of birth</label>
                             <input type="date" class="form-control" id="inputdateofbirth" name="dateofbirth" placeholder="1998-01-01" value="<?php if (isset($owner_info)){echo $owner_info['dateofbirth'];} ?>" required>
                         </div>
