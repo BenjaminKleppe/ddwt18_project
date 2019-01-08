@@ -39,25 +39,25 @@
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" required>
+                        <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?= $street ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" required>
+                        <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="36B" value="<?= $number ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="postalCode" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
+                        <input type="text" class="form-control" id="postalCode" name="postal_code" placeholder="9718AV" value="<?= $postal_code ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="city" class="col-sm-3 col-form-label">City</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?= $city ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -191,3 +191,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+

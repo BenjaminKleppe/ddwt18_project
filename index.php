@@ -72,7 +72,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     include use_template('overview');
 }
 
-/* Add room get */
+/* Add room get postal code check */
 elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     /* Check if logged in */
     if (!check_login()) {
@@ -82,6 +82,76 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     if (!check_owner($db)) {
         redirect('/DDWT18/ddwt18_project/myaccount/');
     }
+
+    /* Page info */
+    $page_title = 'Add Room';
+    $navigation = get_navigation($template, '4');
+
+    /* Page content */
+    $page_subtitle = 'Search a new roommate';
+    $page_content = 'Fill in the address of your room.';
+    $submit_btn = "Check address";
+    $form_action = '/DDWT18/ddwt18_project/add2/';
+
+    /* always use template 'footer' */
+    $footer = use_template('footer');
+
+    /* Get error msg from POST route */
+    if ( isset($_GET['error_msg']) ) {
+        $error_msg = get_error($_GET['error_msg']);
+    }
+
+    include use_template('address');
+}
+
+/* Add room get after postal code validation */
+elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
+    /* Check if logged in */
+    if (!check_login()) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
+    /* Check if the role is owner */
+    if (!check_owner($db)) {
+        redirect('/DDWT18/ddwt18_project/myaccount/');
+    }
+
+    /* Postcode API in order to check postcode */
+    $postal_code = $_POST['postal_code'];
+    $number = $_POST['house_number'];
+    $postal_code = str_replace(' ', '', $postal_code);
+    $number = str_replace(' ', '', $number);
+    $postal_code = strtoupper($postal_code);
+    // De headers worden altijd meegestuurd als array
+    $headers = array();
+    $headers[] = 'X-Api-Key: qKctaMbHlAa04rhML2ZJI8ywYCuWXrUS9P7eev37';
+    // De URL naar de API call
+    $url = 'https://api.postcodeapi.nu/v2/addresses/?postcode=' . $postal_code . '&number=' . $number;
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    // Indien de server geen TLS ondersteunt kun je met
+    // onderstaande optie een onveilige verbinding forceren.
+    // Meestal is dit probleem te herkennen aan een lege response.
+    //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    // De ruwe JSON response
+    $response = curl_exec($curl);
+    // Gebruik json_decode() om de response naar een PHP array te converteren
+    $data = json_decode($response);
+    $addressdata = $data->_embedded->addresses[0];
+    if ($addressdata)   {
+        $city = $addressdata->city->label;
+        $street = $addressdata->street;
+        $return_data[]= array("city"=>$city,"street"=>$street);
+        curl_close($curl);
+    }
+    else {
+        $feedback = [
+            'type' => 'success',
+            'message' => 'The address you entered is not valid!'
+        ];
+        redirect('/DDWT18/ddwt18_project/add/');
+    }
+
 
     /* Page info */
     $page_title = 'Add Room';
@@ -99,9 +169,9 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
     if ( isset($_GET['error_msg']) ) {
         $error_msg = get_error($_GET['error_msg']);
     }
-
     include use_template('new');
 }
+
 
 /* Search room GET */
 elseif (new_route('/DDWT18/ddwt18_project/search/', 'get')) {

@@ -289,18 +289,18 @@ function add_room($pdo, $room_info){
     }
 
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postal_code']) !== 7) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
-            'message' => 'The postal code consists of exactly 7 characters (1234 AB)'
+            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
         ];}
     else {
         if (PostalCheck($room_info['postal_code']) == false ){
             return [
                 'type' => 'danger',
-                'message' => 'You entered an invalid postal code. Please write it like "1234 AB"'
+                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
             ];
-}
+        }
     }
 
     /* Add room */
