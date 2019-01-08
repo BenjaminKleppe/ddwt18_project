@@ -235,7 +235,7 @@ elseif (new_route('/DDWT18/ddwt18_project/roompics/', 'post')) {
     $room_id = $_POST['room_id'];
 
         /* Redirect to homepage */;
-    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
         json_encode($feedback)));
 }
 
@@ -310,7 +310,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/userpic/', 'post')) {
-    /* Upload images of the room */
+    /* Upload profile picture */
     $feedback = upload_userpic($db, $_POST);
     $user_id = $_POST['user_id'];
 
@@ -326,7 +326,7 @@ elseif (new_route('/DDWT18/ddwt18_project/removeaccount/', 'post')){
     $feedback = remove_account($db);
 
     /* Redirect to homepage */
-    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/main/?error_msg=%s',
         json_encode($feedback)));
 
     /* Choose Template */
@@ -438,7 +438,7 @@ elseif (new_route('/DDWT18/ddwt18_project/removeimages/', 'post')){
     $feedback = remove_images($db, $room_id);
 
     /* Redirect to homepage */
-    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
         json_encode($feedback)));
 
     /* Choose Template */
