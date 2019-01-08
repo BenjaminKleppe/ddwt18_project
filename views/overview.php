@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12">
+            <div class="py-3 col-sm-17 col-md-17">
                 <div class="card row">
                     <div class="card-header">
                         Users
