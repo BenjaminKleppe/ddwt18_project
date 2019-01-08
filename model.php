@@ -1026,7 +1026,6 @@ function edit_details($pdo, $owner_info){
         empty($owner_info['password']) or
         empty($owner_info['firstname']) or
         empty($owner_info['lastname']) or
-        empty($owner_info['role']) or
         empty($owner_info['dateofbirth']) or
         empty($owner_info['study']) or
         empty($owner_info['language']) or
@@ -1062,13 +1061,12 @@ function edit_details($pdo, $owner_info){
     $password = password_hash($owner_info['password'], PASSWORD_DEFAULT);
 
     /* Update user */
-    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, role = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
     $stmt->execute([
         $owner_info['username'],
         $password,
         $owner_info['firstname'],
         $owner_info['lastname'],
-        $owner_info['role'],
         $owner_info['dateofbirth'],
         $owner_info['study'],
         $owner_info['language'],
