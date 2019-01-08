@@ -1265,9 +1265,9 @@ function search_room($pdo, $room_info)
 {
 
 
-    $stmt = $pdo->prepare("SELECT * FROM room WHERE lower(city) = ? AND size >= ? AND price <= ?");
+    $stmt = $pdo->prepare("SELECT * FROM room WHERE size >= ? AND price <= ?");
     $stmt->execute(
-        [$room_info['city'],
+        [
             $room_info['size'],
             $room_info['price']
       ]);
