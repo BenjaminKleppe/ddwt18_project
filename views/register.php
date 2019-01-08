@@ -165,8 +165,10 @@
                             <label for="inputbiography">Biography</label>
                             <textarea class="form-control" id="inputbiography" rows="3" name="biography" placeholder="Write here your biography..." required><?php if (isset($owner_info)){echo $owner_info['biography'];} ?></textarea>
                         </div>
+                        <?php if (!isset($_SESSION['user_id'])) { ?>
                         <label></label>
                             <input type="checkbox" required>By creating an account you agree to our <a href="https://www.freeprivacypolicy.com/privacy/view/d14fdefed56b6bf01b06f8e5885eff88" style="color:dodgerblue">Terms & Privacy</a>.
+                        <?php } else { echo "";}; ?>
                         <div class="pt-4">
                             <?php if(isset($_SESSION['user_id'])){ ?><input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>"><?php } ?>
                             <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
