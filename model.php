@@ -976,6 +976,7 @@ function update_room($pdo, $room_info){
         ];
     }
 
+
     /* Update room */
     $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, living = ?, kitchen = ?, bathroom = ?, toilet = ?, internet = ?, mate = ?, smoke = ?, description = ?, tenant = ? WHERE room_id = ?");
     $stmt->execute([
@@ -1057,11 +1058,14 @@ function edit_details($pdo, $owner_info){
         ];
     }
 
+    /* Hash password */
+    $password = password_hash($owner_info['password'], PASSWORD_DEFAULT);
+
     /* Update user */
     $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, role = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
     $stmt->execute([
         $owner_info['username'],
-        $owner_info['password'],
+        $password,
         $owner_info['firstname'],
         $owner_info['lastname'],
         $owner_info['role'],
