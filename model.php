@@ -102,7 +102,9 @@ function get_navigation($template, $active_id){
             <div>
                 <ul class=" navbar-right nav navbar-nav">';
                 if (isset($_SESSION['user_id'])) {
-                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Logout</a ></li >';
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/myaccount/" ><span class="glyphicon glyphicon-user" ></span > My account</a ></li >';
+                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Log out</a ></li >';
+
                 }else {
                     $navigation_exp .= '<li class="dropdown">
                         <a href="/DDWT18/ddwt18_project/login/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in" ></span > Log In </a>

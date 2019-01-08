@@ -24,9 +24,6 @@ $template = Array(
     4 => Array(
         'name' => 'Add room',
         'url' => '/DDWT18/ddwt18_project/add/'),
-    5 => Array(
-        'name' => 'My Account',
-        'url' => '/DDWT18/ddwt18_project/myaccount/'),
 
 );
 
@@ -273,7 +270,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     }
     /* Page info */
     $page_title = 'My Account';
-    $navigation = get_navigation($template, 4);
+    $navigation = get_navigation($template, 5);
     $page_subtitle = 'Your account details on InterRooms';
     /* Page content */
     $user = $_SESSION['user_id'];
@@ -587,6 +584,8 @@ elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'get')) {
 }
 
 elseif (new_route('/DDWT18/ddwt18_project/forgetpassword/', 'post')) {
+
+
     redirect('/DDWT18/ddwt18_project/login/');
 }
 
