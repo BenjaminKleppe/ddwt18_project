@@ -44,19 +44,6 @@
                 <div class="col-md-12 py-3">
                     <div class="card">
                         <div class="card-header">
-                            Add rooms
-                        </div>
-                        <div class="card-body">
-                            <p>Add your contribution to Rooms Overview.</p>
-                            <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">Add a room</a>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-            <?php if (check_owner($db)) { ?>
-                <div class="col-md-12 py-3">
-                    <div class="card">
-                        <div class="card-header">
                             Offered rooms
                         </div>
                         <div class="card-body">
@@ -66,6 +53,7 @@
                     </div>
                 </div>
             <?php } ?>
+            <?php if (!check_owner($db)) { ?>
             <div class="col-md-12 pt-3">
                 <div class="card">
                     <div class="card-header">
@@ -77,6 +65,7 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 
