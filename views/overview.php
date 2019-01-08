@@ -42,12 +42,6 @@
                     <div class="card-body">
                         <form action="<?= $form_action ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-group row">
-                                <label for="city" class="col-sm-3 col-form-label">City</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Groningen">
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="price" class="col-sm-3 col-form-label">Max. price in €</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="price" name="price" placeholder="375">

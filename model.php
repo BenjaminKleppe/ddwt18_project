@@ -1400,3 +1400,14 @@ function forgetpassword($pdo, $username, $email, $code, $check)
 
 }
 
+function optincheck($user, $room, $pdo) {
+    $stmt = $pdo->prepare('SELECT * FROM optin WHERE tenant = ? AND room = ?');
+    $stmt->execute([$user, $room]);
+    $optin = $stmt->rowCount();
+    if ($optin == 1) {
+        return True;
+    }
+    else {
+        return False;
+    }
+}

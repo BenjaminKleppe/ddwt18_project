@@ -172,9 +172,14 @@ if (new_route('/DDWT18/ddwt18_project/results/', 'post')) {
 
 /* Single room */
 elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
+    /* Check if logged in */
+    if ( !check_login() ) {
+        redirect('/DDWT18/ddwt18_project/login/');
+    }
     /* Get rooms from db */
     $room_id = $_GET['room_id'];
     $room_info = get_room_info($db, $room_id);
+    $optincheck = optincheck($_SESSION['user_id'], $room_id, $db);
     $owner_info = get_name($db, $room_info['user_id']);
     $display_buttons = get_user_id() == $room_info['user_id'];
     $disp_buttons = get_user_id() != $room_info['user_id'];

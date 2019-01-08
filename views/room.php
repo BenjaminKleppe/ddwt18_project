@@ -111,9 +111,16 @@
                     <?php } ?>
 
                     <?php if ($checktenant) { ?>
-                    <div class="pb-5">
-                        <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
-                    </div>
+                        <?php if (!$optincheck) { ?>
+                            <div class="pb-5">
+                                <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
+                            </div>
+                        <?php } ?>
+                        <?php if ($optincheck) { ?>
+                            <form action="/DDWT18/ddwt18_project/optout/" method="POST">
+                                    <button type="submit" class="btn btn-danger">Opt-out</button>
+                            </form>
+                        <?php } ?>
                     <?php } ?>
                     <h4>Information about the room:</h4>
                     <table class="table">
