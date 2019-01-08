@@ -30,6 +30,7 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     $page_title = 'InterRooms';
     $display_right_nav = get_user_id();
     $navigation = get_navigation($template, '1');
+
     /* always use template 'footer' */
     $footer = use_template('footer');
 
