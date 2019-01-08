@@ -19,9 +19,6 @@ $template = Array(
         'name' => 'Overview',
         'url' => '/DDWT18/ddwt18_project/overview/'),
     3 => Array(
-        'name' => 'Search room',
-        'url' => '/DDWT18/ddwt18_project/search/'),
-    4 => Array(
         'name' => 'Add room',
         'url' => '/DDWT18/ddwt18_project/add/'),
 
@@ -55,11 +52,12 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
 
     /* Page content */
     $page_subtitle = 'The overview of all rooms available';
-    $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_room_table(get_rooms($db), $db);
     $display_buttons = get_user_id();
     /* always use template 'footer' */
     $footer = use_template('footer');
+    $form_action = '/DDWT18/ddwt18_project/results/';
+    $submit_btn = "Search";
 
     /* Get Number of rooms and users */
     $nbr_rooms = count_rooms($db);
@@ -71,7 +69,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     }
 
     /* Choose Template */
-    include use_template('main');
+    include use_template('overview');
 }
 
 /* Add room get */
@@ -145,17 +143,23 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'post')) {
 /* Search room POST */
 if (new_route('/DDWT18/ddwt18_project/results/', 'post')) {
     /* Page info */
-    $page_title = 'Results';
+    $page_title = 'Overview';
     $display_right_nav = get_user_id();
-    $navigation = get_navigation($template, '0');
+    $navigation = get_navigation($template, '2');
 
     /* Page content */
-
+    $page_subtitle = 'The overview of all rooms available';
+    $page_content = 'On this page you will find all available rooms for internationals.';
     $left_content = get_result_table($db, search_room($db, $_POST));
     $display_buttons = get_user_id();
     /* always use template 'footer' */
     $footer = use_template('footer');
+    $form_action = '/DDWT18/ddwt18_project/results/';
+    $submit_btn = "Search";
 
+    /* Get Number of rooms and users */
+    $nbr_rooms = count_rooms($db);
+    $nbr_users = count_users($db);
 
     /* Get error msg from POST route */
     if ( isset($_GET['error_msg']) ) {
@@ -163,7 +167,7 @@ if (new_route('/DDWT18/ddwt18_project/results/', 'post')) {
     }
 
     /* Choose Template */
-    include use_template('results');
+    include use_template('overview');
 }
 
 /* Single room */
