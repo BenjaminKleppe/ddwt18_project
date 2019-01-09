@@ -22,6 +22,7 @@
                 <p><?= $phonenumber ?></p>
             </div>
             <p><a href="<?= $ownerlink ?>" role="button" class="col-md-6 btn btn-primary ml-4 mt-4">Owner info</a></p>
+        </div>
     </div>
 </div>
 <?php } ?>
