@@ -159,6 +159,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
     $page_content = 'Fill in the details of your room.';
     $submit_btn = "Add room";
     $form_action = '/DDWT18/ddwt18_project/add/';
+
     /* always use template 'footer' */
     $footer = use_template('footer');
 
@@ -166,6 +167,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
     if ( isset($_GET['error_msg']) ) {
         $error_msg = get_error($_GET['error_msg']);
     }
+
     include use_template('new');
 }
 
@@ -609,7 +611,7 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
     $feedback = update_room($db, $_POST);
     $room_id = $_POST['room_id'];
     /* Redirect to room GET route */
-    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
         json_encode($feedback)));
 
     /* Choose Template */

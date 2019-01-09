@@ -89,18 +89,20 @@
                     Your account details:
                 </div>
                 <div class="card-body">
-                    <p><?= implode(" ", $imagename) ?></p>
-                    <p><?php if ($display_buttons) { ?>
-                        <?php if ($checkprofileimage) { ?>
-                    <div class="pb-4">
-                        <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
-                            <input type="hidden" value="<?= $user ?>" name="user_id">
-                            <a onclick="return confirm('Do you want to delete your profile picture Y/N')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
-                        </form>
+                    <div class="col-md-12">
+                        <div class="col-md-8 pb-4"><?= implode(" ", $imagename) ?></div>
                     </div>
-                    <?php } ?>
+                    <?php if ($display_buttons) { ?>
+                        <?php if ($checkprofileimage) { ?>
+                        <div class="">
+                            <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
+                                <input type="hidden" value="<?= $user ?>" name="user_id">
+                                <a onclick="return confirm('Do you want to delete your profile picture Y/N')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
+                            </form>
+                        </div>
+                        <?php } ?>
                     <?php if (!$checkprofileimage) { ?>
-                        <div class="pb-4">
+                        <div class="pb-2">
                             <form action="/DDWT18/ddwt18_project/userpic/" method="post" enctype="multipart/form-data">
                                 <br/>
                                 <label>Select Image to upload</label>
@@ -111,18 +113,33 @@
                         </div>
                     <?php } ?>
                     <?php } ?>
-                    </p>
 
-                    <p>First name: <?= $user_first ?></p>
-                    <p>Last name: <?= $user_last ?></p>
-                    <p>Role: <?= $user_role ?></p>
-                    <p>Date of birth: <?= $user_dob ?></p>
-                    <p>Biography: <?= $user_bio ?></p>
-                    <p>Study: <?= $user_study ?></p>
-                    <p>Language: <?= $user_language ?></p>
-                    <p>E-mail: <?= $user_mail ?></p>
-                    <p>Phone number: <?= $user_phone ?></p>
-                    <div class="pb-2">
+                    <div class="pb-4">
+                        <div class="col-md-6">
+                            <p><strong>First name:</strong></p>
+                            <p><strong>Last name: </strong></p>
+                            <p><strong>Role: </strong></p>
+                            <p><strong>Date of birth: </strong></p>
+                            <p><strong>Biography: </strong></p>
+                            <p><strong>Study: </strong></p>
+                            <p><strong>Language: </strong></p>
+                            <p><strong>E-mail: </strong></p>
+                            <p><strong>Phone number: </strong></p>
+                        </div>
+                        <div class="col-md-6 pb-4">
+                            <p><?= $user_first ?></p></p>
+                            <p><?= $user_last ?></p>
+                            <p><?= $user_role ?></p>
+                            <p><?= $user_dob ?></p>
+                            <p><?= $user_bio ?></p>
+                            <p><?= $user_study ?></p>
+                            <p><?= $user_language ?></p>
+                            <p><?= $user_mail ?></p>
+                            <p><?= $user_phone ?></p>
+                        </div>
+                    </div>
+
+                    <div class="pb-3">
                         <a href="/DDWT18/ddwt18_project/editdet/" class="btn btn-primary">Edit details</a>
                     </div>
                     <div>

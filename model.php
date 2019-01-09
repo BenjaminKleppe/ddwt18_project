@@ -59,6 +59,7 @@ function new_route($route_uri, $request_type){
         return True;
     }
 }
+
 /**
  * Creates a new navigation array item using url and active status
  * @param string $url The url of the navigation item
@@ -68,6 +69,7 @@ function new_route($route_uri, $request_type){
 function na($url, $active){
     return [$url, $active];
 }
+
 /**
  * Creates filename to the template
  * @param string $template filename of the template without extension
@@ -110,7 +112,7 @@ function get_navigation($template, $active_id){
             <div>
                 <ul class=" navbar-right nav navbar-nav">';
     if (isset($_SESSION['user_id'])) {
-        $navigation_exp .= '<li class="pr-4"><a id="add" href="/DDWT18/ddwt18_project/add" class="button"><span class="glyphicon glyphicon-plus"></span> Add room</a></li>';
+        $navigation_exp .= '<li class="pr-4"><a id="add" href="/DDWT18/ddwt18_project/add/" class="button"><span class="glyphicon glyphicon-plus"></span> Add room</a></li>';
         $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/myaccount/" ><span class="glyphicon glyphicon-user" ></span > My account</a ></li >';
         $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Log out</a ></li >';
 
@@ -164,6 +166,7 @@ function p_print($input){
     print_r($input);
     echo '</pre>';
 }
+
 /**
  * Creats HTML alert code with information about the success or failure
  * @param bool $type True if success, False if failure
@@ -209,6 +212,12 @@ function get_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
+
+/**
+ * Add serie to the database
+ * @param object $pdo db object
+ * @return array with all the info from table room, so info of all rooms
+ */
 function get_rooms($pdo){
     $stmt = $pdo->prepare('SELECT * FROM room');
     $stmt->execute();
@@ -222,7 +231,13 @@ function get_rooms($pdo){
     }
     return $room_exp;
 }
-// Get's the information of a single room
+
+/**
+ * Get's the information of a single room
+ * @param object $pdo db object
+ * @param int $room_id id of the room
+ * @return array with all the info of a room
+ */
 function get_room_info($pdo, $room_id){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_id]);
@@ -234,6 +249,8 @@ function get_room_info($pdo, $room_id){
     }
     return $room_info_exp;
 }
+
+
 /* checks postal code */
 function PostalCheck($postcode)
 {
@@ -244,7 +261,13 @@ function PostalCheck($postcode)
         return false;
     }
 }
-/* add a room to the database */
+
+/**
+ * Add a room to the database
+ * @param object $pdo db object
+ * @param int $room_info id of the room
+ * @return array with all the info of a room
+ */
 function add_room($pdo, $room_info){
     /*check if all fields are set */
     if(
@@ -642,7 +665,7 @@ function get_profile_image_info($pdo, $user_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' width='100%' height='45%'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' class='center' style='max-height: 400px'/>";
         }
     }
     return $pictures;
