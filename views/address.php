@@ -38,7 +38,7 @@
                 <div class="form-group row">
                     <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="postalCode" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">

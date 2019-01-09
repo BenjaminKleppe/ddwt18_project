@@ -36,6 +36,7 @@
 
             <div class="pd-15">&nbsp;</div>
             <form action="<?= $form_action ?>" method="POST" enctype="multipart/form-data">
+                <?php if (!isset($room_info['room_id'])) { ?>
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>
                     <div class="col-sm-9">
@@ -45,13 +46,13 @@
                 <div class="form-group row">
                     <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="36B" value="<?= $number ?>" disabled required>
+                        <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?= $number ?>" disabled required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="postalCode" name="postal_code" placeholder="9718AV" value="<?= $postal_code ?>" disabled required>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?= $postal_code ?>" disabled required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -60,13 +61,38 @@
                         <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?= $city ?>" disabled required>
                     </div>
                 </div>
-                <?php if (!isset($room_info['room_id'])) { ?>
                 <div class="form-group row">
                     <label></label>
                     <div class="col-sm-10 p-3 m-3">
                         <a id="add" href="/DDWT18/ddwt18_project/add" class="button py-3 px-3">Not the right address, click here...</a>
                     </div>
                 </div>
+                <?php } ?>
+                <?php if (isset($room_info['room_id'])) { ?>
+                    <div class="form-group row">
+                        <label for="street" class="col-sm-3 col-form-label">Street</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" disabled required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" disabled required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" disabled required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-3 col-form-label">City</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" disabled required>
+                        </div>
+                    </div>
                 <?php } ?>
                 <div class="form-group row">
                     <label for="type" class="col-sm-3 col-form-label"> Select type: </label>
