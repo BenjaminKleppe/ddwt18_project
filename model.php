@@ -87,7 +87,7 @@ function use_template($template){
  * @param array $navigation Array with as Key the page name and as Value the corresponding url
  * @return string html code that represents the navigation
  */
-function get_navigation($template, $active_id){
+function get_navigation($template, $active_id, $pdo){
     $navigation_exp = '
     <div class="container-fluid bg-light bg-clearfix" style="height: 70px">
         <nav class="navbar navbar-static-top navbar-expand-lg navbar-light container">
@@ -114,7 +114,10 @@ function get_navigation($template, $active_id){
             <div>
                 <ul class=" navbar-right nav navbar-nav">';
     if (isset($_SESSION['user_id'])) {
-        $navigation_exp .= '<li class="pr-4"><a id="add" href="/DDWT18/ddwt18_project/add/" class="button"><span class="glyphicon glyphicon-plus"></span> Add room</a></li>';
+        if (check_owner($pdo)) {
+            $navigation_exp .= '<li class="pr-4"><a id="add" href="/DDWT18/ddwt18_project/add/" class="button"><span class="glyphicon glyphicon-plus"></span> Add room</a></li>';
+
+        }
         $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/myaccount/" ><span class="glyphicon glyphicon-user" ></span > My account</a ></li >';
         $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Log out</a ></li >';
 

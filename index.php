@@ -27,7 +27,7 @@ if (new_route('/DDWT18/ddwt18_project/', 'get')) {
     /* Page info */
     $page_title = 'InterRooms';
     $display_right_nav = get_user_id();
-    $navigation = get_navigation($template, '1');
+    $navigation = get_navigation($template, '1', $db);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -47,7 +47,7 @@ if (new_route('/DDWT18/ddwt18_project/overview/', 'get')) {
     /* Page info */
     $page_title = 'Overview';
     $display_right_nav = get_user_id();
-    $navigation = get_navigation($template, '2');
+    $navigation = get_navigation($template, '2', $db);
 
     /* Page content */
     $page_subtitle = 'The overview of all rooms available';
@@ -85,7 +85,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add/', 'get')) {
 
     /* Page info */
     $page_title = 'Add Room';
-    $navigation = get_navigation($template, '4');
+    $navigation = get_navigation($template, '4', $db);
 
     /* Page content */
     $page_subtitle = 'Search a new roommate';
@@ -156,7 +156,7 @@ elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
 
     /* Page info */
     $page_title = 'Add Room';
-    $navigation = get_navigation($template, '4');
+    $navigation = get_navigation($template, '4', $db);
 
     /* Page content */
     $page_subtitle = 'Search a new roommate';
@@ -185,7 +185,7 @@ elseif (new_route('/DDWT18/ddwt18_project/search/', 'get')) {
 
     /* Page info */
     $page_title = 'Search room';
-    $navigation = get_navigation($template, '3');
+    $navigation = get_navigation($template, '3', $db);
 
     /* Page content */
     $page_subtitle = 'Search a room';
@@ -219,7 +219,7 @@ if (new_route('/DDWT18/ddwt18_project/results/', 'post')) {
     /* Page info */
     $page_title = 'Overview';
     $display_right_nav = get_user_id();
-    $navigation = get_navigation($template, '2');
+    $navigation = get_navigation($template, '2', $db);
 
     /* Page content */
     $page_subtitle = 'The overview of all rooms available';
@@ -261,7 +261,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
-    $navigation = get_navigation($template, '2');
+    $navigation = get_navigation($template, '2', $db);
 
     /* Page content */
     $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
@@ -323,7 +323,7 @@ elseif (new_route('/DDWT18/ddwt18_project/register/', 'get')){
     $form_action = "/DDWT18/ddwt18_project/register/";
     $page_title = 'Register';
     $submit_btn = "Register now";
-    $navigation = get_navigation($template, 5);
+    $navigation = get_navigation($template, 5, $db);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -377,7 +377,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $checkprofileimage = check_profile_image($db, $user);
-    $navigation = get_navigation($template, 5);
+    $navigation = get_navigation($template, 5, $db);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -435,7 +435,7 @@ elseif (new_route('/DDWT18/ddwt18_project/contact/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $display_buttons = get_user_id() == $room_info['room_id'];
-    $navigation = get_navigation($template, '0');
+    $navigation = get_navigation($template, '0', $db);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -490,7 +490,7 @@ elseif (new_route('/DDWT18/ddwt18_project/user/', 'get')) {
     $user_mail = $user_name['email'];
     $user_phone = $user_name['phonenumber'];
     $page_title = "User info";
-    $navigation = get_navigation($template, '0');
+    $navigation = get_navigation($template, '0', $db);
 
     /* always use template 'footer' */
     $footer = use_template('footer');
@@ -551,7 +551,7 @@ elseif (new_route('/DDWT18/ddwt18_project/login/', 'get')){
     }
     /* Page info */
     $page_title = 'Login';
-    $navigation = get_navigation($template, 0);
+    $navigation = get_navigation($template, 0, $db);
 
     /* Page content */
     $page_subtitle = 'Use your username and password to login';
@@ -600,7 +600,7 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'get')) {
 
     /* Page info */
     $page_title = 'Edit room';
-    $navigation = get_navigation($template, '3');
+    $navigation = get_navigation($template, '3', $db);
 
     /* Page content */
     $page_subtitle = sprintf("Edit %s %s", $room_info['street'], $room_info['house_number']);
@@ -647,7 +647,7 @@ elseif (new_route('/DDWT18/ddwt18_project/editdet/', 'get')) {
     /* page info */
     $form_action = "/DDWT18/ddwt18_project/editdet/";
     $owner_info = get_name($db, get_user_id());
-    $navigation = get_navigation($template, '4');
+    $navigation = get_navigation($template, '4', $db);
     $page_title = 'Edit details';
     $page_subtitle = 'You can edit your details of your myaccount here';
     $submit_btn = "Edit account";
