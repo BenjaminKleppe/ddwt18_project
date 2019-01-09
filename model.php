@@ -890,7 +890,7 @@ function get_offered_room_table($rooms, $pdo){
     <tr>
         <th scope="col"></th>
         <th scope="col">Address</th>
-        <th scope="col">Squere Metre</th>
+        <th scope="col">Square Meter</th>
         <th scope="col">Price</th>
         <th scope="col"></th>
     </tr>
