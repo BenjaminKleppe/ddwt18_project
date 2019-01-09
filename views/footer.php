@@ -94,7 +94,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center text-black-50 py-3" >© 2018 Copyright:
-            <a class="dark-grey-text" href="https://mdbootstrap.com/education/bootstrap/"> InterRooms.com</a>
+            <a class="dark-grey-text" href="https://interrooms.com"> InterRooms.com</a>
         </div>
         <!-- Copyright -->
 
