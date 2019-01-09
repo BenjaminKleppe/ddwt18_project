@@ -88,7 +88,7 @@
                             </form>
                         </div>
                         <?php } ?>
-                        <div class="pb-4">
+                        <div>
                             <form action="/DDWT18/ddwt18_project/roompics/" method="post" enctype="multipart/form-data">
                                 <br/>
                                 <label>Select Image to upload</label>

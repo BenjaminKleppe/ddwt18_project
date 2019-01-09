@@ -9,6 +9,23 @@
     #add.button:hover{
         background: #2e4960;
     }
+
+    .img-key {
+        width: 100%;
+        height: 80%;
+        background-size: cover;
+    }
+
+    .img-prof{
+        width: 300px;
+        background-size: cover;
+    }
+
+    .img-tab {
+        width: 110px;
+        height: 7%;
+        background-size: cover;
+    }
 </style>
 
 
@@ -210,7 +227,7 @@ function get_room_table($rooms, $pdo){
         $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" class="img-tab"/></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
@@ -693,7 +710,7 @@ function get_image_info($pdo, $room_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No photo' width='100%' height='100%' class='mySlides'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No photo' class='img-key mySlides'/>";
         }
     }
     return $pictures;
@@ -716,7 +733,7 @@ function get_profile_image_info($pdo, $user_id) {
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' class='center' style='max-height: 400px'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' class='img-prof center'/>";
         }
     }
     return $pictures;
@@ -876,7 +893,7 @@ function get_offered_room_table($rooms, $pdo){
         $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
         <tr>
-            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" width="100px" height="7%" /></th>
+            <th scope="row"><img src="/DDWT18/ddwt18_project/pictures/'.$name.'" class="img-tab"/></th>
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
