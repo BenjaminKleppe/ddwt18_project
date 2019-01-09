@@ -127,7 +127,7 @@
                             <p><strong>Phone number: </strong></p>
                         </div>
                         <div class="col-md-6 pb-4">
-                            <p><?= $user_first ?></p></p>
+                            <p><?= $user_first ?></p>
                             <p><?= $user_last ?></p>
                             <p><?= $user_role ?></p>
                             <p><?= $user_dob ?></p>

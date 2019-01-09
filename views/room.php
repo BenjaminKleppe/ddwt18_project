@@ -187,7 +187,7 @@
                 </div>
         </div>
         <div>
-            </br>
+            <br/>
             <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
             <?php
             $address = str_replace(" ", "+",$address_variable);
