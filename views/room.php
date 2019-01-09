@@ -141,7 +141,7 @@
                     <?php if (!check_owner($db)) { ?>
                         <?php if (!$optincheck) { ?>
                             <div class="pb-5">
-                                <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" id="add" class="btn btn-primary">Opt-in</a>
+                                <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" id="suc" class="btn btn-success">Opt in</a>
                             </div>
                         <?php } ?>
                         <?php if ($optincheck) { ?>
