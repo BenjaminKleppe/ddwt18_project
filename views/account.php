@@ -54,17 +54,17 @@
                 </div>
             <?php } ?>
             <?php if (!check_owner($db)) { ?>
-            <div class="col-md-12 pt-3">
-                <div class="card">
-                    <div class="card-header">
-                        Opt-in rooms
-                    </div>
-                    <div class="card-body">
-                        <p>The rooms you opt-in for.</p>
-                        <?= $optinrooms ?>
+                <div class="col-md-12 pt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Opt-in rooms
+                        </div>
+                        <div class="card-body">
+                            <p>The rooms you opt-in for.</p>
+                            <?= $optinrooms ?>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>
@@ -94,24 +94,24 @@
                     </div>
                     <?php if ($display_buttons) { ?>
                         <?php if ($checkprofileimage) { ?>
-                        <div class="">
-                            <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
-                                <input type="hidden" value="<?= $user ?>" name="user_id">
-                                <a onclick="return confirm('Do you want to delete your profile picture?')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
-                            </form>
-                        </div>
+                            <div class="">
+                                <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
+                                    <input type="hidden" value="<?= $user ?>" name="user_id">
+                                    <a onclick="return confirm('Do you want to delete your profile picture?')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
+                                </form>
+                            </div>
                         <?php } ?>
-                    <?php if (!$checkprofileimage) { ?>
-                        <div class="pb-2">
-                            <form action="/DDWT18/ddwt18_project/userpic/" method="post" enctype="multipart/form-data">
-                                <br/>
-                                <label>Select Image to upload</label>
-                                <input type="hidden" value="<?= $user ?>" name="user_id">
-                                <input class="pb-3" type="file" name="image">
-                                <input type="submit" value="Add profile picture" name="picture">
-                            </form>
-                        </div>
-                    <?php } ?>
+                        <?php if (!$checkprofileimage) { ?>
+                            <div class="pb-2">
+                                <form action="/DDWT18/ddwt18_project/userpic/" method="post" enctype="multipart/form-data">
+                                    <br/>
+                                    <label>Select Image to upload</label>
+                                    <input type="hidden" value="<?= $user ?>" name="user_id">
+                                    <input class="pb-3" type="file" name="image">
+                                    <input type="submit" value="Add profile picture" name="picture">
+                                </form>
+                            </div>
+                        <?php } ?>
                     <?php } ?>
 
                     <div class="pb-4">
@@ -120,22 +120,22 @@
                             <p><strong>Last name: </strong></p>
                             <p><strong>Role: </strong></p>
                             <p><strong>Date of birth: </strong></p>
-                            <p><strong>Biography: </strong></p>
                             <p><strong>Study: </strong></p>
                             <p><strong>Language: </strong></p>
                             <p><strong>E-mail: </strong></p>
                             <p><strong>Phone number: </strong></p>
+                            <p><strong>Biography: </strong></p>
                         </div>
                         <div class="col-md-6 pb-4">
                             <p><?= $user_first ?></p>
                             <p><?= $user_last ?></p>
                             <p><?= $user_role ?></p>
                             <p><?= $user_dob ?></p>
-                            <p><?= $user_bio ?></p>
                             <p><?= $user_study ?></p>
                             <p><?= $user_language ?></p>
                             <p><?= $user_mail ?></p>
                             <p><?= $user_phone ?></p>
+                            <p><?= $user_bio ?></p>
                         </div>
                     </div>
 
@@ -163,4 +163,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
-
