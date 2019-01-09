@@ -143,10 +143,11 @@ elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
     }
     else {
         $feedback = [
-            'type' => 'success',
+            'type' => 'danger',
             'message' => 'The address you entered is not valid!'
         ];
-        redirect('/DDWT18/ddwt18_project/add/');
+        redirect(sprintf('/DDWT18/ddwt18_project/add/?error_msg=%s',
+            json_encode($feedback)));
     }
 
 

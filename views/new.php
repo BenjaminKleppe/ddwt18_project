@@ -95,17 +95,6 @@
                     </div>
                 <?php } ?>
                 <div class="form-group row">
-                    <label for="type" class="col-sm-3 col-form-label"> Select type: </label>
-                    <div class="col-sm-3">
-                        <select class="form-control" id="type" name="type">
-                            <option value="<?php if (isset($room_info)){echo $room_info['type'];} else {echo "";} ?>" hidden><?php if (isset($room_info)){echo $room_info['type'];} else {echo "Choose a type...";} ?></option>
-                            <option value="Room">Room</option>
-                            <option value="Apartment">Apartment</option>
-                            <option value="Studio">Studio</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="price" class="col-sm-3 col-form-label">Price in €</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="price" name="price" placeholder="375" value="<?php if (isset($room_info)){echo $room_info['price'];} ?>" required>
@@ -115,6 +104,17 @@
                     <label for="size" class="col-sm-3 col-form-label">Size in m2</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="size" name="size" placeholder="20" value="<?php if (isset($room_info)){echo $room_info['size'];} ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="type" class="col-sm-3 col-form-label"> Select type: </label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="type" name="type">
+                            <option value="<?php if (isset($room_info)){echo $room_info['type'];} else {echo "";} ?>" hidden><?php if (isset($room_info)){echo $room_info['type'];} else {echo "Choose a type...";} ?></option>
+                            <option value="Room">Room</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Studio">Studio</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
