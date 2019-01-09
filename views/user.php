@@ -33,7 +33,7 @@
                         Account details:
                     </div>
                     <div class="card-body">
-                        <p><?= implode(" ", $imagename) ?></p>
+                        <div style="text-align: center"><?= implode(" ", $imagename) ?></div>
                         <p><?php if ($display_buttons) { ?>
                         <?php if ($checkprofileimage) { ?>
                             <div class="pb-4">
