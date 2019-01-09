@@ -14,13 +14,11 @@
 
     <div>
         <div class="container">
-
             <!-- Grid row-->
             <div class="row py-4 d-flex align-items-center">
 
             </div>
         </div>
-
         <!-- Footer Links -->
         <div class="container-fluid">
         <div class="container text-center text-md-left inner">
