@@ -1,3 +1,17 @@
+<style>
+    #add {
+        color: white;
+        background: #337ab7;
+        border-radius: 12px;
+        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+    }
+
+    #add.button:hover{
+        background: #2e4960;
+    }
+</style>
+
+
 <?php
 /**
  * Model
@@ -5,12 +19,10 @@
  * Date: 05-11-18
  * Time: 15:25
  */
-
 /* Enable error reporting */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 /**
  * Connects to the database using PDO
  * @param string $host database host
@@ -21,7 +33,6 @@ error_reporting(E_ALL);
  */
 function connect_db($host, $db, $user, $pass){
     $charset = 'utf8mb4';
-
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -34,7 +45,6 @@ function connect_db($host, $db, $user, $pass){
     }
     return $pdo;
 }
-
 /**
  * Check if the route exist
  * @param string $route_uri URI to be matched
@@ -49,7 +59,6 @@ function new_route($route_uri, $request_type){
         return True;
     }
 }
-
 /**
  * Creates a new navigation array item using url and active status
  * @param string $url The url of the navigation item
@@ -59,7 +68,6 @@ function new_route($route_uri, $request_type){
 function na($url, $active){
     return [$url, $active];
 }
-
 /**
  * Creates filename to the template
  * @param string $template filename of the template without extension
@@ -85,28 +93,29 @@ function get_navigation($template, $active_id){
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">';
-                foreach ($template as $id => $info) {
-                    if ($id == $active_id){
-                        $navigation_exp .= '<li class="nav-item active">';
-                        $navigation_exp .= '<a class="nav-link" href="'.$template[$active_id]['url'].'">'.$template[$active_id]['name'].'</a>';
-                    }else {
-                        $navigation_exp .= '<li class="nav-item">';
-                        $navigation_exp .= '<a class="nav-link" href="'.$template[$id]['url'].'">'.$template[$id]['name'].'</a>';
-                    }
+    foreach ($template as $id => $info) {
+        if ($id == $active_id) {
+            $navigation_exp .= '<li class="nav-item active">';
+            $navigation_exp .= '<a class="nav-link" href="' . $template[$active_id]['url'] . '">' . $template[$active_id]['name'] . '</a>';
+        } else {
+            $navigation_exp .= '<li class="nav-item">';
+            $navigation_exp .= '<a class="nav-link" href="' . $template[$id]['url'] . '">' . $template[$id]['name'] . '</a>';
+            $navigation_exp .= '</li>';
+        }
+    }
 
-                    $navigation_exp .= '</li>';
-                }
-                $navigation_exp .= '
+    $navigation_exp .= '
                 </ul>
             </div>
             <div>
                 <ul class=" navbar-right nav navbar-nav">';
-                if (isset($_SESSION['user_id'])) {
-                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/myaccount/" ><span class="glyphicon glyphicon-user" ></span > My account</a ></li >';
-                    $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Log out</a ></li >';
+    if (isset($_SESSION['user_id'])) {
+        $navigation_exp .= '<li class="pr-4"><a id="add" href="/DDWT18/ddwt18_project/add" class="button"><span class="glyphicon glyphicon-plus"></span> Add room</a></li>';
+        $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/myaccount/" ><span class="glyphicon glyphicon-user" ></span > My account</a ></li >';
+        $navigation_exp .= '<li><a href = "/DDWT18/ddwt18_project/logout/" ><span class="glyphicon glyphicon-log-out" ></span > Log out</a ></li >';
 
-                }else {
-                    $navigation_exp .= '<li class="dropdown">
+    }else {
+        $navigation_exp .= '<li class="dropdown">
                         <a href="/DDWT18/ddwt18_project/login/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in" ></span > Log In </a>
                         <ul class="dropdown-menu" >
                             <div class="col-lg-12" style="width:300px">
@@ -137,15 +146,14 @@ function get_navigation($template, $active_id){
                             </div>
                         </ul>
                     </li>';
-                    $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> Sign Up</a></li>';
-                        }
-                 $navigation_exp .= '
+        $navigation_exp .= '<li><a href="/DDWT18/ddwt18_project/register/" ><span class="glyphicon glyphicon-edit" ></span> Sign Up</a></li>';
+    }
+    $navigation_exp .= '
             </div>
         </nav>
     </div>';
     return $navigation_exp;
 }
-
 
 /**
  * Pritty Print Array
@@ -156,7 +164,6 @@ function p_print($input){
     print_r($input);
     echo '</pre>';
 }
-
 /**
  * Creats HTML alert code with information about the success or failure
  * @param bool $type True if success, False if failure
@@ -171,7 +178,6 @@ function get_error($feedback){
         </div>';
     return $error_exp;
 }
-
 function get_room_table($rooms, $pdo){
     $table_exp = '
     <table class="table table-hover">
@@ -203,13 +209,11 @@ function get_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
-
 function get_rooms($pdo){
     $stmt = $pdo->prepare('SELECT * FROM room');
     $stmt->execute();
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
@@ -218,33 +222,28 @@ function get_rooms($pdo){
     }
     return $room_exp;
 }
-
 // Get's the information of a single room
 function get_room_info($pdo, $room_id){
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_id]);
     $room_info = $stmt->fetch();
     $room_info_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($room_info as $key => $value){
         $room_info_exp[$key] = htmlspecialchars($value);
     }
     return $room_info_exp;
 }
-
 /* checks postal code */
 function PostalCheck($postcode)
 {
     $upper = strtoupper($postcode);
-
     if( preg_match("/^\W*[1-9]{1}[0-9]{3}\W*[a-zA-Z]{2}\W*$/",  $upper)) {
         return $upper;
     } else {
         return false;
     }
 }
-
 /* add a room to the database */
 function add_room($pdo, $room_info){
     /*check if all fields are set */
@@ -271,7 +270,6 @@ function add_room($pdo, $room_info){
             'message' => 'There was an error. Not all fields were filled in!'
         ];
     }
-
     /* Check data type */
     if (!is_numeric($room_info['price'])) {
         return [
@@ -279,7 +277,6 @@ function add_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field price.'
         ];
     }
-
     /* Check data type */
     if (!is_numeric($room_info['size'])) {
         return [
@@ -287,7 +284,6 @@ function add_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field size.'
         ];
     }
-
     /* Check if postal code is entered correctly */
     if (strlen($room_info['postal_code']) !== 6) {
         return [
@@ -302,7 +298,6 @@ function add_room($pdo, $room_info){
             ];
         }
     }
-
     /* Add room */
     $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, living, kitchen, bathroom, toilet, internet, mate, smoke, description, tenant, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
@@ -337,9 +332,7 @@ function add_room($pdo, $room_info){
             'message' => 'There was an error. The room was not added. Try it again.'
         ];
     }
-
 }
-
 /**
  * Count the number of users listed on room overview
  * @param object $pdo database object
@@ -352,7 +345,6 @@ function count_users($pdo){
     $rooms = $stmt->rowCount();
     return $rooms;
 }
-
 /**
  * Count the number of rooms listed on room Overview
  * @param object $pdo database object
@@ -365,7 +357,6 @@ function count_rooms($pdo){
     $rooms = $stmt->rowCount();
     return $rooms;
 }
-
 /**
  * Changes the HTTP Header to a given location
  * @param string $location location to be redirected to
@@ -374,7 +365,6 @@ function redirect($location){
     header(sprintf('Location: %s', $location));
     die();
 }
-
 /**
  * Get current user id
  * @return bool current user id or False if not logged in
@@ -395,7 +385,6 @@ function get_user_id(){
         }
     }
 }
-
 function get_name($pdo, $user) {
     /* Get rooms */
     $stmt = $pdo->prepare('SELECT username, password, firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
@@ -403,7 +392,6 @@ function get_name($pdo, $user) {
     $user_info = $stmt->fetch();
     return $user_info;
 }
-
 function get_image($pdo, $room_id)
 {
     /* Get image */
@@ -413,7 +401,6 @@ function get_image($pdo, $room_id)
     return $rooms['imagename'];
     /*
     $room_exp = Array();
-
     /* Create array with htmlspecialchars
     foreach ($rooms as $key => $value) {
         foreach ($value as $user_key => $user_input) {
@@ -423,7 +410,6 @@ function get_image($pdo, $room_id)
         }
     } */
 }
-
 function get_userpic($pdo, $user_id)
 {
     /* Get image */
@@ -441,7 +427,6 @@ function owner_name($pdo, $user)
     $user_info = $stmt->fetch();
     return $user_info;
 }
-
 function login_user($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -454,7 +439,6 @@ function login_user($pdo, $form_data)
             'message' => 'You should enter a username and password.'
         ];
     }
-
     /* Check if user exists */
     try {
         $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
@@ -473,7 +457,6 @@ function login_user($pdo, $form_data)
             'message' => 'The username you entered does not exist!'
         ];
     }
-
     /* Check password */
     if (!password_verify($form_data['password'], $user_info['password'])) {
         return [
@@ -492,8 +475,6 @@ function login_user($pdo, $form_data)
             json_encode($feedback)));
     }
 }
-
-
 function check_login()
 {
     session_start();
@@ -503,7 +484,6 @@ function check_login()
         return False;
     }
 }
-
 function logout_user(){
     session_start();
     if (session_destroy()){
@@ -517,7 +497,6 @@ function logout_user(){
         ];
     }
 }
-
 function register_user($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -583,8 +562,6 @@ created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, 
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
 }
-
-
 function get_user($pdo, $id)
 {
     $stmt = $pdo->prepare('SELECT * FROM user WHERE id = ?');
@@ -592,7 +569,6 @@ function get_user($pdo, $id)
     $user_info = $stmt->fetch();
     return $user_info;
 }
-
 function contact_room($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -604,7 +580,6 @@ function contact_room($pdo, $form_data)
             'message' => 'You should fill in a message.'
         ];
     }
-
     /* Check if user already exists */
     try {
         $stmt = $pdo->prepare('SELECT tenant FROM optin WHERE room = ? AND tenant = ?');
@@ -623,7 +598,6 @@ function contact_room($pdo, $form_data)
             'message' => 'You have already opt-in for this room!'
         ];
     }
-
     try {
         $stmt = $pdo->prepare('INSERT INTO optin (room, tenant, message) VALUES (?, ?, ?)');
         $stmt->execute([$form_data['room_id'], get_user_id(), $form_data['message']]);
@@ -641,14 +615,12 @@ function contact_room($pdo, $form_data)
         ];
     }
 }
-
 function get_image_info($pdo, $room_id) {
     $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
     $pictures = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
@@ -659,32 +631,27 @@ function get_image_info($pdo, $room_id) {
     }
     return $pictures;
 }
-
 function get_profile_image_info($pdo, $user_id) {
     $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
     $pictures = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
             $room_exp[$key] = htmlspecialchars($user_input);
             $key = $room_exp[$key];
-            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' width='100%' height='100%'/>";
+            $pictures[$key] = "<img src='/DDWT18/ddwt18_project/pictures/$key' alt='No profile picture added' width='100%' height='45%'/>";
         }
     }
     return $pictures;
 }
-
-
 function get_optin_info($pdo) {
     $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
@@ -693,13 +660,11 @@ function get_optin_info($pdo) {
     }
     return $room_exp;
 }
-
 function get_user_optin_info($pdo, $roomid) {
     $stmt = $pdo->prepare('SELECT optin.message, user.firstname, user.lastname, user.id FROM user, optin WHERE optin.tenant = user.id and optin.room = ?');
     $stmt->execute([$roomid]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
@@ -733,8 +698,6 @@ function get_user_optin_room_table($optin, $pdo){
     ';
     return $table_exp;
 }
-
-
 function get_optin_room_table($rooms, $pdo){
     $table_exp = '
     <table class="table table-hover">
@@ -767,13 +730,11 @@ function get_optin_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
-
 function get_offered_info($pdo) {
     $stmt = $pdo->prepare('SELECT * FROM room WHERE user_id = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value){
         foreach ($value as $user_key => $user_input) {
@@ -813,7 +774,6 @@ function get_offered_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
-
 /**
  * Removes a room with a specific room-ID
  * @param object $pdo db object
@@ -821,10 +781,8 @@ function get_offered_room_table($rooms, $pdo){
  * @return array
  */
 function remove_room($pdo, $room_id){
-
     /* Get room info */
     $room_info = get_room_info($pdo, $room_id);
-
     /* Delete room */
     $stmt = $pdo->prepare("DELETE FROM room WHERE room_id = ?");
     $stmt->execute([$room_id]);
@@ -842,7 +800,6 @@ function remove_room($pdo, $room_id){
         ];
     }
 }
-
 /**
  * Remove images with a specific room-ID
  * @param object $pdo db object
@@ -850,7 +807,6 @@ function remove_room($pdo, $room_id){
  * @return array
  */
 function remove_images($pdo, $room_id){
-
     /* Delete images */
     $stmt = $pdo->prepare("DELETE FROM roompics WHERE room_id = ?");
     $stmt->execute([$room_id]);
@@ -868,7 +824,6 @@ function remove_images($pdo, $room_id){
         ];
     }
 }
-
 /**
  * Remove images with a specific room-ID
  * @param object $pdo db object
@@ -876,7 +831,6 @@ function remove_images($pdo, $room_id){
  * @return array
  */
 function remove_userpic($pdo, $user_id){
-
     /* Delete images */
     $stmt = $pdo->prepare("UPDATE user SET image = null WHERE id = ?");
     $stmt->execute([$user_id]);
@@ -894,7 +848,6 @@ function remove_userpic($pdo, $user_id){
         ];
     }
 }
-
 /**
  * Updates a room in the database using post array
  * @param object $pdo db object
@@ -927,7 +880,6 @@ function update_room($pdo, $room_info){
             'message' => 'There was an error. Not all fields were filled in.'
         ];
     }
-
     /* Check data type */
     if (!is_numeric($room_info['price'])) {
         return [
@@ -935,7 +887,6 @@ function update_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field price.'
         ];
     }
-
     /* Check data type */
     if (!is_numeric($room_info['size'])) {
         return [
@@ -943,7 +894,6 @@ function update_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field size.'
         ];
     }
-
     /* Check if postal code is entered correctly */
     if (strlen($room_info['postal_code']) !== 7) {
         return [
@@ -958,13 +908,11 @@ function update_room($pdo, $room_info){
             ];
         }
     }
-
     /* Get current room name */
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
     $room = $stmt->fetch();
     $current_name = $room['street'];
-
     /* Check if room already exists */
     $stmt = $pdo->prepare('SELECT * FROM room WHERE street = ?');
     $stmt->execute([$room_info['street']]);
@@ -975,8 +923,6 @@ function update_room($pdo, $room_info){
             'message' => sprintf("The address of the room cannot be changed. %s %s already exists.", $room_info['street'], $room_info['house_number'])
         ];
     }
-
-
     /* Update room */
     $stmt = $pdo->prepare("UPDATE room SET street = ?, house_number = ?, postal_code = ?, city = ?, type = ?, price = ?, size = ?, living = ?, kitchen = ?, bathroom = ?, toilet = ?, internet = ?, mate = ?, smoke = ?, description = ?, tenant = ? WHERE room_id = ?");
     $stmt->execute([
@@ -1012,7 +958,6 @@ function update_room($pdo, $room_info){
         ];
     }
 }
-
 /**
  * Updates a user in the database using post array
  * @param object $pdo db object
@@ -1026,7 +971,6 @@ function edit_details($pdo, $owner_info){
         empty($owner_info['password']) or
         empty($owner_info['firstname']) or
         empty($owner_info['lastname']) or
-        empty($owner_info['role']) or
         empty($owner_info['dateofbirth']) or
         empty($owner_info['study']) or
         empty($owner_info['language']) or
@@ -1040,13 +984,11 @@ function edit_details($pdo, $owner_info){
             'message' => 'There was an error. Not all fields were filled in.'
         ];
     }
-
     /* Get current user name */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
     $stmt->execute([$owner_info['username']]);
     $user = $stmt->fetch();
     $current_name = $user['username'];
-
     /* Check if user already exists */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
     $stmt->execute([$owner_info['username']]);
@@ -1057,18 +999,15 @@ function edit_details($pdo, $owner_info){
             'message' => 'The username cannot be changed'
         ];
     }
-
     /* Hash password */
     $password = password_hash($owner_info['password'], PASSWORD_DEFAULT);
-
     /* Update user */
-    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, role = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE user SET username = ?, password = ?, firstname = ?, lastname = ?, dateofbirth = ?, study = ?, language = ?, email = ?, biography = ?, phonenumber = ? WHERE id = ?");
     $stmt->execute([
         $owner_info['username'],
         $password,
         $owner_info['firstname'],
         $owner_info['lastname'],
-        $owner_info['role'],
         $owner_info['dateofbirth'],
         $owner_info['study'],
         $owner_info['language'],
@@ -1091,12 +1030,9 @@ function edit_details($pdo, $owner_info){
         ];
     }
 }
-
-
 function upload_photos($pdo, $form_data)
 {
     $img = $_FILES['image']['name'];
-
     try {
         $stmt = $pdo->prepare('INSERT INTO roompics (room_id, imagename) VALUES (?, ?)');
         $stmt->execute([$form_data['room_id'], $img]);
@@ -1120,11 +1056,9 @@ function upload_photos($pdo, $form_data)
         ];
     }
 }
-
 function upload_userpic($pdo, $form_data)
 {
     $img = $_FILES['image']['name'];
-
     try {
         $stmt = $pdo->prepare('UPDATE user SET image = ? WHERE id = ? ');
         $stmt->execute([$img, $form_data['user_id']]);
@@ -1148,11 +1082,9 @@ function upload_userpic($pdo, $form_data)
         ];
     }
 }
-
 function optout($pdo){
     /* get user info */
     $user_id = get_user_id();
-
     $stmt = $pdo->prepare('DELETE FROM optin WHERE optin.tenant = ?');
     $stmt->execute([$user_id]);
     $deletedoptin = $stmt->rowCount();
@@ -1169,13 +1101,10 @@ function optout($pdo){
         ];
     }
 }
-
 function remove_account($pdo){
-
     /* Get room info */
     $user_id = get_user_id();
     $account_info = get_user($pdo, $user_id);
-
     /* Delete room */
     $stmt = $pdo->prepare('DELETE FROM room WHERE room.user_id = ?');
     $stmt->execute([$user_id]);
@@ -1192,7 +1121,6 @@ function remove_account($pdo){
             'type' => 'success',
             'message' => sprintf("User '%s' was removed!", $account_info['username'])
         ];
-
     }
     else {
         return [
@@ -1201,12 +1129,10 @@ function remove_account($pdo){
         ];
     }
 }
-
 /* check if user is an owner in order to add a room */
 function check_owner($pdo){
     /* get user information */
     $user_id = get_user_id();
-
     /* get role from user */
     $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
@@ -1224,7 +1150,6 @@ function check_owner($pdo){
 function check_tenant($pdo){
     /* get user information */
     $user_id = get_user_id();
-
     /* get role from user */
     $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
@@ -1237,7 +1162,6 @@ function check_tenant($pdo){
         return False;
     }
 }
-
 /* check if room has images */
 function check_image($pdo, $room_id){
     $stmt = $pdo->prepare('SELECT room_id FROM roompics WHERE room_id = ?');
@@ -1250,7 +1174,6 @@ function check_image($pdo, $room_id){
         return False;
     }
 }
-
 /* check if profile has image */
 function check_profile_image($pdo, $user_id){
     $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
@@ -1264,22 +1187,16 @@ function check_profile_image($pdo, $user_id){
         return True;
     }
 }
-
 function search_room($pdo, $room_info)
 {
-
-
     $stmt = $pdo->prepare("SELECT * FROM room WHERE size >= ? AND price <= ?");
     $stmt->execute(
         [
             $room_info['size'],
             $room_info['price']
-      ]);
-
-
+        ]);
     $rooms = $stmt->fetchAll();
     $room_exp = Array();
-
     /* Create array with htmlspecialchars */
     foreach ($rooms as $key => $value) {
         foreach ($value as $user_key => $user_input) {
@@ -1319,7 +1236,6 @@ function get_result_table($pdo, $room_info) {
     ';
     return $table_exp;
 }
-
 /**
  * Generate and return a random characters string
  *
@@ -1349,9 +1265,7 @@ function random_str($type = 'alphanum', $length = 8)
             $seedings['alphanum'] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $seedings['num']      = '0123456789';
             $seedings['nozero']   = '123456789';
-
             $pool = $seedings[$type];
-
             $str = '';
             for ($i=0; $i < $length; $i++)
             {
@@ -1365,7 +1279,6 @@ function random_str($type = 'alphanum', $length = 8)
             break;
     }
 }
-
 function checkusermail($pdo, $username, $email) {
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ? AND email = ?');
     $stmt->execute([$username, $email]);
@@ -1383,12 +1296,10 @@ function forgetpassword($pdo, $username, $email, $code, $check)
     $subject = "Password code";
     $txt = "Hello". $username .". Your code is". $code . ". Log in with this code to change your password.";
     mail($to,$subject,$txt);
-
     /* Put code as password in database */
     $password = password_hash($code, PASSWORD_DEFAULT);
     $stmt = $pdo->prepare("UPDATE user SET password = ? WHERE username = ?");
     $stmt->execute([$password, $username]);
-
     /* Feedback */
     if ($check){
         return [
@@ -1398,12 +1309,9 @@ function forgetpassword($pdo, $username, $email, $code, $check)
         return [
             'type' => 'danger',
             'message' => 'Incorrect username or email.'
-
         ];
     }
-
 }
-
 function optincheck($user, $room, $pdo) {
     $stmt = $pdo->prepare('SELECT * FROM optin WHERE tenant = ? AND room = ?');
     $stmt->execute([$user, $room]);

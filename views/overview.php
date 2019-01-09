@@ -63,19 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="py-3 col-sm-17 col-md-17">
-                <div class="card row">
-                    <div class="card-header">
-                        Users
-                    </div>
-                    <div class="card-body">
-                        <p class="count">Our community already has</p>
-                        <h2><?= $nbr_users ?></h2>
-                        <p>active users</p>
-                        <?php if (!isset($_SESSION['user_id'])) { ?><a href="/DDWT18/ddwt18_project/register/" class="btn btn-primary">Join now</a><?php } ?>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </div>

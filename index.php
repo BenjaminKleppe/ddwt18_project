@@ -17,10 +17,7 @@ $template = Array(
         'url' => '/DDWT18/ddwt18_project/'),
     2 => Array(
         'name' => 'Overview',
-        'url' => '/DDWT18/ddwt18_project/overview/'),
-    3 => Array(
-        'name' => 'Add room',
-        'url' => '/DDWT18/ddwt18_project/add/'),
+        'url' => '/DDWT18/ddwt18_project/overview/')
 
 );
 

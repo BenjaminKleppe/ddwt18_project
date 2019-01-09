@@ -44,7 +44,9 @@
                                 <p class="count">There are already</p>
                                 <h2><?= $nbr_rooms ?></h2>
                                 <p>rooms for you to look at!</p>
+                                <?php if (check_owner($db)) { ?>
                                 <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">List yours</a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
