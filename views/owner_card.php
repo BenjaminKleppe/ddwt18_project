@@ -21,7 +21,7 @@
                     <p><?= $email ?></p>
                     <p><?= $phonenumber ?></p>
                 </div>
-                <p><a href="<?= $ownerlink ?>" role="button" class="col-md-6 col-sm-6 col-s-6 btn btn-primary ml-4 mt-4">Owner info</a></p>
+                <p><a href="<?= $ownerlink ?>" id="add" role="button" class="col-md-6 col-sm-6 col-s-6 btn btn-primary ml-4 mt-4">Owner info</a></p>
             </div>
         </div>
     </div>

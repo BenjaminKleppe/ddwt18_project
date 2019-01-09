@@ -1,5 +1,33 @@
 <!doctype html>
 <html lang="en">
+<style>
+    #add {
+        color: white;
+        background: #337ab7;
+        border-radius: 12px;
+        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+    }
+
+    #add.button:hover{
+        background: #2e4960;
+    }
+
+    #dan.btn{
+        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+    }
+
+    #dan.btn:hover{
+        background: darkred;
+    }
+
+    #war.btn{
+        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+    }
+
+    #war.btn:hover{
+        background: gold;
+    }
+</style>
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -84,7 +112,7 @@
                         <div class="pb-4">
                             <form action="/DDWT18/ddwt18_project/removeimages/" method="POST">
                                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                                <a onclick="return confirm('Do you want to delete all images?')"><button type="submit" class="btn btn-danger">Remove images</button></a>
+                                <a onclick="return confirm('Do you want to delete all images?')"><button type="submit" id="dan" class="btn btn-danger">Remove images</button></a>
                             </form>
                         </div>
                         <?php } ?>
@@ -99,12 +127,12 @@
                         </div>
                         <div class="row pb-5">
                             <div class="col-sm-2">
-                                <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" class="btn btn-warning">Edit</a>
+                                <a href="/DDWT18/ddwt18_project/edit/?room_id=<?= $room_id ?>" role="button" id="war" class="btn btn-warning">Edit</a>
                             </div>
                             <div class="col-sm-2">
                                 <form action="/DDWT18/ddwt18_project/remove/" method="POST">
                                     <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                                    <a onclick="return confirm('Do you want to delete this room?')"><button type="submit" class="btn btn-danger">Remove</button></a>
+                                    <a onclick="return confirm('Do you want to delete this room?')"><button type="submit" id="dan" class="btn btn-danger">Remove</button></a>
                                 </form>
                             </div>
                         </div>
@@ -113,12 +141,12 @@
                     <?php if (!check_owner($db)) { ?>
                         <?php if (!$optincheck) { ?>
                             <div class="pb-5">
-                                <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>
+                                <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" id="add" class="btn btn-primary">Opt-in</a>
                             </div>
                         <?php } ?>
                         <?php if ($optincheck) { ?>
                             <form action="/DDWT18/ddwt18_project/optout/" method="POST">
-                                <a onclick="return confirm('Do you want to delete your opt-in?')"><button type="submit" class="btn btn-danger">Opt out</button></a>
+                                <a onclick="return confirm('Do you want to delete your opt-in?')"><button type="submit" id="dan" class="btn btn-danger">Opt out</button></a>
                             </form>
                         <?php } ?>
                     <?php } ?>

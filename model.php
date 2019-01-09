@@ -26,6 +26,14 @@
         height: 7%;
         background-size: cover;
     }
+
+    #dan.btn{
+        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+    }
+
+    #dan.btn:hover{
+        background: darkred;
+    }
 </style>
 
 
@@ -231,7 +239,7 @@ function get_room_table($rooms, $pdo){
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" id="add" class="btn btn-primary">More info</a></td>
         </tr>
         ';
     }
@@ -800,7 +808,7 @@ function get_user_optin_room_table($optin, $pdo){
         <tr>
             <th scope="row">'.$value['firstname'].' '.$value['lastname'].'</th>
             <th scope="row">'.$value['message'].'</th>       
-            <td><a href="/DDWT18/ddwt18_project/user/?user_id='.$value['id'].'" role="button" class="btn btn-primary">User info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/user/?user_id='.$value['id'].'" role="button" id="add" class="btn btn-primary">User info</a></td>
         </tr>
         ';
     }
@@ -836,9 +844,9 @@ function get_optin_room_table($rooms){
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" id="add" class="btn btn-primary">More info</a></td>
             <td><form action="/DDWT18/ddwt18_project/optout/" method="POST">
-                                <a onclick="return confirm(\'Do you want to delete your opt-in?\')"><button type="submit" class="btn btn-danger">Opt out</button></a>
+                                <a onclick="return confirm(\'Do you want to delete your opt-in?\')"><button type="submit" id="dan" class="btn btn-danger">Opt out</button></a>
                         </form></td>
         </tr>
         ';
@@ -897,7 +905,7 @@ function get_offered_room_table($rooms, $pdo){
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" id="add" class="btn btn-primary">More info</a></td>
         </tr>
         ';
     }
@@ -1398,7 +1406,7 @@ function get_result_table($pdo, $room_info) {
             <th scope="row">'.$value['street'].' '.$value['house_number'].'</th>
             <th scope="row">'.$value['size'].'m2</th>
             <th scope="row">€'.$value['price'].',-</th>           
-            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
+            <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" id="add" class="btn btn-primary">More info</a></td>
         </tr>
         ';
     }

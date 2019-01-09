@@ -45,7 +45,7 @@
                                 <h2><?= $nbr_rooms ?></h2>
                                 <p>rooms for you to look at!</p>
                                 <?php if (check_owner($db)) { ?>
-                                <a href="/DDWT18/ddwt18_project/add/" class="btn btn-primary">List yours</a>
+                                <a href="/DDWT18/ddwt18_project/add/" id="add" class="btn btn-primary">List yours</a>
                                 <?php } ?>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                 <p class="count">Our community already has</p>
                                 <h2><?= $nbr_users ?></h2>
                                 <p>active users</p>
-                                <?php if (!isset($_SESSION['user_id'])) { ?><a href="/DDWT18/ddwt18_project/register/" class="btn btn-primary">Join now</a><?php } ?>
+                                <?php if (!isset($_SESSION['user_id'])) { ?><a href="/DDWT18/ddwt18_project/register/" id="add" class="btn btn-primary">Join now</a><?php } ?>
                             </div>
                         </div>
                     </div>

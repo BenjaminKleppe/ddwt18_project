@@ -9,3 +9,38 @@
 .card-body .count {
     margin: 0;
 }
+
+#add {
+    color: white;
+    background: #337ab7;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+}
+
+#add.btn:hover{
+    background: #2e4960;
+}
+
+#dan.btn{
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+}
+
+#dan.btn:hover{
+    background: darkred;
+}
+
+#war.btn{
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+}
+
+#war.btn:hover{
+    background: gold;
+}
+
+#out.btn{
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19)
+}
+
+#out.btn:hover{
+    background: #2e4960;
+}

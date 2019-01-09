@@ -170,7 +170,7 @@
                         <?php } else { echo "";}; ?>
                         <div class="pt-4">
                             <?php if(isset($_SESSION['user_id'])){ ?><input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>"><?php } ?>
-                            <button type="submit" class="btn btn-primary"><?= $submit_btn ?></button>
+                            <button type="submit" id="add" class="btn btn-primary"><?= $submit_btn ?></button>
                         </div>
                     </form>
 

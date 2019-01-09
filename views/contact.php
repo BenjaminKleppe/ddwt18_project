@@ -76,7 +76,7 @@
                 </div>
                 <?php if ($display_buttons) {} ?>
                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                <button type="submit" class="btn btn-primary">Opt-in</button>
+                <button type="submit" id="add" class="btn btn-primary">Opt-in</button>
             </form>
         </div>
     </div>
