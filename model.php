@@ -15,14 +15,15 @@
 <?php
 /**
  * Model
- * User: reinardvandalen
- * Date: 05-11-18
- * Time: 15:25
+ * User: b.kleppe, t.tan, g.danou, l.janssen
+ * Date: 15-12-18
+ * Time: 15:30
  */
 /* Enable error reporting */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 /**
  * Connects to the database using PDO
  * @param string $host database host
@@ -45,6 +46,7 @@ function connect_db($host, $db, $user, $pass){
     }
     return $pdo;
 }
+
 /**
  * Check if the route exist
  * @param string $route_uri URI to be matched
@@ -181,6 +183,13 @@ function get_error($feedback){
         </div>';
     return $error_exp;
 }
+
+/**
+ * Creates a table for the overview page
+ * @param $rooms
+ * @param $pdo
+ * @return table with photo, street + house number, size and prize
+ */
 function get_room_table($rooms, $pdo){
     $table_exp = '
     <table class="table table-hover">
@@ -312,20 +321,6 @@ function add_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field size.'
         ];
     }
-    /* Check if postal code is entered correctly */
-    if (strlen($room_info['postal_code']) !== 6) {
-        return [
-            'type' => 'danger',
-            'message' => 'The postal code consists of exactly 6 characters (1234AB)'
-        ];}
-    else {
-        if (PostalCheck($room_info['postal_code']) == false ){
-            return [
-                'type' => 'danger',
-                'message' => 'You entered an invalid postal code. Please write it like "1234AB"'
-            ];
-        }
-    }
     /* Add room */
     $stmt = $pdo->prepare("INSERT INTO room (street, house_number, postal_code, city, type, price, size, living, kitchen, bathroom, toilet, internet, mate, smoke, description, tenant, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
@@ -347,6 +342,7 @@ function add_room($pdo, $room_info){
         $room_info['tenant'],
         get_user_id()
     ]);
+    /* Checks if the values are given correctly to the db */
     $inserted = $stmt->rowCount();
     if ($inserted ==  1) {
         return [
@@ -354,6 +350,8 @@ function add_room($pdo, $room_info){
             'message' => sprintf("Room %s %s added to room overview.", $room_info['street'], $room_info['house_number'])
         ];
     }
+
+    /* Gives correct corresponding error code */
     else {
         return [
             'type' => 'danger',
@@ -446,34 +444,6 @@ function get_image($pdo, $room_id)
     $rooms = $stmt->fetch();
     return $rooms['imagename'];
 }
-
-/*
-function get_userpic($pdo, $user_id)
-{
-
-    $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
-    $stmt->execute([$user_id]);
-    $rooms = $stmt->fetch();
-    return $rooms['imagename'];
-}
-*/
-
-
-/**
- * Obtains the info of the owner
- * @param object $pdo db object
- * @param int $room_id of the room
- * @return array with the info of the owner
- */
-/*
-function owner_name($pdo, $user)
-{
-    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
-    $stmt->execute([$user]);
-    $user_info = $stmt->fetch();
-    return $user_info;
-}
-*/
 
 /**
  * This function will login the user
@@ -610,6 +580,7 @@ function register_user($pdo, $form_data)
     }
     /* Hash password */
     $password = password_hash($form_data['password'], PASSWORD_DEFAULT);
+
     /* Save user to the database */
     try {
         $stmt = $pdo->prepare('INSERT INTO user (username, password, firstname,
@@ -803,6 +774,7 @@ function get_user_optin_room_table($optin, $pdo){
     </tr>
     </thead>
     <tbody>';
+    /* Create array with name and message */
     foreach($optin as $key => $value){
         $table_exp .= '
         <tr>
@@ -837,6 +809,7 @@ function get_optin_room_table($rooms){
     </tr>
     </thead>
     <tbody>';
+    /* Create array with street + house number, size and price */
     foreach($rooms as $key => $value){
         $table_exp .= '
         <tr>
@@ -895,6 +868,7 @@ function get_offered_room_table($rooms, $pdo){
     </tr>
     </thead>
     <tbody>';
+    /* Create array with picture, street + house number, size and price */
     foreach($rooms as $key => $value){
         $name = get_image($pdo, $rooms[$key]['room_id']);
         $table_exp .= '
@@ -960,6 +934,7 @@ function remove_images($pdo, $room_id){
             'message' => sprintf("Images were removed!")
         ];
     }
+    /* Else gives the corresponding error message */
     else {
         return [
             'type' => 'warning',
@@ -1040,20 +1015,6 @@ function update_room($pdo, $room_info){
             'message' => 'There was an error. You should enter a number in the field size.'
         ];
     }
-    /* Check if postal code is entered correctly */
-    if (strlen($room_info['postal_code']) !== 6) {
-        return [
-            'type' => 'danger',
-            'message' => 'The postal code consists of exactly 7 characters (1234 AB)'
-        ];}
-    else {
-        if (PostalCheck($room_info['postal_code']) == false ){
-            return [
-                'type' => 'danger',
-                'message' => 'You entered an invalid postal code. Please write it like "1234 AB"'
-            ];
-        }
-    }
     /* Get current room name */
     $stmt = $pdo->prepare('SELECT * FROM room WHERE room_id = ?');
     $stmt->execute([$room_info['room_id']]);
@@ -1090,6 +1051,7 @@ function update_room($pdo, $room_info){
         $room_info['tenant'],
         $room_info['room_id']
     ]);
+    /* Check if values are given through correctly to the database */
     $updated = $stmt->rowCount();
     if ($updated ==  1) {
         return [
@@ -1162,6 +1124,7 @@ function edit_details($pdo, $owner_info){
         $owner_info['phonenumber'],
         $owner_info['id']
     ]);
+    /* Check if the data was executed */
     $updated = $stmt->rowCount();
     if ($updated ==  1) {
         return [
@@ -1183,10 +1146,10 @@ function edit_details($pdo, $owner_info){
  * @param array $form_data data from the form
  * @return array error message if the photo was uploaded or not
  */
-function upload_photos($pdo, $form_data)
-{
+function upload_photos($pdo, $form_data) {
     $img = $_FILES['image']['name'];
     try {
+        /* try to insert with room_id */
         $stmt = $pdo->prepare('INSERT INTO roompics (room_id, imagename) VALUES (?, ?)');
         $stmt->execute([$form_data['room_id'], $img]);
         $inserted = $stmt->rowCount();
@@ -1196,6 +1159,7 @@ function upload_photos($pdo, $form_data)
             'message' => sprintf('There was an error: %s', $e->getMessage())
         ];
     }
+    /* if added to the database, return succes, else false */
     if ($inserted == 1) {
         move_uploaded_file($_FILES['image']['tmp_name'], "pictures/$img");
         return [
@@ -1216,10 +1180,10 @@ function upload_photos($pdo, $form_data)
  * @param array $form_data data from the form
  * @return array error message if the photo was uploaded or not
  */
-function upload_userpic($pdo, $form_data)
-{
+function upload_userpic($pdo, $form_data) {
     $img = $_FILES['image']['name'];
     try {
+        /* try to insert with room_id */
         $stmt = $pdo->prepare('UPDATE user SET image = ? WHERE id = ? ');
         $stmt->execute([$img, $form_data['user_id']]);
         $inserted = $stmt->rowCount();
@@ -1229,6 +1193,7 @@ function upload_userpic($pdo, $form_data)
             'message' => sprintf('There was an error: %s', $e->getMessage())
         ];
     }
+    /* if added to the database, return succes, else false */
     if ($inserted == 1) {
         move_uploaded_file($_FILES['image']['tmp_name'], "pictures/$img");
         return [
@@ -1287,6 +1252,7 @@ function remove_account($pdo){
     $stmt = $pdo->prepare('DELETE FROM optin WHERE optin.tenant = ?');
     $stmt->execute([$user_id]);
     $deletedoptin = $stmt->rowCount();
+    /* check if the row which is affected is removed, return true or false with corresponding error */
     if ($deletedroom == 1 or $deleteduser == 1 or $deletedoptin == 1) {
         session_destroy();
         return [
@@ -1366,8 +1332,7 @@ function check_profile_image($pdo, $user_id){
  * @param array $room_info with the info from the room
  * @return array with all the info of the specific rooms
  */
-function search_room($pdo, $room_info)
-{
+function search_room($pdo, $room_info) {
     $stmt = $pdo->prepare("SELECT * FROM room WHERE size >= ? AND price <= ?");
     $stmt->execute(
         [
@@ -1404,6 +1369,7 @@ function get_result_table($pdo, $room_info) {
     </tr>
     </thead>
     <tbody>';
+    /* Create table with image, street + house number, size and price */
     foreach($room_info as $key => $value){
         $name = get_image($pdo, $room_info[$key]['room_id']);
         $table_exp .= '
@@ -1420,6 +1386,7 @@ function get_result_table($pdo, $room_info) {
     </tbody>
     </table>
     ';
+    /* Return formatted table */
     return $table_exp;
 }
 
