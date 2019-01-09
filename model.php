@@ -799,7 +799,7 @@ function get_user_optin_room_table($optin, $pdo){
 function get_optin_room_table($rooms){
     $table_exp = '
     <table class="table table-hover">
-    <thead
+    <thead>
     <tr>
         <th scope="col">Address</th>
         <th scope="col">Squere Metre</th>
@@ -818,7 +818,7 @@ function get_optin_room_table($rooms){
             <th scope="row">€'.$value['price'].',-</th>           
             <td><a href="/DDWT18/ddwt18_project/room/?room_id='.$value['room_id'].'" role="button" class="btn btn-primary">More info</a></td>
             <td><form action="/DDWT18/ddwt18_project/optout/" method="POST">
-                            <button type="submit" class="btn btn-danger">Opt-out</button>
+                                <a onclick="return confirm(\'Do you want to delete your opt-in?\')"><button type="submit" class="btn btn-danger">Opt out</button></a>
                         </form></td>
         </tr>
         ';

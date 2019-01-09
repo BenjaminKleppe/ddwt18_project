@@ -97,7 +97,7 @@
                         <div class="">
                             <form action="/DDWT18/ddwt18_project/removeuserpic/" method="POST">
                                 <input type="hidden" value="<?= $user ?>" name="user_id">
-                                <a onclick="return confirm('Do you want to delete your profile picture Y/N')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
+                                <a onclick="return confirm('Do you want to delete your profile picture?')"><button type="submit" class="btn btn-danger">Remove profile picture</button></a>
                             </form>
                         </div>
                         <?php } ?>
@@ -145,7 +145,7 @@
                     <div>
                         <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
                             <input type="hidden" value="<?= $user_id ?>" name="user_id">
-                            <a onclick="return confirm('Do you want to delete your account Y/N')"><button type="submit" class="btn btn-danger">Remove account</button></a>
+                            <a onclick="return confirm('Do you want to delete your account?')"><button type="submit" class="btn btn-danger">Remove account</button></a>
                         </form>
                     </div>
                 </div>

@@ -84,7 +84,7 @@
                         <div class="pb-4">
                             <form action="/DDWT18/ddwt18_project/removeimages/" method="POST">
                                 <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                                <a onclick="return confirm('Do you want to delete all images Y/N')"><button type="submit" class="btn btn-danger">Remove images</button></a>
+                                <a onclick="return confirm('Do you want to delete all images?')"><button type="submit" class="btn btn-danger">Remove images</button></a>
                             </form>
                         </div>
                         <?php } ?>
@@ -104,7 +104,7 @@
                             <div class="col-sm-2">
                                 <form action="/DDWT18/ddwt18_project/remove/" method="POST">
                                     <input type="hidden" value="<?= $room_id ?>" name="room_id">
-                                    <a onclick="return confirm('Do you want to delete this room Y/N')"><button type="submit" class="btn btn-danger">Remove</button></a>
+                                    <a onclick="return confirm('Do you want to delete this room?')"><button type="submit" class="btn btn-danger">Remove</button></a>
                                 </form>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                         <?php } ?>
                         <?php if ($optincheck) { ?>
                             <form action="/DDWT18/ddwt18_project/optout/" method="POST">
-                                    <button type="submit" class="btn btn-danger">Opt-out</button>
+                                <a onclick="return confirm('Do you want to delete your opt-in?')"><button type="submit" class="btn btn-danger">Opt out</button></a>
                             </form>
                         <?php } ?>
                     <?php } ?>
