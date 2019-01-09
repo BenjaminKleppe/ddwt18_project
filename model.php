@@ -895,7 +895,7 @@ function update_room($pdo, $room_info){
         ];
     }
     /* Check if postal code is entered correctly */
-    if (strlen($room_info['postal_code']) !== 7) {
+    if (strlen($room_info['postal_code']) !== 6) {
         return [
             'type' => 'danger',
             'message' => 'The postal code consists of exactly 7 characters (1234 AB)'

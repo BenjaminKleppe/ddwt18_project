@@ -40,25 +40,25 @@
                 <div class="form-group row">
                     <label for="street" class="col-sm-3 col-form-label">Street</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?= $street ?>" disabled required>
+                        <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?= $street ?>" readonly required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?= $number ?>" disabled required>
+                        <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?= $number ?>" readonly required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?= $postal_code ?>" disabled required>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?= $postal_code ?>" readonly required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="city" class="col-sm-3 col-form-label">City</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?= $city ?>" disabled required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?= $city ?>" readonly required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -72,25 +72,25 @@
                     <div class="form-group row">
                         <label for="street" class="col-sm-3 col-form-label">Street</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" disabled required>
+                            <input type="text" class="form-control" id="street" name="street" placeholder="Grote Markt" value="<?php if (isset($room_info)){echo $room_info['street'];} ?>" readonly required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="houseNumber" class="col-sm-3 col-form-label">House number</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" disabled required>
+                            <input type="text" class="form-control" id="house_number" name="house_number" placeholder="36B" value="<?php if (isset($room_info)){echo $room_info['house_number'];} ?>" readonly required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="postalCode" class="col-sm-3 col-form-label">Postal code</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" disabled required>
+                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="9718AV" value="<?php if (isset($room_info)){echo $room_info['postal_code'];} ?>" readonly required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="city" class="col-sm-3 col-form-label">City</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" disabled required>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Groningen" value="<?php if (isset($room_info)){echo $room_info['city'];} ?>" readonly required>
                         </div>
                     </div>
                 <?php } ?>

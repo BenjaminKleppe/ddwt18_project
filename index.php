@@ -609,7 +609,7 @@ elseif (new_route('/DDWT18/ddwt18_project/edit/', 'post')) {
     $feedback = update_room($db, $_POST);
     $room_id = $_POST['room_id'];
     /* Redirect to room GET route */
-    redirect(sprintf('/DDWT18/ddwt18_project/room/?room_id='.$room_id.'/?error_msg=%s',
+    redirect(sprintf('/DDWT18/ddwt18_project/overview/?error_msg=%s',
         json_encode($feedback)));
 
     /* Choose Template */
