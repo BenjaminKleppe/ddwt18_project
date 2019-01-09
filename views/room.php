@@ -61,7 +61,7 @@
             width: auto;
             margin-top: -22px;
             padding: 16px;
-            color: white;
+            background-color: rgba(255,255,255,0.8);
             font-weight: bold;
             font-size: 18px;
             transition: 0.6s ease;
@@ -78,22 +78,9 @@
 
         /* On hover, add a black background color with a little bit see-through */
         .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(255,255,255,0.3);
         }
-
-        .dot {
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-
-
-
+        
     </style>
     <body>
         <!-- Menu -->
