@@ -78,7 +78,7 @@
                 </div>
                 <div class="card-body">
                     <p>You're logged in to Rooms overview.</p>
-                    <a href="/DDWT18/ddwt18_project/logout/" id="add" class="btn btn-primary">Logout</a>
+                    <a href="/DDWT18/ddwt18_project/logout/" id="dan" class="btn btn-danger">Log out</a>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
                     </div>
 
                     <div class="pb-3">
-                        <a href="/DDWT18/ddwt18_project/editdet/" id="add" class="btn btn-primary">Edit details</a>
+                        <a href="/DDWT18/ddwt18_project/editdet/" id="war" class="btn btn-warning">Edit details</a>
                     </div>
                     <div>
                         <form action="/DDWT18/ddwt18_project/removeaccount/" method="POST">
