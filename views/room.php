@@ -110,7 +110,7 @@
                         </div>
                     <?php } ?>
 
-                    <?php if ($checktenant) { ?>
+                    <?php if (!check_owner($db)) { ?>
                         <?php if (!$optincheck) { ?>
                             <div class="pb-5">
                                 <a href="/DDWT18/ddwt18_project/contact/?room_id=<?= $room_id ?>" role="button" class="btn btn-primary">Opt-in</a>

@@ -251,7 +251,12 @@ function get_room_info($pdo, $room_id){
 }
 
 
-/* checks postal code */
+/**
+ * Performs an postal check
+ * @param $postcode string from room_info
+ * @return $upper the postalcode in upper
+ * @return false if the postalcode is not in the right way written
+ */
 function PostalCheck($postcode)
 {
     $upper = strtoupper($postcode);
@@ -265,7 +270,7 @@ function PostalCheck($postcode)
 /**
  * Add a room to the database
  * @param object $pdo db object
- * @param int $room_info id of the room
+ * @param array $room_info id of the room
  * @return array with all the info of a room
  */
 function add_room($pdo, $room_info){
@@ -356,6 +361,7 @@ function add_room($pdo, $room_info){
         ];
     }
 }
+
 /**
  * Count the number of users listed on room overview
  * @param object $pdo database object
@@ -368,6 +374,7 @@ function count_users($pdo){
     $rooms = $stmt->rowCount();
     return $rooms;
 }
+
 /**
  * Count the number of rooms listed on room Overview
  * @param object $pdo database object
@@ -380,6 +387,7 @@ function count_rooms($pdo){
     $rooms = $stmt->rowCount();
     return $rooms;
 }
+
 /**
  * Changes the HTTP Header to a given location
  * @param string $location location to be redirected to
@@ -388,6 +396,7 @@ function redirect($location){
     header(sprintf('Location: %s', $location));
     die();
 }
+
 /**
  * Get current user id
  * @return bool current user id or False if not logged in
@@ -408,6 +417,13 @@ function get_user_id(){
         }
     }
 }
+
+/**
+ * Obtains the info of the user
+ * @param object $pdo db object
+ * @param string $user id of the room
+ * @return array with all the info of a user
+ */
 function get_name($pdo, $user) {
     /* Get rooms */
     $stmt = $pdo->prepare('SELECT username, password, firstname, lastname, dateofbirth, role, biography, study, language, email, phonenumber FROM user WHERE id = ?');
@@ -415,6 +431,13 @@ function get_name($pdo, $user) {
     $user_info = $stmt->fetch();
     return $user_info;
 }
+
+/**
+ * Obtains the info of the image from a room
+ * @param object $pdo db object
+ * @param int $room_id of the room
+ * @return array with the imagename of the room
+ */
 function get_image($pdo, $room_id)
 {
     /* Get image */
@@ -422,34 +445,43 @@ function get_image($pdo, $room_id)
     $stmt->execute([$room_id]);
     $rooms = $stmt->fetch();
     return $rooms['imagename'];
-    /*
-    $room_exp = Array();
-    /* Create array with htmlspecialchars
-    foreach ($rooms as $key => $value) {
-        foreach ($value as $user_key => $user_input) {
-            $room_exp[$key] = htmlspecialchars($user_input);
-            $key = $room_exp[$key];
-            echo "<img src='/DDWT18/ddwt18_project/pictures/$key' width='30%' height='20%' />";
-        }
-    } */
 }
+
+/*
 function get_userpic($pdo, $user_id)
 {
-    /* Get image */
+
     $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
     $rooms = $stmt->fetch();
     return $rooms['imagename'];
 }
-/* returns first- and lastname, and birth date from owner */
+*/
+
+
+/**
+ * Obtains the info of the owner
+ * @param object $pdo db object
+ * @param int $room_id of the room
+ * @return array with the info of the owner
+ */
+/*
 function owner_name($pdo, $user)
 {
-    /* Get rooms */
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ?');
     $stmt->execute([$user]);
     $user_info = $stmt->fetch();
     return $user_info;
 }
+*/
+
+/**
+ * This function will login the user
+ * @param object $pdo db object
+ * @param array $form_data data from the form
+ * @param int $room_id of the room
+ * @return array error message if the user is logged in or not
+ */
 function login_user($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -498,6 +530,11 @@ function login_user($pdo, $form_data)
             json_encode($feedback)));
     }
 }
+
+/**
+ * Checks if the user is logged in
+ * @return bool True or false if the user is logged in or not
+ */
 function check_login()
 {
     session_start();
@@ -507,6 +544,11 @@ function check_login()
         return False;
     }
 }
+
+/**
+ * Checks if the user is logged in
+ * @return array with error message if the user is logged out or not
+ */
 function logout_user(){
     session_start();
     if (session_destroy()){
@@ -520,6 +562,13 @@ function logout_user(){
         ];
     }
 }
+
+/**
+ * This function will register a new user
+ * @param object $pdo db object
+ * @param array $form_data data from the form
+ * @return array error message if the user registered or not
+ */
 function register_user($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -585,6 +634,13 @@ created!', get_name($pdo, $_SESSION['user_id'])['firstname']." ".get_name($pdo, 
     redirect(sprintf('/DDWT18/ddwt18_project/myaccount/?error_msg=%s',
         json_encode($feedback)));
 }
+
+/**
+ * This function will register a new user
+ * @param object $pdo db object
+ * @param int $id id from the user
+ * @return array with the info from the user
+ */
 function get_user($pdo, $id)
 {
     $stmt = $pdo->prepare('SELECT * FROM user WHERE id = ?');
@@ -592,6 +648,13 @@ function get_user($pdo, $id)
     $user_info = $stmt->fetch();
     return $user_info;
 }
+
+/**
+ * Allows the user to send an optin message and optin to a room
+ * @param object $pdo db object
+ * @param array $form_data data from the form
+ * @return array error message if the message has been sent or not
+ */
 function contact_room($pdo, $form_data)
 {
     /* Check if all fields are set */
@@ -638,6 +701,13 @@ function contact_room($pdo, $form_data)
         ];
     }
 }
+
+/**
+ * Obtains the info from an image and prints it in the room
+ * @param object $pdo db object
+ * @param int $room_id id of the room for the image
+ * @return array with the photo's of the room
+ */
 function get_image_info($pdo, $room_id) {
     $stmt = $pdo->prepare('SELECT imagename FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
@@ -654,6 +724,13 @@ function get_image_info($pdo, $room_id) {
     }
     return $pictures;
 }
+
+/**
+ * Obtains the info from a profile image for myaccount
+ * @param object $pdo db object
+ * @param int $user_id id of the user for the image
+ * @return array with the profile image of the user
+ */
 function get_profile_image_info($pdo, $user_id) {
     $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
@@ -670,6 +747,12 @@ function get_profile_image_info($pdo, $user_id) {
     }
     return $pictures;
 }
+
+/**
+ * Obtains the optin-info from an optin
+ * @param object $pdo db object
+ * @return array with the info of the optin
+ */
 function get_optin_info($pdo) {
     $stmt = $pdo->prepare('SELECT optin.tenant, room.room_id, user.firstname, user.lastname, room.street, room.house_number, room.size, room.price, optin.message FROM room,optin, user WHERE room.room_id = optin.room AND optin.tenant = user.id AND optin.tenant = ?');
     $stmt->execute([$_SESSION['user_id']]);
@@ -683,6 +766,13 @@ function get_optin_info($pdo) {
     }
     return $room_exp;
 }
+
+/**
+ * Obtains the optin-info for the user
+ * @param object $pdo db object
+ * @param int $roomid id of the room for the image
+ * @return array with the info of the user
+ */
 function get_user_optin_info($pdo, $roomid) {
     $stmt = $pdo->prepare('SELECT optin.message, user.firstname, user.lastname, user.id FROM user, optin WHERE optin.tenant = user.id and optin.room = ?');
     $stmt->execute([$roomid]);
@@ -696,6 +786,13 @@ function get_user_optin_info($pdo, $roomid) {
     }
     return $room_exp;
 }
+
+/**
+ * Creates a table with info of the user and message
+ * @param object $pdo db object
+ * @param int $room_id id of the room for the image
+ * @return string with the table of the optin
+ */
 function get_user_optin_room_table($optin, $pdo){
     $table_exp = '
     <table class="table table-hover">
@@ -721,7 +818,13 @@ function get_user_optin_room_table($optin, $pdo){
     ';
     return $table_exp;
 }
-function get_optin_room_table($rooms, $pdo){
+
+/**
+ * Creates a table with info of the room
+ * @param array $rooms with the values from a room
+ * @return string with the table of the optin
+ */
+function get_optin_room_table($rooms){
     $table_exp = '
     <table class="table table-hover">
     <thead
@@ -753,6 +856,12 @@ function get_optin_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
+
+/**
+ * Obtains the info of the offered rooms from the owner
+ * @param object $pdo db object
+ * @return array with the info of the offered rooms
+ */
 function get_offered_info($pdo) {
     $stmt = $pdo->prepare('SELECT * FROM room WHERE user_id = ?');
     $stmt->execute([$_SESSION['user_id']]);
@@ -766,6 +875,13 @@ function get_offered_info($pdo) {
     }
     return $room_exp;
 }
+
+/**
+ * Creates a table with info of the offered rooms
+ * @param array $rooms with the values from a room
+ * @param object $pdo db object
+ * @return string with the table of the offered rooms
+ */
 function get_offered_room_table($rooms, $pdo){
     $table_exp = '
     <table class="table table-hover">
@@ -797,6 +913,7 @@ function get_offered_room_table($rooms, $pdo){
     ';
     return $table_exp;
 }
+
 /**
  * Removes a room with a specific room-ID
  * @param object $pdo db object
@@ -810,6 +927,7 @@ function remove_room($pdo, $room_id){
     $stmt = $pdo->prepare("DELETE FROM room WHERE room_id = ?");
     $stmt->execute([$room_id]);
     $deleted = $stmt->rowCount();
+    /* Checks if the room is deleted from the db */
     if ($deleted ==  1) {
         return [
             'type' => 'success',
@@ -823,6 +941,7 @@ function remove_room($pdo, $room_id){
         ];
     }
 }
+
 /**
  * Remove images with a specific room-ID
  * @param object $pdo db object
@@ -834,6 +953,7 @@ function remove_images($pdo, $room_id){
     $stmt = $pdo->prepare("DELETE FROM roompics WHERE room_id = ?");
     $stmt->execute([$room_id]);
     $deleted = $stmt->rowCount();
+    /* Checks if the images are deleted from the db */
     if ($deleted >=  1) {
         return [
             'type' => 'success',
@@ -847,10 +967,11 @@ function remove_images($pdo, $room_id){
         ];
     }
 }
+
 /**
  * Remove images with a specific room-ID
  * @param object $pdo db object
- * @param int $room_id id of the to be deleted images
+ * @param int $user_id id of the user
  * @return array
  */
 function remove_userpic($pdo, $user_id){
@@ -858,6 +979,7 @@ function remove_userpic($pdo, $user_id){
     $stmt = $pdo->prepare("UPDATE user SET image = null WHERE id = ?");
     $stmt->execute([$user_id]);
     $deleted = $stmt->rowCount();
+    /* Checks if the image is deleted from the db */
     if ($deleted ==  1) {
         return [
             'type' => 'success',
@@ -871,11 +993,12 @@ function remove_userpic($pdo, $user_id){
         ];
     }
 }
+
 /**
  * Updates a room in the database using post array
  * @param object $pdo db object
  * @param array $room_info post array
- * @return array
+ * @return array with an error message if it is succesfully edited or not
  */
 function update_room($pdo, $room_info){
     /* Check if all fields are set */
@@ -985,7 +1108,7 @@ function update_room($pdo, $room_info){
  * Updates a user in the database using post array
  * @param object $pdo db object
  * @param array $user_info post array
- * @return array
+ * @return array with the details of the user
  */
 function edit_details($pdo, $owner_info){
     /* Check if all fields are set */
@@ -1053,6 +1176,13 @@ function edit_details($pdo, $owner_info){
         ];
     }
 }
+
+/**
+ * Allows the owner to upload photos
+ * @param object $pdo db object
+ * @param array $form_data data from the form
+ * @return array error message if the photo was uploaded or not
+ */
 function upload_photos($pdo, $form_data)
 {
     $img = $_FILES['image']['name'];
@@ -1079,6 +1209,13 @@ function upload_photos($pdo, $form_data)
         ];
     }
 }
+
+/**
+ * Allows the owner to upload a profile photo
+ * @param object $pdo db object
+ * @param array $form_data data from the form
+ * @return array error message if the photo was uploaded or not
+ */
 function upload_userpic($pdo, $form_data)
 {
     $img = $_FILES['image']['name'];
@@ -1105,6 +1242,12 @@ function upload_userpic($pdo, $form_data)
         ];
     }
 }
+
+/**
+ * Allows the user to optout of a room
+ * @param object $pdo db object
+ * @return array error message if the optin was removed or not
+ */
 function optout($pdo){
     /* get user info */
     $user_id = get_user_id();
@@ -1124,6 +1267,12 @@ function optout($pdo){
         ];
     }
 }
+
+/**
+ * Allows the user to delete all the info with his id
+ * @param object $pdo db object
+ * @return array error message if the user was removed or not
+ */
 function remove_account($pdo){
     /* Get room info */
     $user_id = get_user_id();
@@ -1152,7 +1301,12 @@ function remove_account($pdo){
         ];
     }
 }
-/* check if user is an owner in order to add a room */
+
+/**
+ * Checks if the user is an owner in order to add a room
+ * @param object $pdo db object
+ * @return bool True or false
+ */
 function check_owner($pdo){
     /* get user information */
     $user_id = get_user_id();
@@ -1169,23 +1323,12 @@ function check_owner($pdo){
     }
 }
 
-/* check if user is a tenant */
-function check_tenant($pdo){
-    /* get user information */
-    $user_id = get_user_id();
-    /* get role from user */
-    $stmt = $pdo->prepare('SELECT role FROM user WHERE id = ?');
-    $stmt->execute([$user_id]);
-    $array_role = $stmt->fetch();
-    $role = $array_role['role'];
-    if ($role == 'Tenant') {
-        return True;
-    }
-    else {
-        return False;
-    }
-}
-/* check if room has images */
+/**
+ * Checks if the room has images
+ * @param object $pdo db object
+ * @param  int $room_id id of the room
+ * @return bool True or false
+ */
 function check_image($pdo, $room_id){
     $stmt = $pdo->prepare('SELECT room_id FROM roompics WHERE room_id = ?');
     $stmt->execute([$room_id]);
@@ -1197,7 +1340,13 @@ function check_image($pdo, $room_id){
         return False;
     }
 }
-/* check if profile has image */
+
+/**
+ * Checks if the profile has a profile picture
+ * @param object $pdo db object
+ * @param  int $user_id id of the user
+ * @return bool True or false
+ */
 function check_profile_image($pdo, $user_id){
     $stmt = $pdo->prepare('SELECT image FROM user WHERE id = ?');
     $stmt->execute([$user_id]);
@@ -1210,6 +1359,13 @@ function check_profile_image($pdo, $user_id){
         return True;
     }
 }
+
+/**
+ * Allows the user to search for specific specifications
+ * @param object $pdo db object
+ * @param array $room_info with the info from the room
+ * @return array with all the info of the specific rooms
+ */
 function search_room($pdo, $room_info)
 {
     $stmt = $pdo->prepare("SELECT * FROM room WHERE size >= ? AND price <= ?");
@@ -1228,6 +1384,13 @@ function search_room($pdo, $room_info)
     }
     return $room_exp;
 }
+
+/**
+ * If someone searched for rooms, this is the result table
+ * @param object $pdo db object
+ * @param array $room_info with the info from the room
+ * @return string with the result table
+ */
 function get_result_table($pdo, $room_info) {
     $table_exp = '
     <table class="table table-hover">
@@ -1259,13 +1422,11 @@ function get_result_table($pdo, $room_info) {
     ';
     return $table_exp;
 }
+
 /**
  * Generate and return a random characters string
- *
  * Useful for generating passwords or hashes.
- *
  * The default string returned is 8 alphanumeric characters string.
- *
  * The type of string returned can be changed with the "type" parameter.
  * Seven types are - by default - available: basic, alpha, alphanum, num, nozero, unique and md5.
  *
@@ -1302,6 +1463,14 @@ function random_str($type = 'alphanum', $length = 8)
             break;
     }
 }
+
+/**
+ * Checks if the email of the user is right
+ * @param object $pdo db object
+ * @param array $username of the user
+ * @param array $email of the user
+ * @return bool True or false
+ */
 function checkusermail($pdo, $username, $email) {
     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = ? AND email = ?');
     $stmt->execute([$username, $email]);
@@ -1313,6 +1482,16 @@ function checkusermail($pdo, $username, $email) {
         return False;
     }
 }
+
+/**
+ * Checks if the email of the user is right
+ * @param object $pdo db object
+ * @param array $username of the user
+ * @param string $email of the user
+ * @param string $code with the new password
+ * @param string $check checks if the email was sent
+ * @return array with an error message
+ */
 function forgetpassword($pdo, $username, $email, $code, $check)
 {
     $to = $email;
@@ -1335,6 +1514,14 @@ function forgetpassword($pdo, $username, $email, $code, $check)
         ];
     }
 }
+
+/**
+ * Obtains the info from the optin
+ * @param object $pdo db object
+ * @param int $room with the id of the room
+ * @param int $user with the id of the user
+ * @return bool True or false
+ */
 function optincheck($user, $room, $pdo) {
     $stmt = $pdo->prepare('SELECT * FROM optin WHERE tenant = ? AND room = ?');
     $stmt->execute([$user, $room]);

@@ -284,7 +284,6 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
     $optinusers = get_user_optin_room_table(get_user_optin_info($db, $room_id), $db);
     $imagename = get_image_info($db, $room_id);
     $checkimage = check_image($db, $room_id);
-    $checktenant = check_tenant($db);
 
     /* always use template 'footer' */
     $right_column = use_template('owner_card');
@@ -359,7 +358,7 @@ elseif (new_route('/DDWT18/ddwt18_project/myaccount/', 'get')) {
     $user_last = $user_name['lastname'];
     $imagename = get_profile_image_info($db, $user);
     $offeredrooms = get_offered_room_table(get_offered_info($db), $db);
-    $optinrooms = get_optin_room_table(get_optin_info($db), $db);
+    $optinrooms = get_optin_room_table(get_optin_info($db));
     $name = $user_name['firstname']." ".$user_name['lastname'];
     $user_role = $user_name['role'];
     $user_dob = $user_name['dateofbirth'];
