@@ -262,7 +262,7 @@ elseif (new_route('/DDWT18/ddwt18_project/room/', 'get')) {
 
     /* Page info */
     $page_title = sprintf("%s %s", $room_info['street'], $room_info['house_number']);
-    $navigation = get_navigation($template, '2', $db);
+    $navigation = get_navigation($template, '0', $db);
 
     /* Page content */
     $added_by = $owner_info['firstname']." ".$owner_info['lastname'];
