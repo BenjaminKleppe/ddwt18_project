@@ -63,7 +63,7 @@
                         <a class="dark-grey-text" href="https://www.rug.nl/" style="color: white">University of Groningen</a>
                     </p>
                     <p>
-                        <a class="dark-grey-text" href="https://www.hanze.nl" style="color: white">HBO Groningen</a>
+                        <a class="dark-grey-text" href="https://www.hanze.nl" style="color: white">Hanzehogeschool Groningen</a>
                     </p>
 
                 </div>
