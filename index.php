@@ -124,11 +124,12 @@ elseif (new_route('/DDWT18/ddwt18_project/add2/', 'post')) {
 
     /* Set up the headers */
     $headers = array();
-    $headers[] = 'X-Api-Key: qKctaMbHlAa04rhML2ZJI8ywYCuWXrUS9P7eev37';
+    $headers[] = 'X-Api-Key: FqQlY9d7BG9YXzK2n5fp6aNqPlHQixyp8lgHQclL';
     $url = 'https://api.postcodeapi.nu/v2/addresses/?postcode=' . $postal_code . '&number=' . $number;
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($curl);
 
     /* Gebruikt json_decode() om de response naar een PHP array te converteren */
