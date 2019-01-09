@@ -121,19 +121,6 @@
                 </div>
             </div>
         <?php } ?>
-        <?php if (check_tenant($db)) { ?>
-            <div class="col-md-12 pt-3">
-                <div class="card">
-                    <div class="card-header">
-                        Opt-in rooms
-                    </div>
-                    <div class="card-body">
-                        <p>The rooms you opt-in for.</p>
-                        <?= $optinrooms ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
     <?php } ?>
 
 </div>
